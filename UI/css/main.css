@@ -1,0 +1,64 @@
+html{
+  font-family: sans-serif;
+  background-image: url(./avataar1.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #fff;
+}
+
+#header, #login-form-container h3,h5{
+  text-align: center;
+}
+
+.grid-container{
+  display: grid;
+  grid-template-columns: auto auto auto;
+  max-height: 90%;
+}
+
+div{
+  /* border: 2px solid black; */
+  padding: 10px;
+} 
+
+#container{
+  max-height: 90vh;
+}
+
+#login-form-container{
+  background-color: rgba(0,0,0,0.4);
+  border-radius: 14px;
+  max-height: 90%;
+  padding: 20px;
+  width: 70%;
+  margin: auto;
+}
+
+input{
+  text-decoration: none;
+  display: block;
+  margin: auto;
+  margin-bottom: 15px;
+  height: 30px;
+  border-radius: 4px;
+  padding: 3px;
+  font-size: 16px;
+  border: none;
+}
+
+input[type="button"]{
+  outline: inherit;
+  cursor: pointer;
+  text-align: center;
+  background-color: #8a2be2;
+  width: 30%;
+  padding: 0;
+  color: inherit
+  
+}
+
+a{
+  text-decoration: none;
+  font-family: inherit;
+  color: inherit;
+}
