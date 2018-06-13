@@ -6,14 +6,14 @@ html{
   color: #fff;
 }
 
-#header, #login-form-container h3,h5{
+#header, #login-form-container h3, h5{
   text-align: center;
 }
 
 .grid-container{
   display: grid;
   grid-template-columns: auto auto auto;
-  max-height: 90%;
+  max-height: 80%;
 }
 
 div{
@@ -28,7 +28,7 @@ div{
 #login-form-container{
   background-color: rgba(0,0,0,0.4);
   border-radius: 14px;
-  max-height: 90%;
+  max-height: 70%;
   padding: 20px;
   width: 70%;
   margin: auto;
@@ -40,13 +40,14 @@ input{
   margin: auto;
   margin-bottom: 15px;
   height: 30px;
+  width: 55%;
   border-radius: 4px;
   padding: 3px;
   font-size: 16px;
   border: none;
 }
 
-input[type="button"]{
+input[type="submit"]{
   outline: inherit;
   cursor: pointer;
   text-align: center;
@@ -55,6 +56,18 @@ input[type="button"]{
   padding: 0;
   color: inherit
   
+}
+
+input[type="checkbox"]{
+  display: inline-block;
+  appearance: none;
+  height: 1em;
+  width: 1em; 
+} 
+
+#checkbox-container {
+  padding: 0;
+  text-align: center
 }
 
 a{
