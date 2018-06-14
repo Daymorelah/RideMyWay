@@ -1,16 +1,16 @@
 html{
   font-family: sans-serif;
-  background-image: url(./avataar1.jpg);
+  background-image: url(../images/avataar1.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   color: #fff;
 }
 
-#header, #login-form-container h3, h5{
+header, #login-form-container h3, h5{
   text-align: center;
 }
 
-.grid-container{
+main{
   display: grid;
   grid-template-columns: auto auto auto;
   max-height: 80%;

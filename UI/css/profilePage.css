@@ -5,6 +5,7 @@ main{
   display: grid;
   grid-gap: 10px;
   grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto;
+  margin: 20px;
 }
 
 .grid-item-1{
@@ -92,3 +93,52 @@ ul {
   border-radius: 8px;
   padding: 4px;
 }
+
+.grid-item-2 button a{
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  color: inherit;
+}
+
+nav button{
+  color: #fff;
+  border: none;
+  outline: inherit;
+  text-align: center;
+  background-color: #8a2be2;
+  font-family: monospace;
+  font-size: 18px;
+  border-radius: 8px;
+  padding: 4px;
+  margin: 4px;
+  height: 50px;
+  width: 10%;
+}
+
+nav button a{
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  cursor: pointer;
+}
+
+#logo{
+  display: inline-block;
+  width: 20%;
+  font-size: 2em;
+  margin: 14px;
+}
+
+#logout-button{
+  margin: 14px;
+  float: right;
+  width: 15%;
+}
+ nav div{
+   display: inline-block;
+   text-align: center;
+   margin: 8px;
+   width: 15%
+ }
