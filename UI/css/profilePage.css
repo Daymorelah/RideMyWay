@@ -80,7 +80,7 @@ ul {
   border-radius: 50%;
 }
 
-#grid-item-2 div{
+#grid-item-2 div {
   text-align: center;
   color: #fff;
   font-family: monospace;
@@ -202,5 +202,25 @@ input[type="submit"]{
   width: 30%;
   padding: 0;
   color: inherit
-  
+}
+
+#about-page-content{
+  text-align: center;
+  color: #fff;
+  font-family: monospace;
+  font-style: bold;
+  font-size: 25px;
+  margin: 40px;
+}
+
+#choose-offer-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  float: right;
+  width: 50%;
+}
+
+#choose-offer-container input{ 
+  margin: 3px;
 }
