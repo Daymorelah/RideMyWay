@@ -3,10 +3,12 @@ body{
   background-color: #d89292;
   margin: 20px;
 }
+
 main{
   display: grid;
   grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto;
   margin: 20px;
+  grid-template-rows: 70%;
 }
 
 #grid-item-1{
@@ -36,11 +38,11 @@ ul {
   padding: 0;
 }
 
-#rides-taken, #rides-given{
+.list-cursor-to-pointer{
   cursor: pointer;
 }
 
-#user-actions li, #grid-item-2 li{
+#user-action li, #grid-item-2 li{
   display: block;
   background-color: #fff;
   border-bottom: 0.5px solid #000;
@@ -49,10 +51,11 @@ ul {
   padding: 10px;
   margin-right: 10px;
   margin-bottom: 3px;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: #000;
 }
 
-#user-actions li span{
+#user-action li span{
   float: right;
   border-radius: 6px;
   text-align: center;
@@ -66,7 +69,6 @@ ul {
   width: 50%;
   font-size: smaller;
   margin-left: 10px;
-  
 }
 
 #grid-item-2 img{
@@ -84,6 +86,10 @@ ul {
   font-family: monospace;
   font-style: bold;
   font-size: 15px;
+}
+
+#grid-item-2 #show-offers{
+  text-align: unset;
 }
 
 #grid-item-2 button {
@@ -154,9 +160,47 @@ footer{
   text-align: center;
   color: #000;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  margin-top: 40px;
   font-size: 1em;
   height: 2em;
   padding: 10px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  margin: 10px;
 }
 
+#set-ride-offer{
+  text-align: center;
+  display: none;
+  background-color: rgba(0,0,0,0.4);
+  border-radius: 14px;
+  max-height: 70%;
+  padding: 20px;
+  width: 70%;
+  margin: auto;
+} 
+
+input{
+  text-decoration: none;
+  display: block;
+  margin: auto;
+  margin-bottom: 15px;
+  height: 30px;
+  width: 55%;
+  border-radius: 4px;
+  padding: 3px;
+  font-size: 16px;
+  border: none;
+}
+
+input[type="submit"]{
+  outline: inherit;
+  cursor: pointer;
+  text-align: center;
+  background-color: #8a2be2;
+  width: 30%;
+  padding: 0;
+  color: inherit
+  
+}
