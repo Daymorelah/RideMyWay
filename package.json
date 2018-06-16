@@ -1,0 +1,45 @@
+{
+  "name": "ridemyway",
+  "version": "1.0.0",
+  "description": "A car pooling app that provides drivers with the ability to create ride offers and passengers to join available rides offers",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Daymorelah/RideMyWay.git"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "mocha",
+    "travis",
+    "ci",
+    "heroku",
+    "code",
+    "climate"
+  ],
+  "author": "Ademola Hussain",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Daymorelah/RideMyWay/issues"
+  },
+  "homepage": "https://github.com/Daymorelah/RideMyWay#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "morgan": "^1.9.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "chai": "^4.1.2",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.9.1",
+    "mocha": "^5.2.0"
+  }
+}
