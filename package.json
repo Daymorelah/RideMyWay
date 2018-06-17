@@ -4,6 +4,7 @@
   "description": "A car pooling app that provides drivers with the ability to create ride offers and passengers to join available rides offers",
   "main": "app.js",
   "scripts": {
+    "start": "nodemon --exec babel-node server/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -28,8 +29,7 @@
   "homepage": "https://github.com/Daymorelah/RideMyWay#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
-    "express": "^4.16.3",
-    "morgan": "^1.9.0"
+    "express": "^4.16.3"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -40,6 +40,8 @@
     "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.9.1",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "morgan": "^1.9.0",
+    "nodemon": "^1.17.5"
   }
 }
