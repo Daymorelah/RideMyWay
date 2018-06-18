@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon --exec babel-node server/app.js",
-    "test": "set NODE_ENV=test&& mocha --require babel-register --require babel-polyfill server/tests/"
+    "test": "set NODE_ENV=test&& mocha --exit --require babel-register --require babel-polyfill server/tests/"
   },
   "repository": {
     "type": "git",

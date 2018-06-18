@@ -2,6 +2,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
+import routes from './Routes';
 
 const PORT = 2033;
 const app = express();
@@ -13,11 +14,10 @@ if (app.get('env') !== 'test') {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get('*', (req, res) => {
-  res.status(200).send({ message: 'Everything wokring as expected. We are good to go!!' });
-});
+routes(app);
 
 app.listen(PORT, (error) => {
+  /* eslint-disable no-console */
   if (error) {
     console.log(`An error occurred try to start the sever. Error is ${error}`);
   } else {
