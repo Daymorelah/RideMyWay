@@ -8,6 +8,7 @@ const routes = (app) => {
   app.get('/api/v1/rides', rideOffersControllers.listRideOffers);
   app.get('/api/v1/:rideId', rideOffersControllers.getARide);
   app.post('/api/v1/rides', rideOffersControllers.createRideOffer);
+  app.post('/api/v1/:rideId/requests', rideOffersControllers.joinARide);
 };
 
 export default routes;

@@ -2,7 +2,7 @@
 import { RideOffers } from '../Models';
 import rideOffers from '../data';
 
-let id = 2;
+let id = 3;
 
 export default {
   listRideOffers(req, res) {
@@ -28,8 +28,19 @@ export default {
       destination: rideOffer.getDestination(),
       time: rideOffer.getTime(),
       driver: rideOffer.driver,
+      passengers: rideOffer.getPassenger(),
     };
     rideOffers.push(myOffer);
     res.status(200).send({ message: 'Ride offer created successfully' });
+  },
+  joinARide(req, res) {
+    const { rideId } = req.params;
+    const rideOffer = rideOffers.find(ride => ride.id === parseInt(rideId, 10));
+    if (rideOffer !== undefined) {
+      rideOffer.passengers.push(req.body.passenger);
+      res.status(200).send({ message: 'Pasenger added to the ride successfully' });
+    } else {
+      res.status(404).send({ message: 'The ride you want to join is not avaiable' });
+    }
   },
 };

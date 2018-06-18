@@ -62,5 +62,28 @@ describe('Ride-My-Way App Tests', () => {
           });
       });
     });
+    describe('Test for request to join a ride', () => {
+      it('should return a message when a user has been succesfully added to a ride', (done) => {
+        chai.request(app).post('/api/v1/3/requests')
+          .send({ passenger: 'Afolayan' })
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(200);
+            expect(res.body).to.be.an('object');
+            expect(res.body).to.have.property('message');
+            done();
+          });
+      });
+      it('should return an error message when the requested ride is not found', (done) => {
+        chai.request(app).post('/api/v1/30/requests')
+          .send({ passenger: 'Afolayan' })
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(404);
+            expect(res.body).to.be.an('object');
+            expect(res.body).to.have.property('message');
+            done();
+          });
+      });
+    });
   });
 });
+
