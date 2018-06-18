@@ -27,5 +27,23 @@ describe('Ride-My-Way App Tests', () => {
           done();
         });
     });
+    describe('Test for returning a single ride offer', () => {
+      it('Should return a ride offer object', (done) => {
+        chai.request(app).get('/api/v1/2')
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(200);
+            expect(res.body).to.have.property('rideOffer');
+            done();
+          });
+      });
+      it('Should return an error message when a requested ride offer is not created', (done) => {
+        chai.request(app).get('/api/v1/2000')
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(404);
+            expect(res.body).to.have.property('message');
+            done();
+          });
+      });
+    });
   });
 });
