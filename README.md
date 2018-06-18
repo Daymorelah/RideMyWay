@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Daymorelah/RideMyWay.svg?branch=ft-join-a-ride-2178134)](https://travis-ci.org/Daymorelah/PostIt)
+
 # RideMyWay
 Ride-my-way App is a carpooling application that provides drivers with the ability to create ride offers and passengers can join available ride offers.
 
