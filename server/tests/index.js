@@ -45,5 +45,22 @@ describe('Ride-My-Way App Tests', () => {
           });
       });
     });
+    describe('Tests for creating a ride offer', () => {
+      it('should return a message when a user is succesfully created', (done) => {
+        const rideOfferDetails = {
+          source: 'Obalende',
+          destination: 'Tejuosho',
+          time: '11:42 A.M',
+          driver: 'Obaseki',
+        };
+        chai.request(app).post('/api/v1/rides')
+          .send(rideOfferDetails)
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(200);
+            expect(res.body).to.have.property('message');
+            done();
+          });
+      });
+    });
   });
 });

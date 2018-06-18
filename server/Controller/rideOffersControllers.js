@@ -1,6 +1,8 @@
 
-// import { RideOffers } from '../Models';
+import { RideOffers } from '../Models';
 import rideOffers from '../data';
+
+let id = 2;
 
 export default {
   listRideOffers(req, res) {
@@ -14,5 +16,20 @@ export default {
     } else {
       res.status(200).send({ rideOffer });
     }
+  },
+  createRideOffer(req, res) {
+    const {
+      source, destination, time, driver,
+    } = req.body;
+    const rideOffer = new RideOffers(source, destination, time, driver);
+    const myOffer = {
+      id: id += 1,
+      source: rideOffer.getSource(),
+      destination: rideOffer.getDestination(),
+      time: rideOffer.getTime(),
+      driver: rideOffer.driver,
+    };
+    rideOffers.push(myOffer);
+    res.status(200).send({ message: 'Ride offer created successfully' });
   },
 };
