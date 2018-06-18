@@ -1,0 +1,15 @@
+language: node,
+sudo: required
+language: node_js
+node_js:
+  - "6"
+env:
+  - NODE_ENV=test
+#Selecte database service to use
+# services:
+#   - postgresql
+# before_script:
+#   - psql -c 'CREATE DATABASE test2;' -U postgres
+#   - npm run migrate-test
+script:
+  - npm test
