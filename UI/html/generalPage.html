@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Home page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="../css/profilePage.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <button id="logo"><a href="./generalPage.html">Ride-With-Me</a></button>
+      <button><a href="./profilePage.html">Profile</a></button>
+      <button><a href="./about.html">About</a></button>
+      <button id="logout-button"><a href="./signin.html">Logout</a></button>
+    </nav>
+  </header>
+  <main>
+    <section id="grid-item-1">
+      <ul id="user-action">
+        <li class="list-cursor-to-pointer" id="check-ride-offers">View available ride offers</li>
+        <li class="list-cursor-to-pointer" id="offer-a-ride">Offer a ride</li>
+        <li class="list-cursor-to-pointer" id="check-offered-rides">View rides offered</li>
+      </ul>
+    </section>
+    <section id="grid-item-2">
+      <div id="show-offers"></div>
+      <div id="set-ride-offer">
+        <form>
+          <input type="text" placeholder="Source"/>
+          <input type="text" placeholder="Destnation"/>
+          <input type="text" placeholder="Time"/>
+          <input type="submit" value="Create Offer"/>
+          <input type="submit" value="Cancel Offer"/>
+        </form>
+      </div>
+    </section>
+  </main>
+  <footer>
+    Designed by Ademola
+  </footer>
+  <script src="../js/generalPage.js"></script>
+</body>
+</html>
