@@ -5,11 +5,11 @@ node_js:
   - "6"
 env:
   - NODE_ENV=test
-#Selecte database service to use
-# services:
-#   - postgresql
-# before_script:
-#   - psql -c 'CREATE DATABASE test2;' -U postgres
-#   - npm run migrate-test
+branches:
+  except:
+  - gh-pages
+  - master
 script:
   - npm test
+after_success: 
+  - npm run coveralls
