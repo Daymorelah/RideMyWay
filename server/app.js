@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import logger from 'morgan';
 import routes from './Routes';
 
-const PORT = 2033;
+const PORT = process.env.PORT || 2033;
 const app = express();
 
 if (app.get('env') !== 'test') {
