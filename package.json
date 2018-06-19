@@ -5,6 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon --exec babel-node server/app.js",
+    "build": "babel server/ -d dist",
+    "host-on-heroku": "npm run build && node dist/app.js",
     "test": "set NODE_ENV=test&& mocha --exit --require babel-register --require babel-polyfill server/tests/",
     "test-coverage": "set NODE_ENV=test&& babel-node ./node_modules/babel-istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- --exit server/tests/",
     "coveralls": "npm run test-coverage && cat ./coverage/lcov.info | coveralls"
