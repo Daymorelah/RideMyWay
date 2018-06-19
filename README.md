@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/Daymorelah/RideMyWay.svg?branch=ft-join-a-ride-2178134)](https://travis-ci.org/Daymorelah/PostIt)
 [![Coverage Status](https://coveralls.io/repos/github/Daymorelah/RideMyWay/badge.svg?branch=ft-join-a-ride-2178134)](https://coveralls.io/github/Daymorelah/RideMyWay?branch=ft-join-a-ride-2178134)
 [![Maintainability](https://api.codeclimate.com/v1/badges/7b39a3c4a60595176942/maintainability)](https://codeclimate.com/github/Daymorelah/RideMyWay/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/7b39a3c4a60595176942/test_coverage)](https://codeclimate.com/github/Daymorelah/RideMyWay/test_coverage)
 
 # RideMyWay
 Ride-my-way App is a carpooling application that provides drivers with the ability to create ride offers and passengers can join available ride offers.
