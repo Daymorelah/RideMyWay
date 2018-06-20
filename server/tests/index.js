@@ -64,7 +64,7 @@ describe('Ride-My-Way App Tests', () => {
     });
     describe('Test for request to join a ride', () => {
       it('should return a message when a user has been succesfully added to a ride', (done) => {
-        chai.request(app).post('/api/v1/3/requests')
+        chai.request(app).put('/api/v1/3/requests')
           .send({ passenger: 'Afolayan' })
           .end((err, res) => {
             expect(res.status).to.deep.equal(200);
@@ -74,7 +74,7 @@ describe('Ride-My-Way App Tests', () => {
           });
       });
       it('should return an error message when the requested ride is not found', (done) => {
-        chai.request(app).post('/api/v1/30/requests')
+        chai.request(app).put('/api/v1/30/requests')
           .send({ passenger: 'Afolayan' })
           .end((err, res) => {
             expect(res.status).to.deep.equal(404);
