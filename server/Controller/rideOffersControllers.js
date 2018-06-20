@@ -1,6 +1,6 @@
 
 import { RideOffers } from '../Models';
-import rideOffers from '../data';
+import { rideOffers } from '../data';
 
 let id = 3;
 

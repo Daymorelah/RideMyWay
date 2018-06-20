@@ -1,5 +1,5 @@
 
-class Drivers {
+class Users {
   constructor(username, password, email) {
     this.username = username;
     this.password = password;
@@ -15,4 +15,4 @@ class Drivers {
     return this.password;
   }
 }
-export default Drivers;
+export default Users;

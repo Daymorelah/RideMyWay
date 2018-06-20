@@ -8,7 +8,7 @@ chai.use(chaiHttp);
 const { expect } = chai;
 
 describe('Ride-My-Way App Tests', () => {
-  describe('Integration test for the ride-offer model', () => {
+  describe('Integration test for the ride-offer controller', () => {
     it('Should welcome the user to the API', (done) => {
       chai.request(app).get('/api/v1')
         .end((err, res) => {
@@ -78,6 +78,40 @@ describe('Ride-My-Way App Tests', () => {
           .send({ passenger: 'Afolayan' })
           .end((err, res) => {
             expect(res.status).to.deep.equal(404);
+            expect(res.body).to.be.an('object');
+            expect(res.body).to.have.property('message');
+            done();
+          });
+      });
+    });
+  });
+  describe('Integration test for th users controller', () => {
+    describe('Test to signup a user', () => {
+      it('Should create a user send a message that the user has ben created', (done) => {
+        const userDetails = {
+          username: 'Thomas',
+          password: 'tomnjerry',
+          email: 'tommy@wemail.com',
+        };
+        chai.request(app).post('/api/v1/signup')
+          .send(userDetails)
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(201);
+            expect(res.body).to.be.an('object');
+            expect(res.body).to.have.property('message');
+            done();
+          });
+      });
+      it('Should return an error if any user detail is not present in body', (done) => {
+        const userDetails = {
+          username: 'Thomas',
+          password: null,
+          email: 'tommy@wemail.com',
+        };
+        chai.request(app).post('/api/v1/signup')
+          .send(userDetails)
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(400);
             expect(res.body).to.be.an('object');
             expect(res.body).to.have.property('message');
             done();

@@ -31,4 +31,17 @@ const rideOffers = [
   },
 ];
 
-export default rideOffers;
+const usersDetail = [
+  {
+    username: 'Boyega',
+    email: 'boyee@wemail.com',
+    password: 'we34dcf%^ytghY67874reDc',
+  },
+  {
+    username: 'Adeshegun',
+    email: 'shexy@wemail.com',
+    password: 'we34dcf%^ytghY67874reDc',
+  },
+];
+
+export { rideOffers, usersDetail };

@@ -1,5 +1,6 @@
 
 import rideOffersControllers from '../Controller/rideOffersControllers';
+import usersController from '../Controller/usersController';
 
 const routes = (app) => {
   app.get('/api/v1/', (req, res) => {
@@ -9,6 +10,7 @@ const routes = (app) => {
   app.get('/api/v1/:rideId', rideOffersControllers.getARide);
   app.post('/api/v1/rides', rideOffersControllers.createRideOffer);
   app.put('/api/v1/:rideId/requests', rideOffersControllers.joinARide);
+  app.post('/api/v1/signup', usersController.userSignUp);
 };
 
 export default routes;
