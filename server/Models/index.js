@@ -1,10 +1,8 @@
 
-import Drivers from './drivers';
-import Passengers from './passengers';
+import Users from './users';
 import RideOffers from './rideoffers';
 
 export {
-  Drivers,
-  Passengers,
+  Users,
   RideOffers,
 };
