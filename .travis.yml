@@ -1,0 +1,19 @@
+language: node,
+sudo: required
+language: node_js
+node_js:
+  - "6"
+env: 
+  global:
+    - CODECLIMATE_REPO_TOKEN=79737235b2cf910f826356c08054a9d4ea18b82ffce033bf0c95146db3fdc771
+    - NODE_ENV=test
+branches:
+  except:
+  - gh-pages
+  - master
+script:
+  - npm test
+after_success: 
+  - npm install -g codeclimate-test-reporter
+  - npm run coveralls
+  - codeclimate-test-reporter < ./coverage/lcov.info
