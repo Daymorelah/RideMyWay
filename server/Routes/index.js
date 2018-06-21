@@ -14,6 +14,7 @@ const routes = (app) => {
   app.post('/api/v1/login', usersController.userLogin);
   app.delete('/api/v1/:rideId/rides', rideOffersControllers.deleteARide);
   app.delete('/api/v1/:userId/users', usersController.deleteAUser);
+  app.delete('/api/v1/:rideId/requests', rideOffersControllers.deleteUserFromRide);
 };
 
 export default routes;

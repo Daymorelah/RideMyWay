@@ -7,7 +7,7 @@ const rideOfferData = [
     time: '2:23 P.M.',
     driver: 'Adetunde',
     passengers: [
-      'Tunde', 'Bola',
+      'Tunde', 'Bola', 'Kemi',
     ],
   },
   {

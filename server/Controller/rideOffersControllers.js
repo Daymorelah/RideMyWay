@@ -52,4 +52,21 @@ export default {
       res.status(200).send({ message: 'Ride offer has been deleted succesfully' });
     }
   },
+  deleteUserFromRide(req, res) {
+    const { rideId } = req.params;
+    const { passenger } = req.body;
+    const foundRide = rideOfferData.find(ride => ride.id === parseInt(rideId, 10));
+    if (foundRide === undefined) {
+      res.status(404).send({ message: 'Ride offer querried is not valid' });
+    } else {
+      const passengerArray = foundRide.passengers;
+      if (passengerArray.includes(passenger)) {
+        const index = passengerArray.indexOf(passenger);
+        passengerArray.splice(index, 1);
+        res.status(200).send({ message: 'user removed from the ride offer successfully' });
+      } else {
+        res.status(404).send({ message: `user ${passenger} is not part of the ride offer querried` });
+      }
+    }
+  },
 };

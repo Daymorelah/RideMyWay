@@ -104,6 +104,38 @@ describe('Ride-My-Way App Tests', () => {
           });
       });
     });
+    describe('Test for deleting a user from a ride ', () => {
+      it('should remove a passenger from a ride offer', (done) => {
+        chai.request(app).delete('/api/v1/1/requests')
+          .send({ passenger: 'Kemi' })
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(200);
+            expect(res.body).to.be.an('object');
+            expect(res.body).to.have.property('message');
+            done();
+          });
+      });
+      it('should send an error message if the user to be deleted is not valid', (done) => {
+        chai.request(app).delete('/api/v1/1/requests')
+          .send({ passenger: 'Kemisola' })
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(404);
+            expect(res.body).to.be.an('object');
+            expect(res.body).to.have.property('message');
+            done();
+          });
+      });
+      it('should send an error message if the ride offer requested is invalid', (done) => {
+        chai.request(app).delete('/api/v1/44/requests')
+          .send({ passenger: 'Kemisola' })
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(404);
+            expect(res.body).to.be.an('object');
+            expect(res.body).to.have.property('message');
+            done();
+          });
+      });
+    });
   });
   describe('Integration test for the users controller', () => {
     describe('Test to signup a user', () => {
