@@ -84,6 +84,26 @@ describe('Ride-My-Way App Tests', () => {
           });
       });
     });
+    describe('Test for deleting a ride offer ', () => {
+      it('Should return a success message when a user has been deleted', (done) => {
+        chai.request(app).delete('/api/v1/3')
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(200);
+            expect(res.body).to.be.an('object');
+            expect(res.body).to.have.property('message');
+            done();
+          });
+      });
+      it('Should return an error message when the requested ride offer is invalid', (done) => {
+        chai.request(app).delete('/api/v1/50')
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(404);
+            expect(res.body).to.be.an('object');
+            expect(res.body).to.have.property('message');
+            done();
+          });
+      });
+    });
   });
   describe('Integration test for the users controller', () => {
     describe('Test to signup a user', () => {

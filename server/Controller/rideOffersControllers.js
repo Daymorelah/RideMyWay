@@ -42,4 +42,14 @@ export default {
       res.status(404).send({ message: 'The ride you want to join is not avaiable' });
     }
   },
+  removeARide(req, res) {
+    const { rideId } = req.params;
+    const rideOffer = rideOfferData.find(ride => ride.id === parseInt(rideId, 10));
+    if (rideOffer === undefined) {
+      res.status(404).send({ message: 'Ride offer requested is not found' });
+    } else {
+      rideOfferData.splice((rideId - 1), 1);
+      res.status(200).send({ message: 'Ride offer has been deleted succesfully' });
+    }
+  },
 };
