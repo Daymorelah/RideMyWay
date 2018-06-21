@@ -2,6 +2,8 @@
 import { Users, usersData } from '../Models';
 import cryptData from '../Utilities/cryptData';
 
+let id = 2;
+
 export default {
   userSignUp(req, res) {
     const { username, password, email } = req.body;
@@ -10,8 +12,14 @@ export default {
       cryptData.encryptData(password).then((hash) => {
         encryptedPassword = hash;
         const newUser = new Users(username, encryptedPassword, email);
-        const newUserName = newUser.getUsername();
-        const arrayLength = usersData.push(newUser);
+        const newUserObject = {
+          id: id += 1,
+          username: newUser.getUsername(),
+          email: newUser.getEmail(),
+          password: newUser.getPassword(),
+        };
+        const newUserName = newUserObject.username;
+        const arrayLength = usersData.push(newUserObject);
         if (arrayLength > 2) {
           res.status(201).send({ message: `User ${newUserName} created succesfully` });
         } else {
@@ -44,6 +52,16 @@ export default {
       }
     } else {
       res.status(400).send({ message: 'Please fill all user details asked for.' });
+    }
+  },
+  deleteAUser(req, res) {
+    const { userId } = req.params;
+    const foundUser = usersData.find(user => user.id === parseInt(userId, 10));
+    if (foundUser === undefined) {
+      res.status(404).send({ message: 'User requested is invalid' });
+    } else {
+      usersData.splice((userId - 1), 1);
+      res.status(200).send({ message: 'User has been deleted succesfully' });
     }
   },
 };

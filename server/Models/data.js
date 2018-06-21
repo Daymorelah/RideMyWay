@@ -34,11 +34,13 @@ const rideOfferData = [
 
 const usersData = [
   {
+    id: 1,
     username: 'Boyega',
     email: 'boyee@wemail.com',
     password: 'we34dcf%^ytghY67874reDc',
   },
   {
+    id: 2,
     username: 'Adeshegun',
     email: 'shexy@wemail.com',
     password: 'we34dcf%^ytghY67874reDc',
