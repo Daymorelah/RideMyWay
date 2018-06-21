@@ -11,6 +11,7 @@ const routes = (app) => {
   app.post('/api/v1/rides', rideOffersControllers.createRideOffer);
   app.put('/api/v1/:rideId/requests', rideOffersControllers.joinARide);
   app.post('/api/v1/signup', usersController.userSignUp);
+  app.post('/api/v1/login', usersController.userLogin);
 };
 
 export default routes;

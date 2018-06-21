@@ -7,7 +7,7 @@ function encryptData(dataToEncrypt) {
 }
 
 function decryptData(dataToDecrypt, dataBaseHash) {
-  return bcrypt.compareSync(dataToDecrypt, dataBaseHash);
+  return bcrypt.compare(dataToDecrypt, dataBaseHash);
 }
 
 export default { encryptData, decryptData };
