@@ -1,4 +1,5 @@
-const rideOffers = [
+
+const rideOfferData = [
   {
     id: 1,
     source: 'Pen-Cinema',
@@ -31,7 +32,7 @@ const rideOffers = [
   },
 ];
 
-const usersDetail = [
+const usersData = [
   {
     username: 'Boyega',
     email: 'boyee@wemail.com',
@@ -44,4 +45,4 @@ const usersDetail = [
   },
 ];
 
-export { rideOffers, usersDetail };
+export { rideOfferData, usersData };

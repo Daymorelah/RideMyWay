@@ -1,6 +1,5 @@
 
-import { Users } from '../Models';
-import { usersDetail } from '../data';
+import { Users, usersData } from '../Models';
 import cryptData from '../Utilities/cryptData';
 
 export default {
@@ -12,7 +11,7 @@ export default {
         encryptedPassword = hash;
         const newUser = new Users(username, encryptedPassword, email);
         const newUserName = newUser.getUsername();
-        const arrayLength = usersDetail.push(newUser);
+        const arrayLength = usersData.push(newUser);
         if (arrayLength > 2) {
           res.status(201).send({ message: `User ${newUserName} created succesfully` });
         } else {
