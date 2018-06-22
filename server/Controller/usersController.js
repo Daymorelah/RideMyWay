@@ -37,19 +37,17 @@ export default {
       const foundUser = usersData.find(user => user.username === username);
       if (foundUser === undefined) {
         res.status(404).send({ message: 'Username or password is invalid' });
-      } else {
-        cryptData.decryptData(password, foundUser.password)
-          .then((isPasswordCorrect) => {
-            if (isPasswordCorrect === true) {
-              res.status(200).send({ message: `User ${foundUser.username} logged in seccessfully` });
-            } else {
-              res.status(400).send({ message: 'Username or password is invalid' });
-            }
-          })
-          .catch(() => res.status(500).send({
-            message: 'An error occurd while fufilling your request. Please try again.',
-          }));
       }
+      cryptData.decryptData(password, foundUser.password)
+        .then((isPasswordCorrect) => {
+          if (isPasswordCorrect) {
+            res.status(200).send({ message: `User ${foundUser.username} logged in seccessfully` });
+          }
+          res.status(400).send({ message: 'Username or password is invalid' });
+        })
+        .catch(() => res.status(500).send({
+          message: 'An error occurd while fufilling your request. Please try again.',
+        }));
     } else {
       res.status(400).send({ message: 'Please fill all user details asked for.' });
     }
