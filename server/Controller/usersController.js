@@ -1,6 +1,7 @@
 
 import { Users, usersData } from '../Models';
 import cryptData from '../Utilities/cryptData';
+import deleteBasedOnId from '../Utilities/commonMethods';
 
 let id = 2;
 
@@ -35,7 +36,6 @@ export default {
     if (username && password) {
       const foundUser = usersData.find(user => user.username === username);
       if (foundUser === undefined) {
-        console.log('foundUser is ==> ', foundUser);
         res.status(404).send({ message: 'Username or password is invalid' });
       } else {
         cryptData.decryptData(password, foundUser.password)
@@ -55,14 +55,7 @@ export default {
     }
   },
   deleteAUser(req, res) {
-    const { userId } = req.params;
-    const foundUser = usersData.find(user => user.id === parseInt(userId, 10));
-    if (foundUser === undefined) {
-      res.status(404).send({ message: 'User requested is invalid' });
-    } else {
-      usersData.splice((userId - 1), 1);
-      res.status(200).send({ message: 'User has been deleted succesfully' });
-    }
+    deleteBasedOnId(req, res, usersData, 'userId');
   },
   updateAUser(req, res) {
     const { userId } = req.params;

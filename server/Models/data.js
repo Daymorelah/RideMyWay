@@ -45,6 +45,12 @@ const usersData = [
     email: 'shexy@wemail.com',
     password: 'we34dcf%^ytghY67874reDc',
   },
+  {
+    id: 3,
+    username: 'Oluwadare',
+    email: 'darey@wemail.com',
+    password: 'weghY64dcf%^7874reD3ytc',
+  },
 ];
 
 export { rideOfferData, usersData };

@@ -1,5 +1,6 @@
 
 import { RideOffers, rideOfferData } from '../Models';
+import deleteBasedOnId from '../Utilities/commonMethods';
 
 let id = 3;
 
@@ -43,14 +44,7 @@ export default {
     }
   },
   deleteARide(req, res) {
-    const { rideId } = req.params;
-    const rideOffer = rideOfferData.find(ride => ride.id === parseInt(rideId, 10));
-    if (rideOffer === undefined) {
-      res.status(404).send({ message: 'Ride offer requested is not found' });
-    } else {
-      rideOfferData.splice((rideId - 1), 1);
-      res.status(200).send({ message: 'Ride offer has been deleted succesfully' });
-    }
+    deleteBasedOnId(req, res, rideOfferData, 'rideId');
   },
   deleteUserFromRide(req, res) {
     const { rideId } = req.params;
