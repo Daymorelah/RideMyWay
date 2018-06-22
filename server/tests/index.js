@@ -234,6 +234,32 @@ describe('Ride-My-Way App Tests', () => {
           });
       });
     });
+    describe('Test to update a registered user\'s details', () => {
+      it('Should return a success message after updating a user\'s detail successfully', (done) => {
+        const userDetails = {
+          username: 'Mukaila',
+          password: 'mukeke',
+          email: 'muka@wemail.com',
+        };
+        chai.request(app).put('/api/v1/1/users')
+          .send(userDetails)
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(200);
+            expect(res.body).to.be.an('object');
+            expect(res.body).to.have.property('message');
+            done();
+          });
+      });
+      it('Should return an error message when the user querried is not valid', (done) => {
+        chai.request(app).put('/api/v1/20/users')
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(404);
+            expect(res.body).to.be.an('object');
+            expect(res.body).to.have.property('message', 'User requested no found');
+            done();
+          });
+      });
+    });
   });
 });
 
