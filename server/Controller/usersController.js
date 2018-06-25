@@ -42,8 +42,9 @@ export default {
         .then((isPasswordCorrect) => {
           if (isPasswordCorrect) {
             res.status(200).send({ message: `User ${foundUser.username} logged in seccessfully` });
+          } else {
+            res.status(400).send({ message: 'Username or password is invalid' });
           }
-          res.status(400).send({ message: 'Username or password is invalid' });
         })
         .catch(() => res.status(500).send({
           message: 'An error occurd while fufilling your request. Please try again.',
