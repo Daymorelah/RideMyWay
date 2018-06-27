@@ -12,6 +12,7 @@ main{
   grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto;
   grid-template-rows: 70%;
   padding: 20px ;
+  min-height: 70vh;
 }
 
 #grid-item-1{
@@ -21,10 +22,15 @@ main{
   height: 100%;
   padding: 10px;
   background-color:  rgba(0,0,0,0.4);
+  
 }
 
-#grid-item-1 div {
-  margin: 10px;
+#grid-item-1 div, #set-ride-offer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 8px;
+  height:100%;
 }
 
 .list-cursor-to-pointer{
@@ -62,7 +68,6 @@ ul {
 }
 
 #user-action li, #grid-item-2 li{
-  display: block;
   background-color: #fff;
   border-bottom: 0.5px solid #000;
   border-radius: 4px; 
@@ -132,7 +137,7 @@ ul {
 }
 
 select{
-  padding: 16px 20px;
+  padding: 8px 10px;
   border: none;
   border-radius: 4px;
   background-color: #ffffff;
@@ -146,7 +151,7 @@ select{
 }
 
 #grid-item-2 button {
-  color: inherit;
+  color: #ffffff;
   border: none;
   outline: inherit;
   cursor: pointer;
@@ -165,12 +170,10 @@ select{
   padding: 0;
   color: inherit;
 }
-
 nav{
   background-color: rgba(0,0,0,0.5);
   border-radius: 8px;
 }
-
 nav button{
   color: #fff;
   border: none;
@@ -226,22 +229,22 @@ footer div {
   margin: 20px auto 0 auto;
 }
 
-#set-ride-offer{
+#set-ride-offer div{
   text-align: center;
-  display: none;
+  display: block;
   background-color: rgba(0,0,0,0.4);
   border-radius: 14px;
   max-height: 70%;
   padding: 20px;
   width: 70%;
   margin: auto;
-} 
+}
 
 input{
   text-decoration: none;
   display: block;
   margin: auto;
-  margin-bottom: 15px;
+  margin-top: 15px;
   height: 30px;
   width: 55%;
   border-radius: 4px;

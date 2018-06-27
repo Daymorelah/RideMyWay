@@ -29,15 +29,33 @@
       </ul>
     </section>
     <section class="container" id="grid-item-2">
-      <div>
+      <div id="search-by">
+        <form action="#">
+          <label for="ride-data">search by:</label>
+          <select name="ride-data" id="ride-data">
+            <option value="destination">Destination</option>
+            <option value="source">Source</option>
+            <option value="time">Time</option>
+            <option value="date">Date</option>
+          </select>
+          <input type="text" />
+          <button>Search</button>
+        </form>
+      </div>
+      <div id="ask-user">
         <h2>Do you want to book or offer a ride ? </h2>
         <button><a href="./generalPage.html">Book a ride</a></button>
         <button><a href="./generalPage.html">Offer a ride</a></button>
       </div>
+      <div id="paginate">
+        <button>Next</button> <button>Previous</button>
+      </div>
     </section>
   </main>
   <footer>
-    Designed by Ademola
+    <div>
+      Designed by Ademola
+    </div>
   </footer>
   <script src="../js/profilePage.js"></script>
 </body>
