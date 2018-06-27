@@ -1,8 +1,6 @@
-html{
+body{
   font-family: sans-serif;
-  background-image: url(../images/avataar1.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-color: #4A312A;
   color: #fff;
 }
 
@@ -22,7 +20,8 @@ div{
 } 
 
 #container{
-  max-height: 90vh;
+  /* max-height: 90vh; */
+  margin-top: 5%;
 }
 
 #login-form-container{
