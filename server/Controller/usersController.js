@@ -4,8 +4,6 @@ import db from '../Models/db/connectToDb';
 import cryptData from '../Utilities/cryptData';
 // import deleteBasedOnId from '../Utilities/commonMethods';
 
-// let id = 2;
-
 export default {
   userSignUp(req, res) {
     const { username, password, email } = req.body;
@@ -13,19 +11,29 @@ export default {
     if (username && password && email) {
       cryptData.encryptData(password).then((hash) => {
         encryptedPassword = hash;
-        db(`INSERT INTO users (id, username, password, email) VALUES (1, '${username}', '${encryptedPassword}', '${email}')`, (error, response) => {
+        db(`INSERT INTO users (username, password, email) VALUES ('${username}', '${encryptedPassword}', '${email}')`, (error, response) => {
           if (error) {
-            console.log('we got an error it is ==> ', error);
-            res.status(500).send({message: 'An error occured on our server'});
+            res.jsend.error({
+              code: 500,
+              message: 'An error occured on our server',
+              data: error.detail,
+            });
           }
           if (response) {
-            console.log('we got a responce it is ==> ', response);
-            res.status(200).send({ message: 'User created succesfully' });
+            res.jsend.success({
+              message: 'User created succesfully',
+            });
           }
         });
-      }).catch();
+      }).catch((error) => {
+        res.jsend.error({ 
+          code: 500,
+          message: 'Please fill all user details asked for.',
+          data: error.message,
+        });
+      });
     } else {
-      res.status(400).send({ message: 'Please fill all user details asked for.' });
+      res.jsend.fail({ message: 'Please fill all user details asked for.' });
     }
   },
   // userLogin(req, res) {

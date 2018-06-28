@@ -9,12 +9,12 @@ async function createUserTable() {
     if (res) {
       console.log('Table users has been dropped succesfully');
       connecToDb('CREATE TABLE users(' +
-                  'id INTEGER PRIMARY KEY NOT NULL,' +
-                  'username TEXT NOT NULL,' +
-                  'password TEXT NOT NULL,' +
+                  'id SERIAL PRIMARY KEY,' +
+                  'username VARCHAR(255) NOT NULL,' +
+                  'password VARCHAR(255) NOT NULL,' +
                   'email TEXT NOT NULL)', (error, responce) => {
         if (error) {
-          console.log('An error occurred trying to create table user.', err);
+          console.log('An error occurred trying to create table user.', error);
         }
         if (responce) {
           console.log('Table user has been Created succesfully');
