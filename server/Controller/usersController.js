@@ -1,9 +1,8 @@
 
-// import { Users, usersData } from '../Models';
-import db from '../Models/db/connectToDb';
-import cryptData from '../Utilities/cryptData';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
+import db from '../Models/db/connectToDb';
+import cryptData from '../Utilities/cryptData';
 // import deleteBasedOnId from '../Utilities/commonMethods';
 
 dotenv.config();
@@ -53,6 +52,7 @@ export default {
         if (error) {
           res.jsend.fail({
             message: 'Username or password is invalid',
+            error,
           });
         }
         if (response) {

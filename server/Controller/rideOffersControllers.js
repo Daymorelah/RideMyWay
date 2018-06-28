@@ -1,12 +1,25 @@
 
-import { RideOffers, rideOfferData } from '../Models';
+import db from '../Models/db/connectToDb';
 import deleteBasedOnId from '../Utilities/commonMethods';
 
 let id = 3;
 
 export default {
   listRideOffers(req, res) {
-    res.status(200).send({ rides: rideOfferData });
+    // res.status(200).send({ rides: rideOfferData });
+    db('SELECT * FROM ride_offers LIMIT 4', (error, response) => {
+      if (error) {
+        res.jsend.fail({
+          message: 'An error occurred. Could not complete your query',
+        });
+      }
+      if (response) {
+        console.log('responce from select query is ==> ', response);
+        res.jsend.success({
+          ride_offers: response.rows[0],
+        });
+      }
+    });
   },
   getARide(req, res) {
     const { rideId } = req.params;
