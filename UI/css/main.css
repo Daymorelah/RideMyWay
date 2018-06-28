@@ -1,0 +1,76 @@
+body{
+  font-family: sans-serif;
+  background-color: #4A312A;
+  color: #fff;
+}
+
+header, #login-form-container h3, h5{
+  text-align: center;
+}
+
+main{
+  display: grid;
+  grid-template-columns: auto auto auto;
+  max-height: 80%;
+}
+
+div{
+  /* border: 2px solid black; */
+  padding: 10px;
+} 
+
+#container{
+  /* max-height: 90vh; */
+  margin-top: 5%;
+}
+
+#login-form-container{
+  background-color: rgba(0,0,0,0.4);
+  border-radius: 14px;
+  max-height: 70%;
+  padding: 20px;
+  width: 70%;
+  margin: auto;
+}
+
+input{
+  text-decoration: none;
+  display: block;
+  margin: auto;
+  margin-bottom: 15px;
+  height: 30px;
+  width: 55%;
+  border-radius: 4px;
+  padding: 3px;
+  font-size: 16px;
+  border: none;
+}
+
+input[type="submit"]{
+  outline: inherit;
+  cursor: pointer;
+  text-align: center;
+  background-color: #8a2be2;
+  width: 30%;
+  padding: 0;
+  color: inherit
+  
+}
+
+input[type="checkbox"]{
+  display: inline-block;
+  appearance: none;
+  height: 1em;
+  width: 1em; 
+} 
+
+#checkbox-container {
+  padding: 0;
+  text-align: center
+}
+
+a{
+  text-decoration: none;
+  font-family: inherit;
+  color: inherit;
+}
