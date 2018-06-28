@@ -1,11 +1,8 @@
 
 import Users from './users';
 import RideOffers from './rideoffers';
-import { rideOfferData, usersData } from './data';
+import passengers from './passengers';
 
-export {
-  Users,
-  RideOffers,
-  rideOfferData,
-  usersData,
-};
+Users();
+RideOffers();
+passengers();
