@@ -8,11 +8,12 @@ const createRideOffersTable = () => {
       console.log('An error occurred trying to drop table ride_offers. ', err);
     }
     if (res) {
-      console.log('Table ride_offers has been dropped succesfully'); connecToDb('CREATE TABLE ride_offers(' +
-      'id INTEGER,' +
-      'username TEXT,' +
-      'password TEXT,' +
-      'email TEXT)', (error, response) => {
+      console.log('Table ride_offers has been dropped succesfully');
+      connecToDb('CREATE TABLE ride_offers(' +
+                  'id INTEGER,' +
+                  'number_of_seats INTEGER,' +
+                  'password TEXT,' +
+                  'email TEXT)', (error, response) => {
         if (error) {
           console.log('An error occurred trying to create table ride_offers.', err);
         }
