@@ -13,10 +13,8 @@ export default {
         encryptedPassword = hash;
         db(`INSERT INTO users (username, password, email) VALUES ('${username}', '${encryptedPassword}', '${email}')`, (error, response) => {
           if (error) {
-            res.jsend.error({
-              code: 500,
-              message: 'An error occured on our server',
-              data: error.detail,
+            res.jsend.fail({
+              message: 'user could not be created',
             });
           }
           if (response) {
@@ -26,7 +24,7 @@ export default {
           }
         });
       }).catch((error) => {
-        res.jsend.error({ 
+        res.jsend.error({
           code: 500,
           message: 'Please fill all user details asked for.',
           data: error.message,
@@ -36,28 +34,38 @@ export default {
       res.jsend.fail({ message: 'Please fill all user details asked for.' });
     }
   },
-  // userLogin(req, res) {
-  //   const { username, password } = req.body;
-  //   if (username && password) {
-  //     const foundUser = usersData.find(user => user.username === username);
-  //     if (foundUser === undefined) {
-  //       res.status(404).send({ message: 'Username or password is invalid' });
-  //     }
-  //     cryptData.decryptData(password, foundUser.password)
-  //       .then((isPasswordCorrect) => {
-  //         if (isPasswordCorrect) {
-  //           res.status(200).send({ message: `User ${foundUser.username} logged in seccessfully` });
-  //         } else {
-  //           res.status(400).send({ message: 'Username or password is invalid' });
-  //         }
-  //       })
-  //       .catch(() => res.status(500).send({
-  //         message: 'An error occurd while fufilling your request. Please try again.',
-  //       }));
-  //   } else {
-  //     res.status(400).send({ message: 'Please fill all user details asked for.' });
-  //   }
-  // },
+  userLogin(req, res) {
+    const { username, password } = req.body;
+    if (username && password) {
+      // const foundUser = usersData.find(user => user.username === username);
+      db(`SELECT username,password FROM users WHERE username = '${username}'`, (error, response) => {
+        if (error) {
+          res.jsend.fail({
+            message: 'Username or password is invalid',
+          });
+        }
+        if (response) {
+          const result = response.rows[0];
+          cryptData.decryptData(password, result.password)
+            .then((isPasswordCorrect) => {
+              if (isPasswordCorrect) {
+                res.jsend.success({ message: `User ${result.username} logged in seccessfully` });
+              } else {
+                res.jsend.fail({
+                  message: 'Username or password is invalid',
+                });
+              }
+            })
+            .catch(() => res.jsend.error({
+              code: 500,
+              message: 'An error occurd while fufilling your request. Please try again.',
+            }));
+        }
+      });
+    } else {
+      res.jsend.fail({ message: 'Please fill all user details asked for.' });
+    }
+  },
   // deleteAUser(req, res) {
   //   deleteBasedOnId(req, res, usersData, 'userId');
   // },
