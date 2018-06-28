@@ -10,8 +10,8 @@ const routes = (app) => {
   // app.get('/api/v1/:rideId', rideOffersControllers.getARide);
   // app.post('/api/v1/rides', rideOffersControllers.createRideOffer);
   // app.put('/api/v1/:rideId/requests', rideOffersControllers.joinARide);
-  app.post('/api/v1/signup', usersController.userSignUp);
-  app.post('/api/v1/login', usersController.userLogin);
+  app.post('/api/v1/auth/signup', usersController.userSignUp);
+  app.post('/api/v1/auth/login', usersController.userLogin);
   // app.delete('/api/v1/:rideId/rides', rideOffersControllers.deleteARide);
   // app.delete('/api/v1/:userId/users', usersController.deleteAUser);
   // app.delete('/api/v1/:rideId/requests', rideOffersControllers.deleteUserFromRide);

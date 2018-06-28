@@ -2,7 +2,12 @@
 // import { Users, usersData } from '../Models';
 import db from '../Models/db/connectToDb';
 import cryptData from '../Utilities/cryptData';
+import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
 // import deleteBasedOnId from '../Utilities/commonMethods';
+
+dotenv.config();
+const secrete = process.env.SECRETE;
 
 export default {
   userSignUp(req, res) {
@@ -11,15 +16,22 @@ export default {
     if (username && password && email) {
       cryptData.encryptData(password).then((hash) => {
         encryptedPassword = hash;
-        db(`INSERT INTO users (username, password, email) VALUES ('${username}', '${encryptedPassword}', '${email}')`, (error, response) => {
+        db(`INSERT INTO users (username, password, email) VALUES ('${username}', '${encryptedPassword}', '${email}') RETURNING *`, (error, response) => {
           if (error) {
             res.jsend.fail({
               message: 'user could not be created',
             });
           }
           if (response) {
+            const result = response.rows[0];
+            const token = jwt.sign({
+              userId: result.id,
+              username: result.username,
+              email: result.email,
+            }, secrete, { expiresIn: '1 day' });
             res.jsend.success({
               message: 'User created succesfully',
+              token,
             });
           }
         });
@@ -37,7 +49,6 @@ export default {
   userLogin(req, res) {
     const { username, password } = req.body;
     if (username && password) {
-      // const foundUser = usersData.find(user => user.username === username);
       db(`SELECT username,password FROM users WHERE username = '${username}'`, (error, response) => {
         if (error) {
           res.jsend.fail({
@@ -49,7 +60,15 @@ export default {
           cryptData.decryptData(password, result.password)
             .then((isPasswordCorrect) => {
               if (isPasswordCorrect) {
-                res.jsend.success({ message: `User ${result.username} logged in seccessfully` });
+                const token = jwt.sign({
+                  userId: result.id,
+                  username: result.username,
+                  email: result.email,
+                }, secrete, { expiresIn: '1 day' });
+                res.jsend.success({
+                  message: `User ${result.username} logged in seccessfully`,
+                  token,
+                });
               } else {
                 res.jsend.fail({
                   message: 'Username or password is invalid',
