@@ -15,7 +15,11 @@ export default {
     if (username && password && email) {
       cryptData.encryptData(password).then((hash) => {
         encryptedPassword = hash;
-        db(`INSERT INTO users (username, password, email) VALUES ('${username}', '${encryptedPassword}', '${email}') RETURNING *`, (error, response) => {
+        db.query('INSERT INTO users (username, password, email) ' +
+                  `VALUES ('${username}',` +
+                  ` '${encryptedPassword}',` +
+                  ` '${email}') RETURNING *`,
+        (error, response) => {
           if (error) {
             res.jsend.fail({
               message: 'user could not be created',
