@@ -10,9 +10,6 @@ const dbConfigurations = {
     max: 10, // max number of connection can be open to database
     idleTimeoutMillis: 30000,
   },
-  production: {
-    use_env_variable: 'DATABASE_URL',
-  },
 };
 
 export default dbConfigurations;
