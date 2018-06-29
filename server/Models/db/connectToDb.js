@@ -3,6 +3,7 @@ import { Pool } from 'pg';
 import config from '../../Config/config';
 
 let pool;
+console.log(`We are in the ${process.env.NODE_ENV} environment`);
 
 if (process.env.DATABASE_URL) {
   pool = new Pool(process.env.DATABASE_URL);
