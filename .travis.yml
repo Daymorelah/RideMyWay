@@ -12,6 +12,7 @@ branches:
   - gh-pages
   - master
 before_script:
+  - psql -c 'CREATE DATABASE ride_my_way_test_db;' -U postgres
   - npm run models-for-testing
 script:
   - npm test
