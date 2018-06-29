@@ -8,7 +8,7 @@ if (process.env.NODE_ENV === 'development') {
   pool = new Pool(config.development);
 }
 if (process.env.NODE_ENV === 'production') {
-  pool = new Pool(process.env[config.production.use_env_variable]);
+  pool = new Pool(process.env.DATABE_URL);
 }
 
 const connectToDb = (text, params, callback) => pool.query(text, params, callback);
