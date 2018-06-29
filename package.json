@@ -10,7 +10,8 @@
     "test": "set NODE_ENV=test&& mocha --exit --require babel-register --require babel-polyfill server/tests/",
     "test-coverage": "set NODE_ENV=test&& babel-node ./node_modules/babel-istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- --exit server/tests/",
     "coveralls": "npm run test-coverage && cat ./coverage/lcov.info | coveralls",
-    "models": "babel-node server/Models"
+    "models": "babel-node server/Models",
+    "models-on-heroku": "set NODE_ENV=production&& babel-node server/Models"
   },
   "repository": {
     "type": "git",
