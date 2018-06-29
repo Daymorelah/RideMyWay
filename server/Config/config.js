@@ -1,4 +1,5 @@
 
+
 const dbConfigurations = {
   development: {
     user: 'postgres',
@@ -8,6 +9,9 @@ const dbConfigurations = {
     port: 5432,
     max: 10, // max number of connection can be open to database
     idleTimeoutMillis: 30000,
+  },
+  production: {
+    use_env_variable: 'DATABASE_URL',
   },
 };
 
