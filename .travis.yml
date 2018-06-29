@@ -11,6 +11,8 @@ branches:
   except:
   - gh-pages
   - master
+before_script:
+  - npm run models-for-testing
 script:
   - npm test
 after_success: 
