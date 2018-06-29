@@ -14,7 +14,6 @@ export default {
         });
       }
       if (response) {
-        console.log('responce from select query is ==> ', response);
         res.jsend.success({
           ride_offers: response.rows[0],
         });

@@ -1,4 +1,5 @@
 
+
 const dbConfigurations = {
   development: {
     user: 'postgres',
