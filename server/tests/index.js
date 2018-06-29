@@ -9,7 +9,7 @@ const { expect } = chai;
 
 describe('Ride-My-Way App Tests', () => {
   describe('Integration test for the ride-offer controller', () => {
-    it('Should welcome the user to the API', (done) => {
+    it.only('Should welcome the user to the API', (done) => {
       chai.request(app).get('/api/v1')
         .end((err, res) => {
           expect(res.status).to.deep.equal(200);
@@ -138,50 +138,53 @@ describe('Ride-My-Way App Tests', () => {
     });
   });
   describe('Integration test for the users controller', () => {
-    describe('Test to signup a user', () => {
-      it('Should create a user send a message that the user has ben created', (done) => {
+    describe.only('Test to signup a user', () => {
+      it('Should create a user and send a message that the user has ben created', (done) => {
         const userDetails = {
           username: 'Thomas',
           password: 'tomnjerry',
           email: 'tommy@wemail.com',
         };
-        chai.request(app).post('/api/v1/signup')
+        chai.request(app).post('/api/v1/auth/signup')
           .send(userDetails)
           .end((err, res) => {
-            expect(res.status).to.deep.equal(201);
-            expect(res.body).to.be.an('object');
-            expect(res.body).to.have.property('message');
+            expect(res.status).to.deep.equal(200);
+            expect(res.body.data).to.have.property('token');
+            expect(res.body.status).to.deep.equal('success');
+            expect(res.body.data.message).to.deep.equal('User created succesfully');
             done();
           });
       });
       it('Should return an error if any user detail is not present in body', (done) => {
         const userDetails = {
           username: 'Thomas',
-          password: null,
           email: 'tommy@wemail.com',
         };
-        chai.request(app).post('/api/v1/signup')
+        chai.request(app).post('/api/v1/auth/signup')
           .send(userDetails)
           .end((err, res) => {
-            expect(res.status).to.deep.equal(400);
+            expect(res.status).to.deep.equal(200);
             expect(res.body).to.be.an('object');
-            expect(res.body).to.have.property('message');
+            expect(res.body.data).to.not.have.property('token');
+            expect(res.body.status).to.deep.equal('fail');
+            expect(res.body.data.message).to.deep.equal('Please fill all user details asked for.');
             done();
           });
       });
     });
-    describe('Test for user login', () => {
+    describe.only('Test for user login', () => {
       it('Should return a success message when a user has logged in', (done) => {
         const userDetails = {
           username: 'Thomas',
           password: 'tomnjerry',
         };
-        chai.request(app).post('/api/v1/login')
+        chai.request(app).post('/api/v1/auth/login')
           .send(userDetails)
           .end((err, res) => {
             expect(res.status).to.deep.equal(200);
-            expect(res.body).to.be.an('object');
-            expect(res.body).to.have.property('message');
+            expect(res.body.status).to.deep.equal('success');
+            expect(res.body.data).to.have.property('token');
+            expect(res.body.data.message).to.deep.equal('User Thomas logged in seccessfully');
             done();
           });
       });
@@ -190,26 +193,27 @@ describe('Ride-My-Way App Tests', () => {
           username: 'Thomas',
           password: 'kaybaba',
         };
-        chai.request(app).post('/api/v1/login')
+        chai.request(app).post('/api/v1/auth/login')
           .send(userDetails)
           .end((err, res) => {
-            expect(res.status).to.deep.equal(400);
-            expect(res.body).to.be.an('object');
-            expect(res.body).to.have.property('message');
+            expect(res.status).to.deep.equal(200);
+            expect(res.body.status).to.deep.equal('fail');
+            expect(res.body.data).to.not.have.property('token');
+            expect(res.body.data.message).to.deep.equal('Username or password is invalid');
             done();
           });
       });
-      it('Should return an error message when user details are not given by the user', (done) => {
+      it('Should return an error message when any user details are not given by the user', (done) => {
         const userDetails = {
-          username: null,
           password: 'kaybaba',
         };
-        chai.request(app).post('/api/v1/login')
+        chai.request(app).post('/api/v1/auth/login')
           .send(userDetails)
           .end((err, res) => {
-            expect(res.status).to.deep.equal(400);
-            expect(res.body).to.be.an('object');
-            expect(res.body).to.have.property('message');
+            expect(res.status).to.deep.equal(200);
+            expect(res.body.status).to.deep.equal('fail');
+            expect(res.body.data).to.not.have.property('token');
+            expect(res.body.data.message).to.deep.equal('Please fill all user details asked for.');
             done();
           });
       });
