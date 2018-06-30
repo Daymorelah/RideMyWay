@@ -2,14 +2,13 @@
 import connecToDb from './db/connectToDb';
 
 async function createUserTable() {
-  await connecToDb.query('DROP TABLE IF EXISTS users', (err, res) => {
+  await connecToDb('DROP TABLE IF EXISTS users', (err, res) => {
     if (err) {
       console.log('An error occurred trying to drop table users. ', err);
-      
     }
     if (res) {
       console.log('Table users has been dropped succesfully');
-      connecToDb.query('CREATE TABLE users(' +
+      connecToDb('CREATE TABLE users(' +
                   'id SERIAL PRIMARY KEY,' +
                   'username VARCHAR(255) NOT NULL UNIQUE,' +
                   'password VARCHAR(255) NOT NULL,' +

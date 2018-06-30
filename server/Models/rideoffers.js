@@ -3,13 +3,13 @@
 import connecToDb from './db/connectToDb';
 
 const createRideOffersTable = () => {
-  connecToDb.query('DROP TABLE IF EXISTS ride_offers', (err, res) => {
+  connecToDb('DROP TABLE IF EXISTS ride_offers', (err, res) => {
     if (err) {
       console.log('An error occurred trying to drop table ride_offers. ', err);
     }
     if (res) {
       console.log('Table ride_offers has been dropped succesfully');
-      connecToDb.query('CREATE TABLE ride_offers(' +
+      connecToDb('CREATE TABLE ride_offers(' +
                   'id SERIAL PRIMARY KEY,' +
                   'number_of_seats SMALLINT NOT NULL,' +
                   'destination VARCHAR(255) NOT NULL,' +

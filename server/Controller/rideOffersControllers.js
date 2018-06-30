@@ -4,7 +4,7 @@ import db from '../Models/db/connectToDb';
 
 export default {
   listRideOffers(req, res) {
-    db.query('SELECT * FROM ride_offers LIMIT 4', (error, response) => {
+    db('SELECT * FROM ride_offers LIMIT 4', (error, response) => {
       if (error) {
         res.jsend.fail({
           message: 'An error occurred. Could not complete your query',
@@ -32,9 +32,7 @@ export default {
     } = req.body;
     if (source && destination && time && driver && numberOfSeats && passengers) {
       const seats = parseInt(numberOfSeats, 10);
-      console.log('numberof seats is ==> ', numberOfSeats);
-      console.log('seats is ==>', seats);
-      db.query('INSERT INTO ride_offers ' +
+      db('INSERT INTO ride_offers ' +
             `('${seats}', '${destination}',` +
             ` '${source}', '${driver}' ,` +
             `'${time}', '${passengers}'` +

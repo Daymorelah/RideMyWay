@@ -2,7 +2,7 @@
 import { Pool } from 'pg';
 import config from '../../Config/config';
 
-const pool;
+let pool;
 
 if (process.env.DATABASE_URL) {
   pool = new Pool({ connectionString: process.env.DATABASE_URL });
@@ -14,6 +14,6 @@ if (process.env.NODE_ENV === 'test') {
   pool = new Pool(config.test);
 }
 
-// const connectToDb = (text, params, callback) => pool.query(text, params, callback);
+const connectToDb = (text, params, callback) => pool.query(text, params, callback);
 
-export default pool;
+export default connectToDb;

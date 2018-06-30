@@ -1,23 +1,25 @@
+import dotenv from 'dotenv';
 
+dotenv.config();
 
 const dbConfigurations = {
   development: {
-    user: 'postgres',
-    host: '127.0.0.1',
-    database: 'ride_my_way_db',
-    password: 'andelabootcamp24',
-    port: 5432,
-    max: 10, // max number of connection can be open to database
-    idleTimeoutMillis: 30000,
+    user: process.env.DB_CONFIG_USERNAME,
+    host: process.env.DB_CONFIG_HOST,
+    database: process.env.DB_CONFIG_DATABASE,
+    password: process.env.DB_CONFIG_PASSWORD,
+    port: process.env.DB_CONFIG_PORT,
+    max: process.env.DB_CONFIG_MAX, // max number of connection can be open to database
+    idleTimeoutMillis: process.env.DB_CONFIG_IDLE_TIMEOUT_MILLIS,
   },
   test: {
-    user: 'postgres',
-    host: '127.0.0.1',
-    database: 'ride_my_way_test_db',
-    password: 'andelabootcamp24',
-    port: 5432,
-    max: 10, // max number of connection can be open to database
-    idleTimeoutMillis: 30000,
+    user: process.env.postgres,
+    host: process.env.DB_CONFIG_HOST,
+    database: process.env.DB_CONFIG_TEST_DATABASE,
+    password: process.env.DB_CONFIG_PASSWORD,
+    port: process.env.DB_CONFIG_PORT,
+    max: process.env.DB_CONFIG_MAX, // max number of connection can be open to database
+    idleTimeoutMillis: process.env.DB_CONFIG_IDLE_TIMEOUT_MILLIS,
   },
 };
 

@@ -15,29 +15,31 @@ export default {
     if (username && password && email) {
       cryptData.encryptData(password).then((hash) => {
         encryptedPassword = hash;
-        db.query('INSERT INTO users (username, password, email) ' +
+        db(
+          'INSERT INTO users (username, password, email) ' +
                   `VALUES ('${username}',` +
                   ` '${encryptedPassword}',` +
                   ` '${email}') RETURNING *`,
-        (error, response) => {
-          if (error) {
-            res.jsend.fail({
-              message: 'user could not be created',
-            });
-          }
-          if (response) {
-            const result = response.rows[0];
-            const token = jwt.sign({
-              userId: result.id,
-              username: result.username,
-              email: result.email,
-            }, secrete, { expiresIn: '1 day' });
-            res.jsend.success({
-              message: 'User created succesfully',
-              token,
-            });
-          }
-        });
+          (error, response) => {
+            if (error) {
+              res.jsend.fail({
+                message: 'user could not be created',
+              });
+            }
+            if (response) {
+              const result = response.rows[0];
+              const token = jwt.sign({
+                userId: result.id,
+                username: result.username,
+                email: result.email,
+              }, secrete, { expiresIn: '1 day' });
+              res.jsend.success({
+                message: 'User created succesfully',
+                token,
+              });
+            }
+          },
+        );
       }).catch((error) => {
         res.jsend.error({
           code: 500,
