@@ -5,7 +5,7 @@ import db from '../Models/db/connectToDb';
 import cryptData from '../Utilities/cryptData';
 
 dotenv.config();
-const secrete = process.env.SECRETE;
+const secrete = process.env.SECRET;
 
 export default {
   userSignUp(req, res) {
