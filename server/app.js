@@ -18,6 +18,14 @@ app.use(jsend.middleware);
 
 routes(app);
 
+// Catch all invalid routes
+app.all('*', (req, res) => {
+  res.jsend.error({
+    code: 404,
+    message: 'Page not found',
+  });
+});
+
 app.listen(PORT, (error) => {
   /* eslint-disable no-console */
   if (error) {

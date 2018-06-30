@@ -10,12 +10,15 @@ const createRideOffersTable = () => {
     if (res) {
       console.log('Table ride_offers has been dropped succesfully');
       connecToDb('CREATE TABLE ride_offers(' +
-                  'id INTEGER,' +
-                  'number_of_seats INTEGER,' +
-                  'password TEXT,' +
-                  'email TEXT)', (error, response) => {
+                  'id SERIAL PRIMARY KEY,' +
+                  'number_of_seats SMALLINT NOT NULL,' +
+                  'destination VARCHAR(255) NOT NULL,' +
+                  'source VARCHAR(255) NOT NULL,' +
+                  'driver VARCHAR(255) NOT NULL,' +
+                  'time VARCHAR(255) NOT NULL,' +
+                  'passengers VARCHAR(255) NOT NULL)', (error, response) => {
         if (error) {
-          console.log('An error occurred trying to create table ride_offers.', err);
+          console.log('An error occurred trying to create table ride_offers.', error);
         }
         if (response) {
           console.log('Table ride_offers has been Created succesfully');

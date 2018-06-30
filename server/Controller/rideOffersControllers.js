@@ -26,22 +26,36 @@ export default {
   //     res.status(200).send({ rideOffer });
   //   }
   // },
-  // createRideOffer(req, res) {
-  //   const {
-  //     source, destination, time, driver,
-  //   } = req.body;
-  //   const rideOffer = new RideOffers(source, destination, time, driver);
-  //   const myOffer = {
-  //     id: id += 1,
-  //     source: rideOffer.getSource(),
-  //     destination: rideOffer.getDestination(),
-  //     time: rideOffer.getTime(),
-  //     driver: rideOffer.driver,
-  //     passengers: rideOffer.getPassenger(),
-  //   };
-  //   rideOfferData.push(myOffer);
-  //   res.status(200).send({ message: 'Ride offer created successfully' });
-  // },
+  createRideOffer(req, res) {
+    const {
+      source, destination, time, driver, numberOfSeats, passengers,
+    } = req.body;
+    if (source && destination && time && driver && numberOfSeats && passengers) {
+      const seats = parseInt(numberOfSeats, 10);
+      db('INSERT INTO ride_offers ' +
+            `('${seats}', '${destination}',` +
+            ` '${source}', '${driver}' ,` +
+            `'${time}', '${passengers}'` +
+      ')', (error, response) => {
+        if (error) {
+          console.log('error from createrideoffer is ==> ', error);
+          res.jsend.fail({
+            message: 'Ride offer could not be created',
+            error,
+          });
+        }
+        if (response) {
+          const rideOffer = response.rows[0];
+          res.jsend.success({
+            message: 'Ride offer created succesfully',
+            rideOffer,
+          });
+        }
+      });
+    } else {
+      res.jsend.fail({ message: 'Please fill out all ride offers details asked for.' });
+    }
+  },
   // joinARide(req, res) {
   //   const { rideId } = req.params;
   //   const rideOffer = rideOfferData.find(ride => ride.id === parseInt(rideId, 10));
