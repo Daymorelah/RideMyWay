@@ -6,7 +6,7 @@ import cryptData from '../Utilities/cryptData';
 // import deleteBasedOnId from '../Utilities/commonMethods';
 
 dotenv.config();
-const secrete = process.env.SECRETE;
+const secrete = process.env.SECRET;
 
 export default {
   userSignUp(req, res) {
@@ -24,6 +24,7 @@ export default {
             if (error) {
               res.jsend.fail({
                 message: 'user could not be created',
+                detail: error.detail,
               });
             }
             if (response) {
@@ -43,7 +44,7 @@ export default {
       }).catch((error) => {
         res.jsend.error({
           code: 500,
-          message: 'Please fill all user details asked for.',
+          message: 'An error occured while processing your request.',
           data: error.message,
         });
       });

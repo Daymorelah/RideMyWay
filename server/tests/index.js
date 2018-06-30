@@ -8,24 +8,86 @@ chai.use(chaiHttp);
 const { expect } = chai;
 
 describe('Ride-My-Way App Tests', () => {
+  let myToken;
+  before((done) => {
+    const userDetails = {
+      username: 'gibbs',
+      password: 'gibbsFreeEnergy',
+      email: 'gabo@wemail.com',
+    };
+    chai.request(app).post('/api/v1/auth/signup')
+      .send(userDetails)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        const { token } = res.body.data;
+        myToken = token;
+        return done();
+      });
+  });
+  it('Should welcome the user to the API', (done) => {
+    chai.request(app).get('/api/v1')
+      .end((err, res) => {
+        expect(res.status).to.deep.equal(200);
+        expect(res.body).to.have.property('message');
+        done();
+      });
+  });
   describe('Integration test for the ride-offer controller', () => {
-    it.only('Should welcome the user to the API', (done) => {
-      chai.request(app).get('/api/v1')
-        .end((err, res) => {
-          expect(res.status).to.deep.equal(200);
-          expect(res.body).to.be.an('object');
-          expect(res.body).to.have.property('message');
-          done();
-        });
+    describe.only('Tests for creating a ride offer', () => {
+      it('should return a message when a ride offer has been succesfully created', (done) => {
+        const rideOfferDetails = {
+          source: 'Obalende',
+          destination: 'Tejuosho',
+          time: '11:42 A.M',
+          driver: 'Obaseki',
+          numberOfSeats: 4,
+          passengers: 'Sheyi',
+        };
+        chai.request(app).post('/api/v1/users/rides')
+          .send(rideOfferDetails)
+          .set('x-access-token', myToken)
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(200);
+            expect(res.body.status).to.deep.equal('success');
+            expect(res.body.data).to.have.property('message');
+            expect(res.body.data).to.have.property('rideOfferCreated');
+            expect(res.body.data.rideOfferCreated).to.be.an('object');
+            done();
+          });
+      });
+      it('should return a "failed" message when any ride detail is missing', (done) => {
+        const rideOfferDetails = {
+          source: 'Obalende',
+          destination: 'Tejuosho',
+          time: '11:42 A.M',
+          numberOfSeats: 4,
+          passengers: 'Sheyi',
+        };
+        chai.request(app).post('/api/v1/users/rides')
+          .send(rideOfferDetails)
+          .set('x-access-token', myToken)
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(200);
+            expect(res.body.status).to.deep.equal('fail');
+            expect(res.body.data).to.have.property('message');
+            done();
+          });
+      });
     });
-    it('Should return an array of ride offer objects', (done) => {
-      chai.request(app).get('/api/v1/rides')
-        .end((err, res) => {
-          expect(res.status).to.deep.equal(200);
-          expect(res.body).to.have.property('rides');
-          expect(res.body.rides).to.be.an('array');
-          done();
-        });
+    describe.only('Test for viewing all available ride offers', () => {
+      it('Should return an array of ride offer objects', (done) => {
+        chai.request(app).get('/api/v1/rides')
+          .set('x-access-token', myToken)
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(200);
+            expect(res.body.status).to.deep.equal('success');
+            expect(res.body.data).to.have.property('ride_offers');
+            expect(res.body.data.ride_offers.length).to.deep.equal(1);
+            done();
+          });
+      });
     });
     describe('Test for returning a single ride offer', () => {
       it('Should return a ride offer object', (done) => {
@@ -40,23 +102,6 @@ describe('Ride-My-Way App Tests', () => {
         chai.request(app).get('/api/v1/2000')
           .end((err, res) => {
             expect(res.status).to.deep.equal(404);
-            expect(res.body).to.have.property('message');
-            done();
-          });
-      });
-    });
-    describe('Tests for creating a ride offer', () => {
-      it('should return a message when a user is succesfully created', (done) => {
-        const rideOfferDetails = {
-          source: 'Obalende',
-          destination: 'Tejuosho',
-          time: '11:42 A.M',
-          driver: 'Obaseki',
-        };
-        chai.request(app).post('/api/v1/rides')
-          .send(rideOfferDetails)
-          .end((err, res) => {
-            expect(res.status).to.deep.equal(200);
             expect(res.body).to.have.property('message');
             done();
           });

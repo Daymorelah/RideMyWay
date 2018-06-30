@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
 dotenv.config();
-const secrete = process.env.SECRETE;
+const secrete = process.env.SECRET;
 
 export default {
   /* eslint-disable consistent-return */
