@@ -11,7 +11,7 @@ export default {
       }
       if (response) {
         res.jsend.success({
-          ride_offers: response.rows[0],
+          ride_offers: response.rows,
         });
       }
     });
@@ -22,23 +22,23 @@ export default {
     } = req.body;
     if (source && destination && time && driver && numberOfSeats && passengers) {
       const seats = parseInt(numberOfSeats, 10);
-      db('INSERT INTO ride_offers ' +
+      db('INSERT INTO ride_offers (number_of_seats, destination, ' +
+            'source, driver,time, passengers)VALUES ' +
             `('${seats}', '${destination}',` +
             ` '${source}', '${driver}' ,` +
             `'${time}', '${passengers}'` +
-      ')', (error, response) => {
+      ') RETURNING * ', (error, response) => {
         if (error) {
-          console.log('error from createrideoffer is ==> ', error);
           res.jsend.fail({
             message: 'Ride offer could not be created',
-            error,
+            detail: error.message,
           });
         }
         if (response) {
-          const rideOffer = response.rows[0];
+          const rideOfferCreated = response.rows[0];
           res.jsend.success({
             message: 'Ride offer created succesfully',
-            rideOffer,
+            rideOfferCreated,
           });
         }
       });

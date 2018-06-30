@@ -7,14 +7,13 @@ env:
   global:
     - CODECLIMATE_REPO_TOKEN=79737235b2cf910f826356c08054a9d4ea18b82ffce033bf0c95146db3fdc771
     - NODE_ENV=test
-    - SECRETE='SDcf45^7*(7uMN88(IkOdvjiP'
+    - SECRET='SDcf45^7*(7uMN88(IkOdvjiP'
 branches:
   except:
   - gh-pages
   - master
 before_script:
-  - psql -c 'CREATE DATABASE ride_my_way_test_db;' -U postgres
-  - npm run models-for-testing
+  - psql -c 'CREATE DATABASE travis;' -U postgres
 script:
   - npm test
 after_success: 
