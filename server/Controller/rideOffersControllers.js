@@ -46,4 +46,27 @@ export default {
       res.jsend.fail({ message: 'Please fill out all ride offers details asked for.' });
     }
   },
+  getARide(req, res) {
+    const { rideId } = req.params;
+    db(`SELECT * FROM ride_offers WHERE id=${rideId}`, (error, response) => {
+      if (error) {
+        res.jsend.fail({
+          message: 'Ride offer could not be created',
+          detail: error.message,
+        });
+      }
+      if (response) {
+        if (response.rows.length === 0) {
+          res.jsend.fail({
+            message: 'Ride offer requested does not exist',
+          });
+        } else {
+          const ride = response.rows[0];
+          res.jsend.success({
+            ride,
+          });
+        }
+      }
+    });
+  },
 };
