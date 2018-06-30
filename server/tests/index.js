@@ -89,20 +89,23 @@ describe('Ride-My-Way App Tests', () => {
           });
       });
     });
-    describe('Test for returning a single ride offer', () => {
-      it('Should return a ride offer object', (done) => {
-        chai.request(app).get('/api/v1/2')
+    describe.only('Test for returning a single ride offer', () => {
+      it('Should return the ride offer requested', (done) => {
+        chai.request(app).get('/api/v1/rides/1')
           .end((err, res) => {
             expect(res.status).to.deep.equal(200);
-            expect(res.body).to.have.property('rideOffer');
+            expect(res.body.status).to.deep.equal('success');
+            expect(res.body.data).to.have.property('ride');
+            expect(res.body.data.ride.id).to.deep.equal(1);
             done();
           });
       });
       it('Should return an error message when a requested ride offer is not created', (done) => {
-        chai.request(app).get('/api/v1/2000')
+        chai.request(app).get('/api/v1/rides/2000')
           .end((err, res) => {
-            expect(res.status).to.deep.equal(404);
-            expect(res.body).to.have.property('message');
+            expect(res.status).to.deep.equal(200);
+            expect(res.body.status).to.deep.equal('fail');
+            expect(res.body.data).to.have.property('message');
             done();
           });
       });
