@@ -2,7 +2,7 @@
 import db from '../Models/db/connectToDb';
 
 export default {
-  listRideOffers(req, res) {
+  getAllRideOffers(req, res) {
     db('SELECT * FROM ride_offers LIMIT 4', (error, response) => {
       if (error) {
         res.jsend.fail({
@@ -26,15 +26,15 @@ export default {
     const {
       source, destination, time, driver, numberOfSeats, passengers,
     } = req.body;
-    const { decoded } = req;
-    if (decoded) {
+    const { userId } = req.decoded;
+    if (userId) {
       if (source && destination && time && driver && numberOfSeats && passengers) {
         const seats = parseInt(numberOfSeats, 10);
         db('INSERT INTO ride_offers (number_of_seats, destination, ' +
-            'source, driver, time, passengers)VALUES ' +
+            'source, driver, time, passengers, fk_users_id)VALUES ' +
             `('${seats}', '${destination}',` +
             ` '${source}', '${driver}', ` +
-            `'${time}', '${passengers}' ` +
+            `'${time}', '${passengers}', '${userId}' ` +
               ') RETURNING * ', (err, resp) => {
           if (err) {
             res.jsend.fail({
@@ -45,8 +45,9 @@ export default {
           }
           if (resp) {
             if (resp.rows.length === 0) {
-              res.jsend.fail({
+              res.jsend.success({
                 message: 'Request was completed but did not return any response',
+                rideOfferCreated: null,
               });
             } else {
               const rideOfferCreated = resp.rows[0];
@@ -76,8 +77,9 @@ export default {
         }
         if (response) {
           if (response.rows.length === 0) {
-            res.jsend.fail({
+            res.jsend.success({
               message: 'Ride offer requested does not exist',
+              ride: null,
             });
           } else {
             const ride = response.rows[0];
@@ -114,7 +116,6 @@ export default {
               if (response) {
                 res.jsend.success({
                   message: 'Your request to join the ride has been completed',
-                  response,
                 });
               }
             });
@@ -134,5 +135,35 @@ export default {
         message: 'Required fields are missing',
       });
     }
+  },
+  getAllRideRequests(req, res) {
+    const { rideId } = req.params;
+    db(
+      `SELECT name FROM requests WHERE fk_rideoffer_id=${rideId} GROUP BY NAME`,
+      (error, response) => {
+        if (error) {
+          res.jsend.fail({
+            message: 'An error occurred while processing your request',
+            detail: error.message,
+            error,
+          });
+        }
+        if (response.rows.length) {
+          const passengers = [];
+          for (let i = 0; i < response.rows.length; i += 1) {
+            passengers.push(response.rows[i].name);
+          }
+          res.jsend.success({
+            message: 'Request completed sucessfully',
+            passengers,
+          });
+        } else {
+          res.jsend.success({
+            message: 'Request completed sucessfully but ther was no response.',
+            passengers: null,
+          });
+        }
+      },
+    );
   },
 };
