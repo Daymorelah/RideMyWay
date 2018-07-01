@@ -29,7 +29,7 @@ export default {
             if (response) {
               if (response.rows.length === 0) {
                 res.jsend.fail({
-                  message: 'Your request could not be completed',
+                  message: 'Your request was completed but did not return any result',
                 });
               } else {
                 const result = response.rows[0];
@@ -41,7 +41,6 @@ export default {
                 res.jsend.success({
                   message: 'User created succesfully',
                   token,
-                  userId: result.id,
                 });
               }
             }

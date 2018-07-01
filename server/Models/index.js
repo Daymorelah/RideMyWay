@@ -1,12 +1,8 @@
 
-import createUSersTable from './users';
+import createUsersTable from './users';
 import createRideoffersTable from './rideoffers';
-import createPassengersTable from './passengers';
-import createDriversTable from './drivers';
-import createRideoffersPassengersTable from './rideoffers_passengers';
+import createRequestsTable from './requests';
 
-createUSersTable();
-setTimeout(createPassengersTable, 1000);
-setTimeout(createDriversTable, 1500);
-setTimeout(createRideoffersTable, 2000);
-setTimeout(createRideoffersPassengersTable, 3000);
+createUsersTable();
+setTimeout(createRideoffersTable, 1000);
+setTimeout(createRequestsTable, 1500);
