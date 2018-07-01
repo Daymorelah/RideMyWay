@@ -104,23 +104,5 @@ export default {
       res.jsend.fail({ message: 'Please fill all user details asked for.' });
     }
   },
-  // deleteAUser(req, res) {
-  //   deleteBasedOnId(req, res, usersData, 'userId');
-  // },
-  // updateAUser(req, res) {
-  //   const { userId } = req.params;
-  //   const newUserDetails = req.body;
-  //   const foundUser = usersData.find(user => user.id === parseInt(userId, 10));
-  //   if (foundUser === undefined) {
-  //     res.status(404).send({ message: 'User requested no found' });
-  //   } else {
-  //     const index = foundUser.id;
-  //     newUserDetails.id = index;
-  //     const dataRemoved = usersData.splice((index - 1), 1, newUserDetails);
-  //     if (Array.isArray(dataRemoved) && (dataRemoved.length > 0)) {
-  //       res.status(200).send({ message: 'User\'s details has been updated successfully' });
-  //     }
-  //   }
-  // },
 };
 

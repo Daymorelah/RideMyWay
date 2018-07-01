@@ -22,10 +22,6 @@ const routes = (app) => {
     '/api/v1/users/rides/:rideId/requests', authenticateWihtJwt,
     rideOffersControllers.getAllRideRequests,
   );
-  // app.delete('/api/v1/:rideId/rides', rideOffersControllers.deleteARide);
-  // app.delete('/api/v1/:userId/users', usersController.deleteAUser);
-  // app.delete('/api/v1/:rideId/requests', rideOffersControllers.deleteUserFromRide);
-  // app.put('/api/v1/:userId/users', usersController.updateAUser);
 };
 
 export default routes;
