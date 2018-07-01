@@ -10,9 +10,15 @@ export default {
         });
       }
       if (response) {
-        res.jsend.success({
-          ride_offers: response.rows,
-        });
+        if (response.rows.length === 0) {
+          res.jsend.fail({
+            message: 'Ride-offer requested does not exist',
+          });
+        } else {
+          res.jsend.success({
+            ride_offers: response.rows,
+          });
+        }
       }
     });
   },
@@ -20,30 +26,63 @@ export default {
     const {
       source, destination, time, driver, numberOfSeats, passengers,
     } = req.body;
-    if (source && destination && time && driver && numberOfSeats && passengers) {
-      const seats = parseInt(numberOfSeats, 10);
-      db('INSERT INTO ride_offers (number_of_seats, destination, ' +
-            'source, driver,time, passengers)VALUES ' +
-            `('${seats}', '${destination}',` +
-            ` '${source}', '${driver}' ,` +
-            `'${time}', '${passengers}'` +
-      ') RETURNING * ', (error, response) => {
+    const { decoded } = req;
+    let driverId;
+    if (decoded) {
+      db('INSERT INTO drivers (fk_users_id, name) VALUES ' +
+        `('${decoded.userId}', '${decoded.username}'` +
+        ') RETURNING id', (error, response) => {
         if (error) {
           res.jsend.fail({
-            message: 'Ride offer could not be created',
+            message: 'Driver could not be created',
             detail: error.message,
+            error,
           });
         }
         if (response) {
-          const rideOfferCreated = response.rows[0];
-          res.jsend.success({
-            message: 'Ride offer created succesfully',
-            rideOfferCreated,
-          });
+          if (response.rows.length === 0) {
+            res.jsend.fail({
+              message: 'Request was completed but did not return any result',
+            });
+          } else {
+            driverId = response.rows[0].id;
+            if (source && destination && time && driver && numberOfSeats && passengers) {
+              const seats = parseInt(numberOfSeats, 10);
+              db('INSERT INTO ride_offers (number_of_seats, destination, ' +
+                    'source, driver, time, fk_drivers_id, passengers)VALUES ' +
+                    `('${seats}', '${destination}',` +
+                    ` '${source}', '${driver}', ` +
+                    `'${time}', '${driverId}', '${passengers}' ` +
+              ') RETURNING * ', (err, resp) => {
+                if (err) {
+                  res.jsend.fail({
+                    message: 'Ride-offer could not be created',
+                    detail: err.message,
+                    err,
+                  });
+                }
+                if (resp) {
+                  if (resp.rows.length === 0) {
+                    res.jsend.fail({
+                      message: 'Request was completed but did not return any response',
+                    });
+                  } else {
+                    const rideOfferCreated = resp.rows[0];
+                    res.jsend.success({
+                      message: 'Ride-offer created succesfully',
+                      rideOfferCreated,
+                    });
+                  }
+                }
+              });
+            } else {
+              res.jsend.fail({ message: 'Please fill out all ride offers details asked for.' });
+            }
+          }
         }
       });
     } else {
-      res.jsend.fail({ message: 'Please fill out all ride offers details asked for.' });
+      res.jsend.fail({ message: 'You are not authorized to consume this endpoint' });
     }
   },
   getARide(req, res) {
