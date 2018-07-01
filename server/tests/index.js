@@ -49,7 +49,6 @@ describe('Ride-My-Way App Tests', () => {
           .send(rideOfferDetails)
           .set('x-access-token', myToken)
           .end((err, res) => {
-            console.log('res in create ride offer is ==>', res);
             expect(res.status).to.deep.equal(200);
             expect(res.body.status).to.deep.equal('success');
             expect(res.body.data).to.have.property('message');
@@ -111,24 +110,36 @@ describe('Ride-My-Way App Tests', () => {
           });
       });
     });
-    describe('Test for request to join a ride', () => {
+    describe.only('Test for request to join a ride', () => {
       it('should return a message when a user has been succesfully added to a ride', (done) => {
-        chai.request(app).put('/api/v1/3/requests')
-          .send({ passenger: 'Afolayan' })
+        chai.request(app).post('/api/v1/rides/1/requests')
+          .set('x-access-token', myToken)
+          .send({ passengerName: 'Afolayan' })
           .end((err, res) => {
             expect(res.status).to.deep.equal(200);
-            expect(res.body).to.be.an('object');
-            expect(res.body).to.have.property('message');
+            expect(res.body.status).to.deep.equal('success');
+            expect(res.body.data).to.have.property('message');
             done();
           });
       });
       it('should return an error message when the requested ride is not found', (done) => {
-        chai.request(app).put('/api/v1/30/requests')
-          .send({ passenger: 'Afolayan' })
+        chai.request(app).post('/api/v1/rides/30/requests')
+          .set('x-access-token', myToken)
+          .send({ passengerName: 'Afolayan' })
           .end((err, res) => {
-            expect(res.status).to.deep.equal(404);
-            expect(res.body).to.be.an('object');
-            expect(res.body).to.have.property('message');
+            expect(res.status).to.deep.equal(200);
+            expect(res.body.status).to.deep.equal('fail');
+            expect(res.body.data).to.have.property('message');
+            done();
+          });
+      });
+      it('should return a "fail" message when required fields are missing', (done) => {
+        chai.request(app).post('/api/v1/rides/1/requests')
+          .set('x-access-token', myToken)
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(200);
+            expect(res.body.status).to.deep.equal('fail');
+            expect(res.body.data).to.have.property('message');
             done();
           });
       });

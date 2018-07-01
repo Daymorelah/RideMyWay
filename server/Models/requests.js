@@ -8,14 +8,14 @@ const createRequestsTable = () => {
     }
     if (res) {
       console.log('Table requests has been dropped succesfully');
-      connecToDb('CREATE TABLE requests(' +
-                  'id SERIAL PRIMARY KEY,' +
-                  'name VARCHAR(255) NOT NULL,' +
-                  'fk_users_id SMALLINT NOT NULL,' +
-                  'CONSTRAINT fk_user FOREIGN KEY (fk_users_id) REFERENCES users(id),' +
-                  'fk_rideoffer_id SMALLINT NOT NULL,' +
-                  'CONSTRAINT fk_rideoffer FOREIGN KEY (fk_rideoffer_id) REFERENCES ride_offers(id)' +
-                  ')', (error, responce) => {
+      connecToDb(`CREATE TABLE requests(
+                  id SERIAL PRIMARY KEY,
+                  name VARCHAR(255) NOT NULL,
+                  fk_users_id SMALLINT NOT NULL,
+                  CONSTRAINT fk_user FOREIGN KEY (fk_users_id) REFERENCES users(id),
+                  fk_rideoffer_id SMALLINT NOT NULL,
+                  CONSTRAINT fk_rideoffer FOREIGN KEY (fk_rideoffer_id) REFERENCES ride_offers(id)
+                  )`, (error, responce) => {
         if (error) {
           console.log('An error occurred trying to create table requests.', error);
         }
