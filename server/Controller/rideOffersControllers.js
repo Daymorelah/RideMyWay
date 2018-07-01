@@ -108,4 +108,38 @@ export default {
       }
     });
   },
+  requestToJoinARide(req, res) {
+    const { rideId } = req.params;
+    const { decoded } = req;
+    let passengerId;
+    if (decoded) {
+      db('INSERT INTO passengers (fk_users_id, name) VALUES ' +
+        `( '${decoded.userId}', '${decoded.usename}' ` +
+        ') RETURNING id', (error, response) => {
+        if (error) {
+          res.jsend.fail({
+            message: 'Driver could not be created',
+            detail: error.message,
+            error,
+          });
+        }
+        if (response) {
+          if (response.rows.length === 0) {
+            res.jsend.fail({
+              message: 'Request was completed but did not return any result',
+            });
+          } else {
+            passengerId = response.rows[0].id;
+            if (rideId) {
+              db('')
+            } else {
+              res.jsend.fail({ message: 'The ride you would like to join was not stated' });
+            }
+          }
+        }
+      });
+    } else {
+      res.jsend.fail({ message: 'You are not authorized to consume this endpoint' });
+    }
+  },
 };
