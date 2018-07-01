@@ -1,8 +1,8 @@
 
 import connecToDb from './db/connectToDb';
 
-async function createUserTable() {
-  await connecToDb('DROP TABLE IF EXISTS users CASCADE', (err, res) => {
+const createUserTable = () => {
+  connecToDb('DROP TABLE IF EXISTS users CASCADE', (err, res) => {
     if (err) {
       console.log('An error occurred trying to drop table users. ', err);
     }
@@ -23,6 +23,6 @@ async function createUserTable() {
       });
     }
   });
-}
+};
 
 export default createUserTable;

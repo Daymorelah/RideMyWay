@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
 dotenv.config();
-const secrete = process.env.SECRET;
+const secret = process.env.SECRET;
 
 export default {
   /* eslint-disable consistent-return */
@@ -11,7 +11,7 @@ export default {
     if (!token) {
       return res.jsend.fail({ message: 'User not auhorized' });
     }
-    jwt.verify(token, secrete, (err, decoded) => {
+    jwt.verify(token, secret, (err, decoded) => {
       if (err) {
         return res.jsend.fail({ message: 'Token Authentication failed' });
       }
