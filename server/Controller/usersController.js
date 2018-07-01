@@ -27,16 +27,23 @@ export default {
               });
             }
             if (response) {
-              const result = response.rows[0];
-              const token = jwt.sign({
-                userId: result.id,
-                username: result.username,
-                email: result.email,
-              }, secrete, { expiresIn: '1 day' });
-              res.jsend.success({
-                message: 'User created succesfully',
-                token,
-              });
+              if (response.rows.length === 0) {
+                res.jsend.fail({
+                  message: 'Your request could not be completed',
+                });
+              } else {
+                const result = response.rows[0];
+                const token = jwt.sign({
+                  userId: result.id,
+                  username: result.username,
+                  email: result.email,
+                }, secrete, { expiresIn: '1 day' });
+                res.jsend.success({
+                  message: 'User created succesfully',
+                  token,
+                  userId: result.id,
+                });
+              }
             }
           },
         );
@@ -54,37 +61,44 @@ export default {
   userLogin(req, res) {
     const { username, password } = req.body;
     if (username && password) {
-      db(`SELECT username,password FROM users WHERE username = '${username}'`, (error, response) => {
+      db(`SELECT * FROM users WHERE username = '${username}'`, (error, response) => {
         if (error) {
-          res.jsend.fail({
-            message: 'Username or password is invalid',
+          res.jsend.error({
+            code: 500,
+            message: 'An error occured processing your request',
             error,
           });
         }
         if (response) {
-          const result = response.rows[0];
-          cryptData.decryptData(password, result.password)
-            .then((isPasswordCorrect) => {
-              if (isPasswordCorrect) {
-                const token = jwt.sign({
-                  userId: result.id,
-                  username: result.username,
-                  email: result.email,
-                }, secrete, { expiresIn: '1 day' });
-                res.jsend.success({
-                  message: `User ${result.username} logged in seccessfully`,
-                  token,
-                });
-              } else {
-                res.jsend.fail({
-                  message: 'Username or password is invalid',
-                });
-              }
-            })
-            .catch(() => res.jsend.error({
-              code: 500,
-              message: 'An error occurd while fufilling your request. Please try again.',
-            }));
+          if (response.rows.length === 0) {
+            res.jsend.fail({
+              message: 'Username or password is invalid',
+            });
+          } else {
+            const result = response.rows[0];
+            cryptData.decryptData(password, result.password)
+              .then((isPasswordCorrect) => {
+                if (isPasswordCorrect) {
+                  const token = jwt.sign({
+                    userId: result.id,
+                    username: result.username,
+                    email: result.email,
+                  }, secrete, { expiresIn: '1 day' });
+                  res.jsend.success({
+                    message: `User ${result.username} logged in seccessfully`,
+                    token,
+                  });
+                } else {
+                  res.jsend.fail({
+                    message: 'Username or password is invalid',
+                  });
+                }
+              })
+              .catch(() => res.jsend.error({
+                code: 500,
+                message: 'An error occurd while fufilling your request. Please try again.',
+              }));
+          }
         }
       });
     } else {

@@ -2,7 +2,7 @@
 import connecToDb from './db/connectToDb';
 
 async function createUserTable() {
-  await connecToDb('DROP TABLE IF EXISTS users', (err, res) => {
+  await connecToDb('DROP TABLE IF EXISTS users CASCADE', (err, res) => {
     if (err) {
       console.log('An error occurred trying to drop table users. ', err);
     }
@@ -12,12 +12,13 @@ async function createUserTable() {
                   'id SERIAL PRIMARY KEY,' +
                   'username VARCHAR(255) NOT NULL UNIQUE,' +
                   'password VARCHAR(255) NOT NULL,' +
-                  'email TEXT NOT NULL UNIQUE)', (error, responce) => {
+                  'email VARCHAR(255) NOT NULL UNIQUE' +
+                  ')', (error, responce) => {
         if (error) {
-          console.log('An error occurred trying to create table user.', error);
+          console.log('An error occurred trying to create table users.', error);
         }
         if (responce) {
-          console.log('Table user has been Created succesfully');
+          console.log('Table users has been Created succesfully');
         }
       });
     }
