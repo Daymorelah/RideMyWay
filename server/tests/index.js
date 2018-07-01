@@ -43,12 +43,13 @@ describe('Ride-My-Way App Tests', () => {
           time: '11:42 A.M',
           driver: 'Obaseki',
           numberOfSeats: 4,
-          passengers: 'Sheyi',
+          passengers: '{"Sheyi"}',
         };
         chai.request(app).post('/api/v1/users/rides')
           .send(rideOfferDetails)
           .set('x-access-token', myToken)
           .end((err, res) => {
+            console.log('res in create ride offer is ==>', res);
             expect(res.status).to.deep.equal(200);
             expect(res.body.status).to.deep.equal('success');
             expect(res.body.data).to.have.property('message');
@@ -63,7 +64,7 @@ describe('Ride-My-Way App Tests', () => {
           destination: 'Tejuosho',
           time: '11:42 A.M',
           numberOfSeats: 4,
-          passengers: 'Sheyi',
+          passengers: "{'Sheyi'}",
         };
         chai.request(app).post('/api/v1/users/rides')
           .send(rideOfferDetails)
