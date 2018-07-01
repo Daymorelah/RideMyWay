@@ -104,8 +104,10 @@ describe('Ride-My-Way App Tests', () => {
         chai.request(app).get('/api/v1/rides/2000')
           .end((err, res) => {
             expect(res.status).to.deep.equal(200);
-            expect(res.body.status).to.deep.equal('fail');
+            expect(res.body.status).to.deep.equal('success');
             expect(res.body.data).to.have.property('message');
+            expect(res.body.data).to.have.property('ride');
+            expect(res.body.data.ride).to.deep.equal(null);
             done();
           });
       });
@@ -140,6 +142,31 @@ describe('Ride-My-Way App Tests', () => {
             expect(res.status).to.deep.equal(200);
             expect(res.body.status).to.deep.equal('fail');
             expect(res.body.data).to.have.property('message');
+            done();
+          });
+      });
+    });
+    describe.only('Test to get all request to a ride offer', () => {
+      it('should return a list of interested passengers to a ride offer', (done) => {
+        chai.request(app).get('/api/v1/users/rides/1/requests')
+          .set('x-access-token', myToken)
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(200);
+            expect(res.body.status).to.deep.equal('success');
+            expect(res.body.data).to.have.property('message');
+            expect(res.body.data).to.have.property('passengers');
+            done();
+          });
+      });
+      it('should return null when ride requested is  invalid', (done) => {
+        chai.request(app).get('/api/v1/users/rides/1000/requests')
+          .set('x-access-token', myToken)
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(200);
+            expect(res.body.status).to.deep.equal('success');
+            expect(res.body.data).to.have.property('message');
+            expect(res.body.data).to.have.property('passengers');
+            expect(res.body.data.passengers).to.deep.equal(null);
             done();
           });
       });
