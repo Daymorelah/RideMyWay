@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Daymorelah/RideMyWay.svg?branch=ft-user-signup-2178134)](https://travis-ci.org/Daymorelah/PostIt)
+[![Build Status](https://travis-ci.org/Daymorelah/RideMyWay.svg?branch=ft-user-signup-2178134)](https://travis-ci.org/Daymorelah/RideMyWay)
 [![Coverage Status](https://coveralls.io/repos/github/Daymorelah/RideMyWay/badge.svg?branch=ft-update-user-details-2178134)](https://coveralls.io/github/Daymorelah/RideMyWay?branch=ft-update-user-details-2178134)
 [![Maintainability](https://api.codeclimate.com/v1/badges/7b39a3c4a60595176942/maintainability)](https://codeclimate.com/github/Daymorelah/RideMyWay/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/7b39a3c4a60595176942/test_coverage)](https://codeclimate.com/github/Daymorelah/RideMyWay/test_coverage)
