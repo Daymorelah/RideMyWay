@@ -300,7 +300,7 @@ describe('Ride-My-Way App Tests', () => {
       });
     });
     describe.only('Test to either request or reject a ride', () => {
-      it('Should return a success message when a user accepts a request to a ride ', (done) => {
+      it('Should return a success message when a user accepts a request to a ride ', () => {
         chai.request(app).put('/api/v1/users/rides/1/requests/1')
           .set('x-access-token', myToken)
           .send({ isAccepted: true })
@@ -308,10 +308,9 @@ describe('Ride-My-Way App Tests', () => {
             expect(res.status).to.deep.equal(200);
             expect(res.body.status).to.deep.equal('success');
             expect(res.body.data).to.have.property('message');
-            done();
           });
       });
-      it('Should return a success message when a user rejects a request to a ride ', (done) => {
+      it('Should return a success message when a user rejects a request to a ride ', () => {
         chai.request(app).put('/api/v1/users/rides/1/requests/1')
           .set('x-access-token', myToken)
           .send({ isAccepted: false })
@@ -319,7 +318,6 @@ describe('Ride-My-Way App Tests', () => {
             expect(res.status).to.deep.equal(200);
             expect(res.body.status).to.deep.equal('success');
             expect(res.body.data).to.have.property('message');
-            done();
           });
       });
     });
