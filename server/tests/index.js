@@ -299,7 +299,7 @@ describe('Ride-My-Way App Tests', () => {
           });
       });
     });
-    describe.only('Test to either request or reject a ride', () => {
+    describe('Test to either request or reject a ride', () => {
       it('Should return a success message when a user accepts a request to a ride ', () => {
         chai.request(app).put('/api/v1/users/rides/1/requests/1')
           .set('x-access-token', myToken)
