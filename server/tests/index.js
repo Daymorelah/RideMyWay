@@ -34,7 +34,7 @@ describe('Ride-My-Way App Tests', () => {
         done();
       });
   });
-  describe.only('Integration test for the users controller', () => {
+  describe('Integration test for the users controller', () => {
     describe.only('Test to signup a user', () => {
       it('Should create a user and send a message that the user has ben created', (done) => {
         const userDetails = {
@@ -300,7 +300,7 @@ describe('Ride-My-Way App Tests', () => {
       });
     });
     describe.only('Test to either request or reject a ride', () => {
-      it('Should return a success message when a user accepts a request to a ride ', () => {
+      it('Should return a success message when a user accepts a request to a ride ', (done) => {
         chai.request(app).put('/api/v1/users/rides/1/requests/1')
           .set('x-access-token', myToken)
           .send({ isAccepted: true })
@@ -311,7 +311,7 @@ describe('Ride-My-Way App Tests', () => {
             done();
           });
       });
-      it('Should return a success message when a user rejects a request to a ride ', () => {
+      it('Should return a success message when a user rejects a request to a ride ', (done) => {
         chai.request(app).put('/api/v1/users/rides/1/requests/1')
           .set('x-access-token', myToken)
           .send({ isAccepted: false })
