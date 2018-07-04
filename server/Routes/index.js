@@ -22,6 +22,7 @@ const routes = (app) => {
     '/api/v1/users/rides/:rideId/requests', authenticateWihtJwt,
     rideOffersControllers.getAllRideRequests,
   );
+  app.put('/api/v1/users/rides/:rideId/requests/:requestId', authenticateWihtJwt, rideOffersControllers.acceptOrRejectRequest);
 };
 
 export default routes;

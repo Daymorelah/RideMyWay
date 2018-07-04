@@ -34,196 +34,6 @@ describe('Ride-My-Way App Tests', () => {
         done();
       });
   });
-  describe('Integration test for the ride-offer controller', () => {
-    describe.only('Tests for creating a ride offer', () => {
-      it('should return a message when a ride offer has been succesfully created', (done) => {
-        const rideOfferDetails = {
-          source: 'Obalende',
-          destination: 'Tejuosho',
-          time: '11:42 A.M',
-          driver: 'Obaseki',
-          numberOfSeats: 4,
-          passengers: '{"Sheyi"}',
-        };
-        chai.request(app).post('/api/v1/users/rides')
-          .send(rideOfferDetails)
-          .set('x-access-token', myToken)
-          .end((err, res) => {
-            expect(res.status).to.deep.equal(200);
-            expect(res.body.status).to.deep.equal('success');
-            expect(res.body.data).to.have.property('message');
-            expect(res.body.data).to.have.property('rideOfferCreated');
-            expect(res.body.data.rideOfferCreated).to.be.an('object');
-            done();
-          });
-      });
-      it('should return a "failed" message when any ride detail is missing', (done) => {
-        const rideOfferDetails = {
-          source: 'Obalende',
-          destination: 'Tejuosho',
-          time: '11:42 A.M',
-          numberOfSeats: 4,
-          passengers: "{'Sheyi'}",
-        };
-        chai.request(app).post('/api/v1/users/rides')
-          .send(rideOfferDetails)
-          .set('x-access-token', myToken)
-          .end((err, res) => {
-            expect(res.status).to.deep.equal(200);
-            expect(res.body.status).to.deep.equal('fail');
-            expect(res.body.data).to.have.property('message');
-            done();
-          });
-      });
-    });
-    describe.only('Test for viewing all available ride offers', () => {
-      it('Should return an array of ride offer objects', (done) => {
-        chai.request(app).get('/api/v1/rides')
-          .set('x-access-token', myToken)
-          .end((err, res) => {
-            expect(res.status).to.deep.equal(200);
-            expect(res.body.status).to.deep.equal('success');
-            expect(res.body.data).to.have.property('ride_offers');
-            expect(res.body.data.ride_offers.length).to.deep.equal(1);
-            done();
-          });
-      });
-    });
-    describe.only('Test for returning a single ride offer', () => {
-      it('Should return the ride offer requested', (done) => {
-        chai.request(app).get('/api/v1/rides/1')
-          .end((err, res) => {
-            expect(res.status).to.deep.equal(200);
-            expect(res.body.status).to.deep.equal('success');
-            expect(res.body.data).to.have.property('ride');
-            expect(res.body.data.ride.id).to.deep.equal(1);
-            done();
-          });
-      });
-      it('Should return an error message when a requested ride offer is not created', (done) => {
-        chai.request(app).get('/api/v1/rides/2000')
-          .end((err, res) => {
-            expect(res.status).to.deep.equal(200);
-            expect(res.body.status).to.deep.equal('success');
-            expect(res.body.data).to.have.property('message');
-            expect(res.body.data).to.have.property('ride');
-            expect(res.body.data.ride).to.deep.equal(null);
-            done();
-          });
-      });
-    });
-    describe.only('Test for request to join a ride', () => {
-      it('should return a message when a user has been succesfully added to a ride', (done) => {
-        chai.request(app).post('/api/v1/rides/1/requests')
-          .set('x-access-token', myToken)
-          .send({ passengerName: 'Afolayan' })
-          .end((err, res) => {
-            expect(res.status).to.deep.equal(200);
-            expect(res.body.status).to.deep.equal('success');
-            expect(res.body.data).to.have.property('message');
-            done();
-          });
-      });
-      it('should return an error message when the requested ride is not found', (done) => {
-        chai.request(app).post('/api/v1/rides/30/requests')
-          .set('x-access-token', myToken)
-          .send({ passengerName: 'Afolayan' })
-          .end((err, res) => {
-            expect(res.status).to.deep.equal(200);
-            expect(res.body.status).to.deep.equal('fail');
-            expect(res.body.data).to.have.property('message');
-            done();
-          });
-      });
-      it('should return a "fail" message when required fields are missing', (done) => {
-        chai.request(app).post('/api/v1/rides/1/requests')
-          .set('x-access-token', myToken)
-          .end((err, res) => {
-            expect(res.status).to.deep.equal(200);
-            expect(res.body.status).to.deep.equal('fail');
-            expect(res.body.data).to.have.property('message');
-            done();
-          });
-      });
-    });
-    describe.only('Test to get all request to a ride offer', () => {
-      it('should return a list of interested passengers to a ride offer', (done) => {
-        chai.request(app).get('/api/v1/users/rides/1/requests')
-          .set('x-access-token', myToken)
-          .end((err, res) => {
-            expect(res.status).to.deep.equal(200);
-            expect(res.body.status).to.deep.equal('success');
-            expect(res.body.data).to.have.property('message');
-            expect(res.body.data).to.have.property('passengers');
-            done();
-          });
-      });
-      it('should return null when ride requested is  invalid', (done) => {
-        chai.request(app).get('/api/v1/users/rides/1000/requests')
-          .set('x-access-token', myToken)
-          .end((err, res) => {
-            expect(res.status).to.deep.equal(200);
-            expect(res.body.status).to.deep.equal('success');
-            expect(res.body.data).to.have.property('message');
-            expect(res.body.data).to.have.property('passengers');
-            expect(res.body.data.passengers).to.deep.equal(null);
-            done();
-          });
-      });
-    });
-    describe('Test for deleting a ride offer ', () => {
-      it('Should return a success message when a user has been deleted', (done) => {
-        chai.request(app).delete('/api/v1/3/rides')
-          .end((err, res) => {
-            expect(res.status).to.deep.equal(200);
-            expect(res.body).to.be.an('object');
-            expect(res.body).to.have.property('message');
-            done();
-          });
-      });
-      it('Should return an error message when the requested ride offer is invalid', (done) => {
-        chai.request(app).delete('/api/v1/50/rides')
-          .end((err, res) => {
-            expect(res.status).to.deep.equal(404);
-            expect(res.body).to.be.an('object');
-            expect(res.body).to.have.property('message');
-            done();
-          });
-      });
-    });
-    describe('Test for deleting a user from a ride ', () => {
-      it('should remove a passenger from a ride offer', (done) => {
-        chai.request(app).delete('/api/v1/1/requests')
-          .send({ passenger: 'Kemi' })
-          .end((err, res) => {
-            expect(res.status).to.deep.equal(200);
-            expect(res.body).to.be.an('object');
-            expect(res.body).to.have.property('message');
-            done();
-          });
-      });
-      it('should send an error message if the user to be deleted is not valid', (done) => {
-        chai.request(app).delete('/api/v1/1/requests')
-          .send({ passenger: 'Kemisola' })
-          .end((err, res) => {
-            expect(res.status).to.deep.equal(404);
-            expect(res.body).to.be.an('object');
-            expect(res.body).to.have.property('message');
-            done();
-          });
-      });
-      it('should send an error message if the ride offer requested is invalid', (done) => {
-        chai.request(app).delete('/api/v1/44/requests')
-          .send({ passenger: 'Kemisola' })
-          .end((err, res) => {
-            expect(res.status).to.deep.equal(404);
-            expect(res.body).to.be.an('object');
-            expect(res.body).to.have.property('message');
-            done();
-          });
-      });
-    });
-  });
   describe('Integration test for the users controller', () => {
     describe.only('Test to signup a user', () => {
       it('Should create a user and send a message that the user has ben created', (done) => {
@@ -347,6 +157,218 @@ describe('Ride-My-Way App Tests', () => {
             expect(res.status).to.deep.equal(404);
             expect(res.body).to.be.an('object');
             expect(res.body).to.have.property('message', 'User requested no found');
+            done();
+          });
+      });
+    });
+  });
+  describe('Integration test for the ride-offer controller', () => {
+    describe.only('Tests for creating a ride offer', () => {
+      it('should return a message when a ride offer has been succesfully created', (done) => {
+        const rideOfferDetails = {
+          source: 'Obalende',
+          destination: 'Tejuosho',
+          time: '11:42 A.M',
+          driver: 'Obaseki',
+          numberOfSeats: 4,
+          passengers: '{"Sheyi"}',
+        };
+        chai.request(app).post('/api/v1/users/rides')
+          .send(rideOfferDetails)
+          .set('x-access-token', myToken)
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(200);
+            expect(res.body.status).to.deep.equal('success');
+            expect(res.body.data).to.have.property('message');
+            expect(res.body.data).to.have.property('rideOfferCreated');
+            expect(res.body.data.rideOfferCreated).to.be.an('object');
+            done();
+          });
+      });
+      it('should return a "failed" message when any ride detail is missing', (done) => {
+        const rideOfferDetails = {
+          source: 'Obalende',
+          destination: 'Tejuosho',
+          time: '11:42 A.M',
+          numberOfSeats: 4,
+          passengers: "{'Sheyi'}",
+        };
+        chai.request(app).post('/api/v1/users/rides')
+          .send(rideOfferDetails)
+          .set('x-access-token', myToken)
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(200);
+            expect(res.body.status).to.deep.equal('fail');
+            expect(res.body.data).to.have.property('message');
+            done();
+          });
+      });
+    });
+    describe.only('Test for viewing all available ride offers', () => {
+      it('Should return an array of ride offer objects', (done) => {
+        chai.request(app).get('/api/v1/rides')
+          .set('x-access-token', myToken)
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(200);
+            expect(res.body.status).to.deep.equal('success');
+            expect(res.body.data).to.have.property('ride_offers');
+            expect(res.body.data.ride_offers.length).to.deep.equal(1);
+            done();
+          });
+      });
+    });
+    describe.only('Test for returning a single ride offer', () => {
+      it('Should return the ride offer requested', (done) => {
+        chai.request(app).get('/api/v1/rides/1')
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(200);
+            expect(res.body.status).to.deep.equal('success');
+            expect(res.body.data).to.have.property('ride');
+            expect(res.body.data.ride.id).to.deep.equal(1);
+            done();
+          });
+      });
+      it('Should return an error message when a requested ride offer is not created', (done) => {
+        chai.request(app).get('/api/v1/rides/2000')
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(200);
+            expect(res.body.status).to.deep.equal('success');
+            expect(res.body.data).to.have.property('message');
+            expect(res.body.data).to.have.property('ride');
+            expect(res.body.data.ride).to.deep.equal(null);
+            done();
+          });
+      });
+    });
+    describe.only('Test for requesting to join a ride', () => {
+      it('should return a message when a user has been succesfully added to a ride', (done) => {
+        chai.request(app).post('/api/v1/rides/1/requests')
+          .set('x-access-token', myToken)
+          .send({ passengerName: 'Afolayan' })
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(200);
+            expect(res.body.status).to.deep.equal('success');
+            expect(res.body.data).to.have.property('message');
+            done();
+          });
+      });
+      it('should return an error message when the requested ride is not found', (done) => {
+        chai.request(app).post('/api/v1/rides/30/requests')
+          .set('x-access-token', myToken)
+          .send({ passengerName: 'Afolayan' })
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(200);
+            expect(res.body.status).to.deep.equal('fail');
+            expect(res.body.data).to.have.property('message');
+            done();
+          });
+      });
+      it('should return a "fail" message when required fields are missing', (done) => {
+        chai.request(app).post('/api/v1/rides/1/requests')
+          .set('x-access-token', myToken)
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(200);
+            expect(res.body.status).to.deep.equal('fail');
+            expect(res.body.data).to.have.property('message');
+            done();
+          });
+      });
+    });
+    describe.only('Test to get all request to a ride offer', () => {
+      it('should return a list of interested passengers to a ride offer', (done) => {
+        chai.request(app).get('/api/v1/users/rides/1/requests')
+          .set('x-access-token', myToken)
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(200);
+            expect(res.body.status).to.deep.equal('success');
+            expect(res.body.data).to.have.property('message');
+            expect(res.body.data).to.have.property('passengers');
+            done();
+          });
+      });
+      it('should return null when ride requested is  invalid', (done) => {
+        chai.request(app).get('/api/v1/users/rides/1000/requests')
+          .set('x-access-token', myToken)
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(200);
+            expect(res.body.status).to.deep.equal('success');
+            expect(res.body.data).to.have.property('message');
+            expect(res.body.data).to.have.property('passengers');
+            expect(res.body.data.passengers).to.deep.equal(null);
+            done();
+          });
+      });
+    });
+    describe('Test to either request or reject a ride', () => {
+      it('Should return a success message when a user accepts a request to a ride ', () => {
+        chai.request(app).put('/api/v1/users/rides/1/requests/1')
+          .set('x-access-token', myToken)
+          .send({ isAccepted: true })
+          .end((error, res) => {
+            expect(res.status).to.deep.equal(200);
+            expect(res.body.status).to.deep.equal('success');
+            expect(res.body.data).to.have.property('message');
+          });
+      });
+      it('Should return a success message when a user rejects a request to a ride ', () => {
+        chai.request(app).put('/api/v1/users/rides/1/requests/1')
+          .set('x-access-token', myToken)
+          .send({ isAccepted: false })
+          .end((error, res) => {
+            expect(res.status).to.deep.equal(200);
+            expect(res.body.status).to.deep.equal('success');
+            expect(res.body.data).to.have.property('message');
+          });
+      });
+    });
+    describe('Test for deleting a ride offer ', () => {
+      it('Should return a success message when a user has been deleted', (done) => {
+        chai.request(app).delete('/api/v1/3/rides')
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(200);
+            expect(res.body).to.be.an('object');
+            expect(res.body).to.have.property('message');
+            done();
+          });
+      });
+      it('Should return an error message when the requested ride offer is invalid', (done) => {
+        chai.request(app).delete('/api/v1/50/rides')
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(404);
+            expect(res.body).to.be.an('object');
+            expect(res.body).to.have.property('message');
+            done();
+          });
+      });
+    });
+    describe('Test for deleting a user from a ride ', () => {
+      it('should remove a passenger from a ride offer', (done) => {
+        chai.request(app).delete('/api/v1/1/requests')
+          .send({ passenger: 'Kemi' })
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(200);
+            expect(res.body).to.be.an('object');
+            expect(res.body).to.have.property('message');
+            done();
+          });
+      });
+      it('should send an error message if the user to be deleted is not valid', (done) => {
+        chai.request(app).delete('/api/v1/1/requests')
+          .send({ passenger: 'Kemisola' })
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(404);
+            expect(res.body).to.be.an('object');
+            expect(res.body).to.have.property('message');
+            done();
+          });
+      });
+      it('should send an error message if the ride offer requested is invalid', (done) => {
+        chai.request(app).delete('/api/v1/44/requests')
+          .send({ passenger: 'Kemisola' })
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(404);
+            expect(res.body).to.be.an('object');
+            expect(res.body).to.have.property('message');
             done();
           });
       });

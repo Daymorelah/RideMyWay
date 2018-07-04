@@ -30,5 +30,5 @@ const createRideOffersTable = () => {
     }
   });
 };
-
+// createRideOffersTable();
 export default createRideOffersTable;

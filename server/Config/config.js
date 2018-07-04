@@ -13,7 +13,7 @@ const dbConfigurations = {
     idleTimeoutMillis: process.env.DB_CONFIG_IDLE_TIMEOUT_MILLIS,
   },
   test: {
-    user: process.env.postgres,
+    user: process.env.DB_CONFIG_USERNAME,
     host: process.env.DB_CONFIG_HOST,
     database: process.env.DB_CONFIG_TEST_DATABASE,
     password: process.env.DB_CONFIG_PASSWORD,

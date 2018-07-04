@@ -5,7 +5,7 @@ import db from '../Models/db/connectToDb';
 import cryptData from '../Utilities/cryptData';
 
 dotenv.config();
-const secrete = process.env.SECRET;
+const secret = process.env.SECRET;
 
 export default {
   userSignUp(req, res) {
@@ -37,7 +37,7 @@ export default {
                   userId: result.id,
                   username: result.username,
                   email: result.email,
-                }, secrete, { expiresIn: '1 day' });
+                }, secret, { expiresIn: '1 day' });
                 res.jsend.success({
                   message: 'User created succesfully',
                   token,
@@ -82,7 +82,7 @@ export default {
                     userId: result.id,
                     username: result.username,
                     email: result.email,
-                  }, secrete, { expiresIn: '1 day' });
+                  }, secret, { expiresIn: '1 day' });
                   res.jsend.success({
                     message: `User ${result.username} logged in seccessfully`,
                     token,
