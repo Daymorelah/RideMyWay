@@ -17,6 +17,6 @@ export default {
       }
       req.decoded = decoded;
       next();
-    }); // end of verification
-  }, // end of check token
-}; // end of export default
+    });
+  },
+};
