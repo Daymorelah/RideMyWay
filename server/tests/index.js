@@ -258,7 +258,7 @@ describe('Ride-My-Way App Tests', () => {
           .send({ passengerName: 'Afolayan' })
           .end((err, res) => {
             expect(res.status).to.deep.equal(200);
-            expect(res.body.status).to.deep.equal('fail');
+            expect(res.body.status).to.deep.equal('success');
             expect(res.body.data).to.have.property('message');
             done();
           });

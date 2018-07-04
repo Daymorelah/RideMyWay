@@ -16,11 +16,11 @@ const createRequestsTable = () => {
                   fk_rideoffer_id SMALLINT NOT NULL,
                   CONSTRAINT fk_rideoffer FOREIGN KEY (fk_rideoffer_id) REFERENCES ride_offers(id),
                   UNIQUE(fk_users_id, fk_rideoffer_id)
-                  )`, (error, responce) => {
+                  )`, (error, response) => {
         if (error) {
           console.log('An error occurred trying to create table requests.', error);
         }
-        if (responce) {
+        if (response) {
           console.log('Table requests has been Created succesfully');
         }
       });

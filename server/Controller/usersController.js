@@ -7,8 +7,8 @@ import cryptData from '../Utilities/cryptData';
 dotenv.config();
 const secret = process.env.SECRET;
 
-export default {
-  userSignUp(req, res) {
+class UserController {
+  static userSignUp(req, res) {
     const { username, password, email } = req.body;
     let encryptedPassword;
     if (username && password && email) {
@@ -56,8 +56,8 @@ export default {
     } else {
       res.jsend.fail({ message: 'Please fill all user details asked for.' });
     }
-  },
-  userLogin(req, res) {
+  }
+  static userLogin(req, res) {
     const { username, password } = req.body;
     if (username && password) {
       db(`SELECT * FROM users WHERE username = '${username}'`, (error, response) => {
@@ -103,6 +103,7 @@ export default {
     } else {
       res.jsend.fail({ message: 'Please fill all user details asked for.' });
     }
-  },
-};
+  }
+}
 
+export default UserController;

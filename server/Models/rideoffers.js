@@ -16,7 +16,7 @@ const createRideOffersTable = () => {
                   source VARCHAR(255) NOT NULL,
                   driver VARCHAR(255) NOT NULL,
                   time VARCHAR(255) NOT NULL,
-                  passengers VARCHAR(255)[],
+                  passengers VARCHAR(255)[] DEFAULT '{}',
                   fk_users_id SMALLINT NOT NULL,
                   CONSTRAINT fk_users FOREIGN KEY (fk_users_id) REFERENCES users(id)
                   )`, (error, response) => {

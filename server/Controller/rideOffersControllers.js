@@ -1,17 +1,18 @@
 
 import db from '../Models/db/connectToDb';
 
-export default {
-  getAllRideOffers(req, res) {
-    db('SELECT * FROM ride_offers LIMIT 4', (error, response) => {
+class RidesController {
+  static getAllRideOffers(req, res) {
+    db('SELECT * FROM ride_offers LIMIT 6', (error, response) => {
       if (error) {
-        res.jsend.fail({
-          message: 'An error occurred. Please try again',
+        res.jsend.error({
+          code: 500,
+          message: 'Internal server error. Could not retrieve ride offers',
         });
       }
       if (response) {
-        if (response.rows.length === 0) {
-          res.jsend.fail({
+        if (!response.rows.length) {
+          res.jsend.success({
             ride_offers: null,
           });
         } else {
@@ -21,8 +22,8 @@ export default {
         }
       }
     });
-  },
-  createRideOffer(req, res) {
+  }
+  static createRideOffer(req, res) {
     const {
       source, destination, time, driver, numberOfSeats,
     } = req.body;
@@ -37,10 +38,9 @@ export default {
             `'${time}', '${userId}' ` +
               ') RETURNING * ', (err, resp) => {
           if (err) {
-            res.jsend.fail({
+            res.jsend.error({
               message: 'Ride-offer could not be created',
-              detail: err.message,
-              err,
+              code: 500,
             });
           }
           if (resp) {
@@ -64,15 +64,15 @@ export default {
     } else {
       res.jsend.fail({ message: 'You are not authorized to consume this endpoint' });
     }
-  },
-  getDetailsOfARide(req, res) {
+  }
+  static getDetailsOfARide(req, res) {
     const { rideId } = req.params;
     if (rideId) {
       db(`SELECT * FROM ride_offers WHERE id=${rideId}`, (error, response) => {
         if (error) {
-          res.jsend.fail({
-            message: 'Ride offer could not be created',
-            detail: error.message,
+          res.jsend.error({
+            code: 500,
+            message: 'Coudl not get details of the ride',
           });
         }
         if (response) {
@@ -94,23 +94,28 @@ export default {
         message: 'Required fields are missing',
       });
     }
-  },
-  requestToJoinARide(req, res) {
+  }
+  static requestToJoinARide(req, res) {
     const { rideId } = req.params;
     const { userId } = req.decoded;
     const { passengerName } = req.body;
     if (rideId && userId && passengerName) {
       db(`SELECT id FROM ride_offers WHERE id=${rideId}`, (err, resp) => {
+        if (err) {
+          res.jsend.error({
+            code: 500,
+            message: 'Could not get the ride you requested',
+          });
+        }
         if (resp.rows.length) {
           if (resp.rows[0].id === parseInt(rideId, 10)) {
             db(`INSERT INTO requests (name, fk_users_id,
               fk_rideoffer_id) VALUES ('${passengerName}',
               '${userId}', '${rideId}' )`, (error, response) => {
               if (error) {
-                res.jsend.fail({
-                  messsage: 'An error occured. Your request could not be completed.',
-                  detail: error.message,
-                  error,
+                res.jsend.error({
+                  code: 500,
+                  messsage: 'Your requst to join the ride could not completed. Please try again.',
                 });
               }
               if (response) {
@@ -125,8 +130,8 @@ export default {
             });
           }
         } else {
-          res.jsend.fail({
-            message: 'Your request could not be completed at the moment. Please try again',
+          res.jsend.success({
+            message: 'Your request was completed but didn\'t return any data',
           });
         }
       });
@@ -135,38 +140,35 @@ export default {
         message: 'Required fields are missing',
       });
     }
-  },
-  getAllRideRequests(req, res) {
+  }
+  static getAllRideRequests(req, res) {
     const { rideId } = req.params;
     db(
       `SELECT name FROM requests WHERE fk_rideoffer_id=${rideId}`,
       (error, response) => {
         if (error) {
-          res.jsend.fail({
+          res.jsend.error({
+            code: 500,
             message: 'An error occurred while processing your request',
-            detail: error.message,
-            error,
           });
         }
         if (response.rows.length) {
           const passengers = [];
-          for (let i = 0; i < response.rows.length; i += 1) {
-            passengers.push(response.rows[i].name);
-          }
+          response.rows.forEach(passenger => passengers.push(passenger));
           res.jsend.success({
             message: 'Request completed sucessfully',
             passengers,
           });
         } else {
           res.jsend.success({
-            message: 'Request completed sucessfully but ther was no response.',
+            message: 'Request completed sucessfully but there was no response.',
             passengers: null,
           });
         }
       },
     );
-  },
-  acceptOrRejectRequest(req, res) {
+  }
+  static acceptOrRejectRequest(req, res) {
     const { rideId, requestId } = req.params;
     const { isAccepted } = req.body;
     if (rideId && requestId && isAccepted) {
@@ -175,47 +177,40 @@ export default {
           `SELECT name FROM requests WHERE id=${requestId}`,
           (error, response) => {
             if (error) {
-              res.jsend.fail({
+              res.jsend.error({
+                code: 500,
                 message: 'An error occurred while processing you request',
-                detail: error.message,
-                error,
               });
             }
             if (response.rows.length) {
               const passengerName = response.rows[0].name;
               if (passengerName) {
-                let newPassengersString = [];
-                db(`SELECT passengers FROM ride_offers WHERE id=${rideId}`, (errors, Responce) => {
+                db(`SELECT passengers FROM ride_offers WHERE id=${rideId}`, (errors, Response) => {
                   if (errors) {
-                    res.jsend.fail({
-                      message: 'An error occured while selecting processig your requests',
-                      detail: errors.message,
-                      error: errors,
+                    res.jsend.error({
+                      code: 500,
+                      message: 'An error occured while fetching users for the ride',
                     });
                   }
-                  if (Responce.rows[0]) {
-                    if (Responce.rows[0].passengers === null) {
-                      newPassengersString.push(passengerName);
-                    } else {
-                      newPassengersString = Responce.rows[0].passengers.concat(passengerName);
-                    }
+                  if (Response.rows[0]) {
+                    const dbPassenger = Response.rows;
                     db(
-                      `UPDATE ride_offers SET passengers='{${newPassengersString}}' WHERE id=${rideId}`,
+                      `UPDATE ride_offers SET passengers = 
+                      array_append(${dbPassenger},${passengerName}) 
+                      WHERE id=${rideId}`,
                       (err, resp) => {
                         if (err) {
-                          res.jsend.fail({
-                            message: 'An error occurred while updating processing your request',
-                            detail: err.message,
-                            err,
+                          res.jsend.error({
+                            code: 500,
+                            message: 'An error occurred while trying to update the passenger\'s column',
                           });
                         }
                         if (resp) {
-                          // remember to change id=${rideid} to requestId
-                          db(`DELETE FROM requests WHERE id=${rideId}`, (anyError) => {
+                          db(`DELETE FROM requests WHERE id=${requestId}`, (anyError) => {
                             if (anyError) {
-                              res.jsend.fail({
-                                message: 'An error occurred while processing your request',
-                                error: anyError,
+                              res.jsend.error({
+                                code: 500,
+                                message: 'An error occurred while trying to delete the request from its table.',
                               });
                             }
                           });
@@ -241,7 +236,7 @@ export default {
               }
             } else {
               res.jsend.success({
-                message: 'Request successful but no data was sent',
+                message: 'Request successful but didn\'t return any data',
                 data: null,
               });
             }
@@ -251,10 +246,9 @@ export default {
       if (isAccepted === 'false') {
         db(`DELETE FROM requests WHERE id=${requestId}`, (error, response) => {
           if (error) {
-            res.jsend.fail({
-              message: 'An error occurred while processing you request',
-              detail: error.message,
-              error,
+            res.jsend.error({
+              code: 500,
+              message: 'An error occurred when trying to delete the request from its table',
             });
           }
           if (response) {
@@ -269,5 +263,7 @@ export default {
         message: 'Please fill all required fields',
       });
     }
-  },
-};
+  }
+}
+
+export default RidesController;
