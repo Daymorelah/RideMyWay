@@ -11,11 +11,11 @@ const createRequestsTable = () => {
       connecToDb(`CREATE TABLE requests(
                   id SERIAL PRIMARY KEY,
                   name VARCHAR(255) NOT NULL,
-                  fk_users_id SMALLINT NOT NULL,
-                  CONSTRAINT fk_user FOREIGN KEY (fk_users_id) REFERENCES users(id),
-                  fk_rideoffer_id SMALLINT NOT NULL,
-                  CONSTRAINT fk_rideoffer FOREIGN KEY (fk_rideoffer_id) REFERENCES ride_offers(id),
-                  UNIQUE(fk_users_id, fk_rideoffer_id)
+                  users_id SMALLINT NOT NULL,
+                  CONSTRAINT myuser FOREIGN KEY (users_id) REFERENCES users(id),
+                  rideoffer_id SMALLINT NOT NULL,
+                  CONSTRAINT rideoffer FOREIGN KEY (rideoffer_id) REFERENCES ride_offers(id),
+                  UNIQUE(users_id, rideoffer_id)
                   )`, (error, response) => {
         if (error) {
           console.log('An error occurred trying to create table requests.', error);
