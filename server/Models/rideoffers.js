@@ -16,9 +16,9 @@ const createRideOffersTable = () => {
                   source VARCHAR(255) NOT NULL,
                   driver VARCHAR(255) NOT NULL,
                   time VARCHAR(255) NOT NULL,
-                  passengers VARCHAR(255)[],
-                  fk_users_id SMALLINT NOT NULL,
-                  CONSTRAINT fk_users FOREIGN KEY (fk_users_id) REFERENCES users(id)
+                  passengers VARCHAR(255)[] DEFAULT '{}',
+                  users_id SMALLINT NOT NULL,
+                  CONSTRAINT users FOREIGN KEY (users_id) REFERENCES users(id)
                   )`, (error, response) => {
         if (error) {
           console.log('An error occurred trying to create table ride_offers.', error);
