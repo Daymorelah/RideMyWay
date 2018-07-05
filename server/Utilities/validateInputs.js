@@ -10,25 +10,25 @@ class Validate {
           if (validate.isAlphanumeric(username) && validate.isAlphanumeric(password)) {
             next();
           } else {
-            return res.jsend.fail({
+            return res.status(400).jsend.fail({
               code: 400,
               message: 'Username and or password should contain only letters and numbers',
             });
           }
         } else {
-          return res.jsend.fail({
+          return res.status(400).jsend.fail({
             codde: 400,
             message: 'Please enter a valid email address',
           });
         }
       } else {
-        return res.jsend.erro({
+        return res.status(400).jsend.fail({
           code: 400,
           message: 'User details should not be empty',
         });
       }
     } else {
-      res.jsend.error({
+      res.status(400).jsend.fail({
         code: 400,
         message: 'Please enter all user details requested',
       });
@@ -41,19 +41,19 @@ class Validate {
         if (validate.isAlphanumeric(username) && validate.isAlphanumeric(password)) {
           next();
         } else {
-          return res.jsend.fail({
+          return res.status(400).jsend.fail({
             code: 400,
             message: 'Username and or password should contain only letters and numbers',
           });
         }
       } else {
-        return res.jsend.erro({
+        return res.status(400).jsend.fail({
           code: 400,
           message: 'User details should not be empty',
         });
       }
     } else {
-      res.jsend.error({
+      res.status(400).jsend.fail({
         code: 400,
         message: 'Please enter all user details requested',
       });
@@ -72,37 +72,37 @@ class Validate {
                 validate.isLength(numberOfSeats, { min: 0, max: 2 })) {
                 next();
               } else {
-                res.jsend.error({
+                res.status(400).jsend.fail({
                   code: 400,
                   message: 'Number of seats should be a number and must be 2-digit',
                 });
               }
             } else {
-              res.jsend.error({
+              res.status(400).jsend.fail({
                 code: 400,
                 message: 'Driver field should contain letters only.',
               });
             }
           } else {
-            res.jsend.error({
+            res.status(400).jsend.fail({
               code: 400,
               message: 'Time field should contain numbers and/or letters only',
             });
           }
         } else {
-          res.jsend.error({
+          res.status(400).jsend.fail({
             code: 400,
             message: 'Destination field must contain letters only',
           });
         }
       } else {
-        res.jsend.error({
+        res.status(400).jsend.fail({
           code: 400,
           message: 'Source should contain letters only',
         });
       }
     } else {
-      res.jsend.error({
+      res.status(400).jsend.fail({
         code: 400,
         message: 'All fields are required',
       });
@@ -114,13 +114,13 @@ class Validate {
       if (validate.isNumeric(rideId) && validate.isInt(rideId)) {
         next();
       } else {
-        res.jsend.error({
+        res.status(400).jsend.fail({
           code: 400,
           message: 'The ride requested should be an integer and contain only numbers',
         });
       }
     } else {
-      res.jsend.eror({
+      res.status(400).jsend.fail({
         code: 400,
         message: 'Required fields are missing',
       });
@@ -135,19 +135,19 @@ class Validate {
         validate.isLength(passengerName, { min: 1, max: 20 })) {
           next();
         } else {
-          res.jsend.error({
+          res.status(400).jsend.fail({
             code: 400,
             message: 'Passenger name should contain letters only',
           });
         }
       } else {
-        res.jsend.error({
+        res.status(400).jsend.fail({
           code: 400,
           message: 'The ride requested should be an integer and contain only numbers',
         });
       }
     } else {
-      res.jsend.error({
+      res.status(400).jsend.fail({
         code: 400,
         message: 'Required fields are missing',
       });
@@ -159,13 +159,13 @@ class Validate {
       if (validate.isNumeric(rideId) && validate.isInt(rideId)) {
         next();
       } else {
-        res.jsend.error({
+        res.status(400).jsend.fail({
           code: 400,
           message: 'Required params field must be an integer',
         });
       }
     } else {
-      res.jsend.error({
+      res.status(400).jsend.fail({
         code: 400,
         message: 'Required params field is missing',
       });
@@ -180,25 +180,25 @@ class Validate {
           if (validate.isBoolean(isAccepted)) {
             next();
           } else {
-            res.jsend.error({
+            res.status(400).jsend.fail({
               code: 400,
               message: 'You must return a boolean in the body',
             });
           }
         } else {
-          res.jsend.error({
+          res.status(400).jsend.fail({
             code: 400,
             message: 'The request you want to either accept or reject must be an integer',
           });
         }
       } else {
-        res.jsend.error({
+        res.status(400).jsend.fail({
           code: 400,
           message: 'Ride number requested must be an integer',
         });
       }
     } else {
-      res.jsend.error({
+      res.status(400).jsend.fail({
         code: 400,
         message: 'Required fields are missing',
       });

@@ -9,14 +9,14 @@ class Authenticate {
   static checkToken(req, res, next) {
     const token = req.body.token || req.query.token || req.headers['x-access-token'];
     if (!token) {
-      return res.jsend.fail({
+      return res.status(401).jsend.fail({
         code: 401,
         message: 'User not auhorized',
       });
     }
     jwt.verify(token, secret, (err, decoded) => {
       if (err) {
-        return res.jsend.fail({
+        return res.status(401).jsend.fail({
           code: 401,
           message: 'Authentication failed',
         });

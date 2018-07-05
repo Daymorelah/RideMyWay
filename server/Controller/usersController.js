@@ -20,7 +20,7 @@ class UserController {
                   ` '${email}') RETURNING *`,
         (error, response) => {
           if (error) {
-            res.jsend.error({
+            res.status(500).jsend.error({
               code: 500,
               message: 'Your details could not be saved on our database. Please try again',
             });
@@ -38,7 +38,7 @@ class UserController {
                 username: result.username,
                 email: result.email,
               }, secret, { expiresIn: '1 day' });
-              res.jsend.success({
+              res.status(201).jsend.success({
                 message: 'User created succesfully',
                 token,
               });
@@ -47,7 +47,7 @@ class UserController {
         },
       );
     }).catch(() => {
-      res.jsend.error({
+      res.status(500).jsend.error({
         code: 500,
         message: 'An error occured trying to save the user\'s detail',
       });
@@ -57,15 +57,15 @@ class UserController {
     const { username, password } = req.body;
     db(`SELECT * FROM users WHERE username = '${username}'`, (error, response) => {
       if (error) {
-        res.jsend.error({
+        res.status(500).jsend.error({
           code: 500,
           message: 'An error occured trying to get the user\'s details',
         });
       }
       if (response) {
         if (response.rows.length === 0) {
-          res.jsend.success({
-            code: 409,
+          res.status(400).jsend.success({
+            code: 400,
             message: 'Username or password does not exist',
           });
         } else {
@@ -83,13 +83,13 @@ class UserController {
                   token,
                 });
               } else {
-                res.jsend.success({
-                  code: 409,
+                res.status(400).jsend.success({
+                  code: 400,
                   message: 'Username or password is invalid',
                 });
               }
             })
-            .catch(() => res.jsend.error({
+            .catch(() => res.status(500).jsend.error({
               code: 500,
               message: 'An error occured trying to save the user\'s details into the database.',
             }));

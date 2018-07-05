@@ -7,13 +7,12 @@ class RidesController {
       if (error) {
         res.jsend.error({
           code: 500,
-          message: 'Internal server error. Could not retrieve ride offers',
+          message: 'Could not retrieve ride offers',
         });
       }
       if (response) {
         if (!response.rows.length) {
           res.jsend.success({
-            code: 409,
             message: 'No rides has been created yet.',
             ride_offers: null,
           });
@@ -36,27 +35,19 @@ class RidesController {
             `('${seats}', '${destination}',` +
             ` '${source}', '${driver}', ` +
             `'${time}', '${userId}' ` +
-              ') RETURNING * ', (err, resp) => {
-      if (err) {
-        res.jsend.error({
+              ') RETURNING * ', (error, response) => {
+      if (error) {
+        res.send(500).jsend.error({
           message: 'Your details were not saved into the database. Please try again.',
           code: 500,
         });
       }
-      if (resp) {
-        if (resp.rows.length === 0) {
-          res.jsend.success({
-            code: 409,
-            message: 'Could not create ride-offer',
-            rideOfferCreated: null,
-          });
-        } else {
-          const rideOfferCreated = resp.rows[0];
-          res.jsend.success({
-            message: 'Ride-offer created succesfully',
-            rideOfferCreated,
-          });
-        }
+      if (response) {
+        const rideOfferCreated = response.rows[0];
+        res.status(201).jsend.success({
+          message: 'Ride-offer created succesfully',
+          rideOfferCreated,
+        });
       }
     });
   }
@@ -71,7 +62,7 @@ class RidesController {
       }
       if (response) {
         if (response.rows.length === 0) {
-          res.jsend.success({
+          res.status(404).jsend.success({
             message: 'Ride offer requested does not exist',
             ride: null,
           });
@@ -107,21 +98,21 @@ class RidesController {
               });
             }
             if (response) {
-              res.jsend.success({
+              res.status(201).jsend.success({
                 message: 'Your request to join the ride has been completed',
               });
             }
           });
         } else {
-          res.jsend.success({
-            message: 'The ride-offer you requested to join is not available',
-            code: 409,
+          res.status(404).jsend.success({
+            message: 'The ride-offer you requested to join was not found',
+            code: 404,
           });
         }
       } else {
-        res.jsend.success({
+        res.status(404).jsend.success({
           message: 'The ride you requested does not exist',
-          code: 409,
+          code: 404,
         });
       }
     });

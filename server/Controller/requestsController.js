@@ -8,7 +8,7 @@ class RequestsController {
       `SELECT name FROM requests WHERE rideoffer_id=${rideId}`,
       (error, response) => {
         if (error) {
-          res.jsend.error({
+          res.status(500).jsend.error({
             code: 500,
             message: 'An error occurred while processing your request',
           });
@@ -21,9 +21,9 @@ class RequestsController {
             passengers,
           });
         } else {
-          res.jsend.success({
-            code: 409,
-            message: 'The ride offer you selected does not exist',
+          res.status(404).jsend.success({
+            code: 404,
+            message: 'The ride-offer you selected does not exist',
             passengers: null,
           });
         }
@@ -39,7 +39,7 @@ class RequestsController {
           `SELECT name FROM requests WHERE id=${requestId}`,
           (error, response) => {
             if (error) {
-              res.jsend.error({
+              res.status(500).jsend.error({
                 code: 500,
                 message: 'An error occurred while processing you request',
               });
@@ -49,9 +49,9 @@ class RequestsController {
               if (passengerName) {
                 db(`SELECT passengers FROM ride_offers WHERE id=${rideId}`, (errors, Response) => {
                   if (errors) {
-                    res.jsend.error({
+                    res.status(500).jsend.error({
                       code: 500,
-                      message: 'An error occured while fetching users for the ride',
+                      message: 'An error occured while fetching passengers for the ride',
                     });
                   }
                   if (Response.rows[0]) {
@@ -66,20 +66,21 @@ class RequestsController {
                       WHERE id=${rideId}`,
                       (err, resp) => {
                         if (err) {
-                          res.jsend.error({
+                          res.status(500).jsend.error({
                             code: 500,
-                            message: 'An error occurred while trying to update the passenger\'s column',
+                            message: 'An error occurred while trying to add the passenger',
                           });
                         }
                         if (resp) {
                           db(`DELETE FROM requests WHERE id=${requestId}`, (anyError) => {
                             if (anyError) {
-                              res.jsend.error({
+                              res.status(500).jsend.error({
                                 code: 500,
-                                message: 'An error occurred while trying to delete the request from its table.',
+                                message: 'An error occurred while completing the request for this ride.',
                               });
                             } else {
-                              res.jsend.success({
+                              res.status(204).jsend.success({
+                                code: 204,
                                 message: 'Passenger added to ride succesfully',
                                 resp: resp.rows,
                               });
@@ -89,23 +90,23 @@ class RequestsController {
                       },
                     );
                   } else {
-                    res.jsend.success({
-                      code: 409,
+                    res.status(404).jsend.success({
+                      code: 404,
                       message: 'The ride querried does not exist',
                       passenger: null,
                     });
                   }
                 });
               } else {
-                res.jsend.success({
-                  code: 409,
+                res.status(200).jsend.success({
+                  code: 200,
                   message: 'There is no passenger associated with this request',
                   passenger: null,
                 });
               }
             } else {
-              res.jsend.success({
-                code: 409,
+              res.status(404).jsend.success({
+                code: 400,
                 message: 'The request you selected does not exist.',
                 data: null,
               });
@@ -116,7 +117,7 @@ class RequestsController {
       if (isAccepted === 'false') {
         db(`DELETE FROM requests WHERE id=${requestId}`, (error, response) => {
           if (error) {
-            res.jsend.error({
+            res.status(500).jsend.error({
               code: 500,
               message: 'An error occurred when trying to delete the request from its table',
             });
@@ -129,7 +130,7 @@ class RequestsController {
         });
       }
     } else {
-      res.jsend.fail({
+      res.status(400).jsend.fail({
         message: 'Please fill all required fields',
       });
     }

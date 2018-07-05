@@ -9,7 +9,7 @@ const dbConfigurations = {
     database: process.env.DB_CONFIG_DATABASE,
     password: process.env.DB_CONFIG_PASSWORD,
     port: process.env.DB_CONFIG_PORT,
-    max: process.env.DB_CONFIG_MAX, // max number of connection can be open to database
+    max: process.env.DB_CONFIG_MAX,
     idleTimeoutMillis: process.env.DB_CONFIG_IDLE_TIMEOUT_MILLIS,
   },
   test: {
@@ -18,7 +18,7 @@ const dbConfigurations = {
     database: process.env.DB_CONFIG_TEST_DATABASE,
     password: process.env.DB_CONFIG_PASSWORD,
     port: process.env.DB_CONFIG_PORT,
-    max: process.env.DB_CONFIG_MAX, // max number of connection can be open to database
+    max: process.env.DB_CONFIG_MAX,
     idleTimeoutMillis: process.env.DB_CONFIG_IDLE_TIMEOUT_MILLIS,
   },
 };

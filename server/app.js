@@ -27,7 +27,6 @@ app.all('*', (req, res) => {
 });
 
 app.listen(PORT, (error) => {
-  /* eslint-disable no-console */
   if (error) {
     console.log(`An error occurred try to start the sever. Error is ${error}`);
   } else {
