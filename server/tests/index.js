@@ -45,7 +45,7 @@ describe('Ride-My-Way App Tests', () => {
         chai.request(app).post('/api/v1/auth/signup')
           .send(userDetails)
           .end((err, res) => {
-            expect(res.status).to.deep.equal(200);
+            expect(res.status).to.deep.equal(201);
             expect(res.body.data).to.have.property('token');
             expect(res.body.status).to.deep.equal('success');
             expect(res.body.data.message).to.deep.equal('User created succesfully');
@@ -60,12 +60,10 @@ describe('Ride-My-Way App Tests', () => {
         chai.request(app).post('/api/v1/auth/signup')
           .send(userDetails)
           .end((err, res) => {
-            expect(res.status).to.deep.equal(200);
+            expect(res.status).to.deep.equal(400);
             expect(res.body).to.be.an('object');
             expect(res.body).to.not.have.property('token');
-            expect(res.body.code).to.deep.equal(400);
-            expect(res.body.status).to.deep.equal('error');
-            expect(res.body.message).to.deep.equal('Please enter all user details requested');
+            expect(res.body.status).to.deep.equal('fail');
             done();
           });
       });
@@ -94,24 +92,24 @@ describe('Ride-My-Way App Tests', () => {
         chai.request(app).post('/api/v1/auth/login')
           .send(userDetails)
           .end((err, res) => {
-            expect(res.status).to.deep.equal(200);
-            expect(res.body.status).to.deep.equal('success');
+            expect(res.status).to.deep.equal(400);
+            expect(res.body.status).to.deep.equal('fail');
             expect(res.body.data).to.not.have.property('token');
             expect(res.body.data.message).to.deep.equal('Username or password is invalid');
             done();
           });
       });
-      it('Should return an error message when any user details are not given by the user', (done) => {
+      it('Should return an error message when any user detail is not given by the user', (done) => {
         const userDetails = {
           password: 'kaybaba',
         };
         chai.request(app).post('/api/v1/auth/login')
           .send(userDetails)
           .end((err, res) => {
-            expect(res.status).to.deep.equal(200);
-            expect(res.body.status).to.deep.equal('error');
+            expect(res.status).to.deep.equal(400);
+            expect(res.body.status).to.deep.equal('fail');
             expect(res.body).to.not.have.property('token');
-            expect(res.body.message).to.deep.equal('Please enter all user details requested');
+            expect(res.body).to.not.have.property('message');
             done();
           });
       });
@@ -178,7 +176,7 @@ describe('Ride-My-Way App Tests', () => {
           .send(rideOfferDetails)
           .set('x-access-token', myToken)
           .end((err, res) => {
-            expect(res.status).to.deep.equal(200);
+            expect(res.status).to.deep.equal(201);
             expect(res.body.status).to.deep.equal('success');
             expect(res.body.data).to.have.property('message');
             expect(res.body.data).to.have.property('rideOfferCreated');
@@ -198,10 +196,10 @@ describe('Ride-My-Way App Tests', () => {
           .send(rideOfferDetails)
           .set('x-access-token', myToken)
           .end((err, res) => {
-            expect(res.status).to.deep.equal(200);
-            expect(res.body.status).to.deep.equal('error');
-            expect(res.body.code).to.deep.equal(400);
-            expect(res.body).to.have.property('message');
+            expect(res.status).to.deep.equal(400);
+            expect(res.body.status).to.deep.equal('fail');
+            expect(res.body.data.code).to.deep.equal(400);
+            expect(res.body.data).to.have.property('message');
             done();
           });
       });
@@ -235,8 +233,8 @@ describe('Ride-My-Way App Tests', () => {
         chai.request(app).get('/api/v1/rides/2000')
           .set('x-access-token', myToken)
           .end((err, res) => {
-            expect(res.status).to.deep.equal(200);
-            expect(res.body.status).to.deep.equal('success');
+            expect(res.status).to.deep.equal(404);
+            expect(res.body.status).to.deep.equal('fail');
             expect(res.body.data).to.have.property('message');
             expect(res.body.data).to.have.property('ride');
             expect(res.body.data.ride).to.deep.equal(null);
@@ -250,7 +248,7 @@ describe('Ride-My-Way App Tests', () => {
           .set('x-access-token', myToken)
           .send({ passengerName: 'Afolayan' })
           .end((err, res) => {
-            expect(res.status).to.deep.equal(200);
+            expect(res.status).to.deep.equal(201);
             expect(res.body.status).to.deep.equal('success');
             expect(res.body.data).to.have.property('message');
             done();
@@ -261,8 +259,8 @@ describe('Ride-My-Way App Tests', () => {
           .set('x-access-token', myToken)
           .send({ passengerName: 'Afolayan' })
           .end((err, res) => {
-            expect(res.status).to.deep.equal(200);
-            expect(res.body.status).to.deep.equal('success');
+            expect(res.status).to.deep.equal(404);
+            expect(res.body.status).to.deep.equal('fail');
             expect(res.body.data).to.have.property('message');
             done();
           });
@@ -271,10 +269,9 @@ describe('Ride-My-Way App Tests', () => {
         chai.request(app).post('/api/v1/rides/1/requests')
           .set('x-access-token', myToken)
           .end((err, res) => {
-            expect(res.status).to.deep.equal(200);
-            expect(res.body.status).to.deep.equal('error');
-            expect(res.body).to.have.property('message');
-            expect(res.body.code).to.deep.equal(400);
+            expect(res.status).to.deep.equal(400);
+            expect(res.body.status).to.deep.equal('fail');
+            expect(res.body.data).to.have.property('message');
             done();
           });
       });
@@ -295,7 +292,7 @@ describe('Ride-My-Way App Tests', () => {
         chai.request(app).get('/api/v1/users/rides/1000/requests')
           .set('x-access-token', myToken)
           .end((err, res) => {
-            expect(res.status).to.deep.equal(200);
+            expect(res.status).to.deep.equal(404);
             expect(res.body.status).to.deep.equal('success');
             expect(res.body.data).to.have.property('message');
             expect(res.body.data).to.have.property('passengers');
@@ -310,9 +307,7 @@ describe('Ride-My-Way App Tests', () => {
           .set('x-access-token', myToken)
           .send({ isAccepted: 'true' })
           .end((error, res) => {
-            expect(res.status).to.deep.equal(200);
-            expect(res.body.status).to.deep.equal('success');
-            expect(res.body.data).to.have.property('message');
+            expect(res.status).to.deep.equal(204);
             done();
           });
       });
@@ -321,7 +316,6 @@ describe('Ride-My-Way App Tests', () => {
           .set('x-access-token', myToken)
           .send({ isAccepted: 'false' })
           .end((error, res) => {
-            console.log('res.body in reject req is ==> ', res.body);
             expect(res.status).to.deep.equal(200);
             expect(res.body.status).to.deep.equal('success');
             expect(res.body.data).to.have.property('message');

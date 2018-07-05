@@ -62,7 +62,7 @@ class RidesController {
       }
       if (response) {
         if (response.rows.length === 0) {
-          res.status(404).jsend.success({
+          res.status(404).jsend.fail({
             message: 'Ride offer requested does not exist',
             ride: null,
           });
@@ -104,13 +104,13 @@ class RidesController {
             }
           });
         } else {
-          res.status(404).jsend.success({
+          res.status(404).jsend.fail({
             message: 'The ride-offer you requested to join was not found',
             code: 404,
           });
         }
       } else {
-        res.status(404).jsend.success({
+        res.status(404).jsend.fail({
           message: 'The ride you requested does not exist',
           code: 404,
         });

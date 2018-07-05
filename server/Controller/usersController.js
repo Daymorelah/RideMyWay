@@ -83,7 +83,7 @@ class UserController {
                   token,
                 });
               } else {
-                res.status(400).jsend.success({
+                res.status(400).jsend.fail({
                   code: 400,
                   message: 'Username or password is invalid',
                 });
