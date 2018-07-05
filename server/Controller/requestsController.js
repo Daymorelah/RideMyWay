@@ -79,10 +79,9 @@ class RequestsController {
                                 message: 'An error occurred while completing the request for this ride.',
                               });
                             } else {
-                              res.status(204).jsend.success({
-                                code: 204,
+                              res.status(200).jsend.success({
+                                code: 200,
                                 message: 'Passenger added to ride succesfully',
-                                resp: resp.rows,
                               });
                             }
                           });
