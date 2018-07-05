@@ -304,25 +304,28 @@ describe('Ride-My-Way App Tests', () => {
           });
       });
     });
-    describe('Test to either request or reject a ride', () => {
-      it('Should return a success message when a user accepts a request to a ride ', () => {
+    describe.only('Test to either request or reject a ride', () => {
+      it('Should return a success message when a user accepts a request to a ride ', (done) => {
         chai.request(app).put('/api/v1/users/rides/1/requests/1')
           .set('x-access-token', myToken)
-          .send({ isAccepted: true })
+          .send({ isAccepted: 'true' })
           .end((error, res) => {
             expect(res.status).to.deep.equal(200);
             expect(res.body.status).to.deep.equal('success');
             expect(res.body.data).to.have.property('message');
+            done();
           });
       });
-      it('Should return a success message when a user rejects a request to a ride ', () => {
+      it('Should return a success message when a user rejects a request to a ride ', (done) => {
         chai.request(app).put('/api/v1/users/rides/1/requests/1')
           .set('x-access-token', myToken)
-          .send({ isAccepted: false })
+          .send({ isAccepted: 'false' })
           .end((error, res) => {
+            console.log('res.body in reject req is ==> ', res.body);
             expect(res.status).to.deep.equal(200);
             expect(res.body.status).to.deep.equal('success');
             expect(res.body.data).to.have.property('message');
+            done();
           });
       });
     });
