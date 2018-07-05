@@ -80,13 +80,10 @@ class RequestsController {
                               });
                             } else {
                               res.jsend.success({
-                                data: null,
+                                message: 'Passenger added to ride succesfully',
+                                resp: resp.rows,
                               });
                             }
-                          });
-                          res.jsend.success({
-                            message: 'Passenger added to ride succesfully',
-                            resp: resp.rows,
                           });
                         }
                       },
