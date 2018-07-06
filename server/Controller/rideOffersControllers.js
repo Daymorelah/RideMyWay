@@ -41,8 +41,7 @@ class RidesController {
           message: 'Your details were not saved into the database. Please try again.',
           code: 500,
         });
-      }
-      if (response) {
+      } else {
         const rideOfferCreated = response.rows[0];
         res.status(201).jsend.success({
           message: 'Ride-offer created succesfully',
@@ -92,9 +91,9 @@ class RidesController {
               rideoffer_id) VALUES ('${passengerName}',
               '${userId}', '${rideId}' )`, (error, response) => {
             if (error) {
-              res.jsend.error({
-                code: 500,
-                messsage: 'Could not add you to the request list to join the ride. Please try again.',
+              res.status(409).jsend.fail({
+                code: 409,
+                messsage: 'You cannot join the same ride twice.',
               });
             }
             if (response) {

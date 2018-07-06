@@ -26,7 +26,7 @@ describe('Ride-My-Way App Tests', () => {
         return done();
       });
   });
-  it('Should welcome the user to the API', (done) => {
+  it('should welcome the user to the API', (done) => {
     chai.request(app).get('/api/v1')
       .end((err, res) => {
         expect(res.status).to.deep.equal(200);
@@ -36,7 +36,7 @@ describe('Ride-My-Way App Tests', () => {
   });
   describe('Integration test for the users controller', () => {
     describe.only('Test to signup a user', () => {
-      it('Should create a user and send a message that the user has ben created', (done) => {
+      it('should create a user and send a message that the user has ben created', (done) => {
         const userDetails = {
           username: 'Thomas',
           password: 'tomnjerry',
@@ -52,7 +52,7 @@ describe('Ride-My-Way App Tests', () => {
             done();
           });
       });
-      it('Should return an error if any user detail is not present in body', (done) => {
+      it('should return an error if any user detail is not present in body', (done) => {
         const userDetails = {
           username: 'Thomas',
           email: 'tommy@wemail.com',
@@ -69,7 +69,7 @@ describe('Ride-My-Way App Tests', () => {
       });
     });
     describe.only('Test for user login', () => {
-      it('Should return a success message when a user has logged in', (done) => {
+      it('should return a success message when a user has logged in', (done) => {
         const userDetails = {
           username: 'Thomas',
           password: 'tomnjerry',
@@ -84,7 +84,7 @@ describe('Ride-My-Way App Tests', () => {
             done();
           });
       });
-      it('Should return an error message when password is invalid', (done) => {
+      it('should return an error message when password is invalid', (done) => {
         const userDetails = {
           username: 'Thomas',
           password: 'kaybaba',
@@ -99,7 +99,7 @@ describe('Ride-My-Way App Tests', () => {
             done();
           });
       });
-      it('Should return an error message when any user detail is not given by the user', (done) => {
+      it('should return an error message when any user detail is not given by the user', (done) => {
         const userDetails = {
           password: 'kaybaba',
         };
@@ -115,7 +115,7 @@ describe('Ride-My-Way App Tests', () => {
       });
     });
     describe('Test for deleting a registered user', () => {
-      it('Should return a success message when a user as been deleted successfully', (done) => {
+      it('should return a success message when a user as been deleted successfully', (done) => {
         chai.request(app).delete('/api/v1/2/users')
           .end((err, res) => {
             expect(res.status).to.deep.equal(200);
@@ -124,7 +124,7 @@ describe('Ride-My-Way App Tests', () => {
             done();
           });
       });
-      it('Should return a failure message if the user to be deleted is invalid', (done) => {
+      it('should return a failure message if the user to be deleted is invalid', (done) => {
         chai.request(app).delete('/api/v1/200/users')
           .end((err, res) => {
             expect(res.status).to.deep.equal(404);
@@ -135,7 +135,7 @@ describe('Ride-My-Way App Tests', () => {
       });
     });
     describe('Test to update a registered user\'s details', () => {
-      it('Should return a success message after updating a user\'s detail successfully', (done) => {
+      it('should return a success message after updating a user\'s detail successfully', (done) => {
         const userDetails = {
           username: 'Mukaila',
           password: 'mukeke',
@@ -150,7 +150,7 @@ describe('Ride-My-Way App Tests', () => {
             done();
           });
       });
-      it('Should return an error message when the user querried is not valid', (done) => {
+      it('should return an error message when the user querried is not valid', (done) => {
         chai.request(app).put('/api/v1/20/users')
           .end((err, res) => {
             expect(res.status).to.deep.equal(404);
@@ -205,7 +205,7 @@ describe('Ride-My-Way App Tests', () => {
       });
     });
     describe.only('Test for viewing all available ride offers', () => {
-      it('Should return an array of ride offer objects', (done) => {
+      it('should return an array of ride offer objects', (done) => {
         chai.request(app).get('/api/v1/rides')
           .set('x-access-token', myToken)
           .end((err, res) => {
@@ -218,7 +218,7 @@ describe('Ride-My-Way App Tests', () => {
       });
     });
     describe.only('Test for returning a single ride offer', () => {
-      it('Should return the ride offer requested', (done) => {
+      it('should return the ride offer requested', (done) => {
         chai.request(app).get('/api/v1/rides/1')
           .set('x-access-token', myToken)
           .end((err, res) => {
@@ -229,7 +229,7 @@ describe('Ride-My-Way App Tests', () => {
             done();
           });
       });
-      it('Should return an error message when a requested ride offer is not created', (done) => {
+      it('should return an error message when a requested ride offer is not created', (done) => {
         chai.request(app).get('/api/v1/rides/2000')
           .set('x-access-token', myToken)
           .end((err, res) => {
@@ -288,12 +288,12 @@ describe('Ride-My-Way App Tests', () => {
             done();
           });
       });
-      it('should return null when ride requested is  invalid', (done) => {
+      it('should return null when ride requested is invalid', (done) => {
         chai.request(app).get('/api/v1/users/rides/1000/requests')
           .set('x-access-token', myToken)
           .end((err, res) => {
             expect(res.status).to.deep.equal(404);
-            expect(res.body.status).to.deep.equal('success');
+            expect(res.body.status).to.deep.equal('fail');
             expect(res.body.data).to.have.property('message');
             expect(res.body.data).to.have.property('passengers');
             expect(res.body.data.passengers).to.deep.equal(null);
@@ -302,16 +302,16 @@ describe('Ride-My-Way App Tests', () => {
       });
     });
     describe.only('Test to either request or reject a ride', () => {
-      it('Should return a success message when a user accepts a request to a ride ', (done) => {
+      it('should return a success message when a user accepts a request to a ride ', (done) => {
         chai.request(app).put('/api/v1/users/rides/1/requests/1')
           .set('x-access-token', myToken)
           .send({ isAccepted: 'true' })
           .end((error, res) => {
-            expect(res.status).to.deep.equal(204);
+            expect(res.status).to.deep.equal(200);
             done();
           });
       });
-      it('Should return a success message when a user rejects a request to a ride ', (done) => {
+      it('should return a success message when a user rejects a request to a ride ', (done) => {
         chai.request(app).put('/api/v1/users/rides/1/requests/1')
           .set('x-access-token', myToken)
           .send({ isAccepted: 'false' })
@@ -324,7 +324,7 @@ describe('Ride-My-Way App Tests', () => {
       });
     });
     describe('Test for deleting a ride offer ', () => {
-      it('Should return a success message when a user has been deleted', (done) => {
+      it('should return a success message when a user has been deleted', (done) => {
         chai.request(app).delete('/api/v1/3/rides')
           .end((err, res) => {
             expect(res.status).to.deep.equal(200);
@@ -333,7 +333,7 @@ describe('Ride-My-Way App Tests', () => {
             done();
           });
       });
-      it('Should return an error message when the requested ride offer is invalid', (done) => {
+      it('should return an error message when the requested ride offer is invalid', (done) => {
         chai.request(app).delete('/api/v1/50/rides')
           .end((err, res) => {
             expect(res.status).to.deep.equal(404);

@@ -21,7 +21,7 @@ class RequestsController {
             passengers,
           });
         } else {
-          res.status(404).jsend.success({
+          res.status(404).jsend.fail({
             code: 404,
             message: 'The ride-offer you selected does not exist',
             passengers: null,
@@ -64,14 +64,13 @@ class RequestsController {
                     db(
                       `UPDATE ride_offers SET passengers = '{${newPassengersArray}}' 
                       WHERE id=${rideId}`,
-                      (err, resp) => {
+                      (err) => {
                         if (err) {
                           res.status(500).jsend.error({
                             code: 500,
-                            message: 'An error occurred while trying to add the passenger',
+                            message: 'An error occurred while trying to add the passenger to the request',
                           });
-                        }
-                        if (resp) {
+                        } else {
                           db(`DELETE FROM requests WHERE id=${requestId}`, (anyError) => {
                             if (anyError) {
                               res.status(500).jsend.error({
@@ -89,7 +88,7 @@ class RequestsController {
                       },
                     );
                   } else {
-                    res.status(404).jsend.success({
+                    res.status(404).jsend.fail({
                       code: 404,
                       message: 'The ride querried does not exist',
                       passenger: null,
@@ -97,15 +96,15 @@ class RequestsController {
                   }
                 });
               } else {
-                res.status(200).jsend.success({
-                  code: 200,
+                res.status(404).jsend.fail({
+                  code: 404,
                   message: 'There is no passenger associated with this request',
                   passenger: null,
                 });
               }
             } else {
-              res.status(404).jsend.success({
-                code: 400,
+              res.status(404).jsend.fail({
+                code: 404,
                 message: 'The request you selected does not exist.',
                 data: null,
               });
