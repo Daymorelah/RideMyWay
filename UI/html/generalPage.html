@@ -5,17 +5,22 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Home page</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Arimo" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Shrikhand" rel="stylesheet">
   <link rel="stylesheet" type="text/css" media="screen" href="../css/generalPage.css" />
 </head>
 <body>
-  <header>
-    <nav>
-      <button id="logo"><a href="./generalPage.html">Ride-With-Me</a></button>
-      <button><a href="./profilePage.html">Profile</a></button>
-      <button><a href="./about.html">About</a></button>
-      <button id="logout-button"><a href="./signin.html">Logout</a></button>
+  <div>
+    <nav class="topnav">
+      <a id="logo" href="./generalPage.html">Ride-With-Me</a>
+      <a class="active" href="./generalPage.html">Home</a>
+      <a href="./profilePage.html">Profile</a>
+      <a href="./about.html">About</a>
+      <a id="logout" href="./signin.html">Logout</a>
     </nav>
-  </header>
+    <header>
+    </header>
+  </div>
   <main>
     <section class="container" id="grid-item-1">
       <div>
@@ -36,7 +41,7 @@
             <option value="time">Time</option>
             <option value="date">Date</option>
           </select>
-          <input type="text" />
+          <input type="text" placeholder="typer here" />
           <button>Search</button>
         </form>
       </div>
@@ -46,21 +51,20 @@
       </div>
       <div id="set-ride-offer">
         <div>
-        <form>
-            <input type="text" placeholder="Source"/>
-            <input type="text" placeholder="Destnation"/>
-            <input type="text" placeholder="Time"/>
-            <input type="submit" value="Create Offer"/>
-            <input type="submit" value="Cancel Offer"/>
+        <form action='#'>
+          <input type="text" placeholder="Source"/>
+          <input type="text" placeholder="Destnation"/>
+          <input type="text" placeholder="Time"/>
+          <input type="submit" value="Create Offer"/>
+          <input type="submit" value="Cancel Offer"/>
         </form>
         </div>
       </div>
     </section>
   </main>
-  <footer>
-    <div>
-      Designed by Ademola
-    </div>  </footer>
+  <div class="footer">
+    <p>Designed by Ademola</p>  
+  </div>
   <script src="../js/generalPage.js"></script>
 </body>
 </html>
