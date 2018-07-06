@@ -20,29 +20,21 @@ class UserController {
                   ` '${email}') RETURNING *`,
         (error, response) => {
           if (error) {
-            res.status(500).jsend.error({
-              code: 500,
-              message: 'Your details could not be saved on our database. Please try again',
+            res.jsend.fail({
+              code: 409,
+              message: 'User details allready exist on our database. Request was not successful',
             });
-          }
-          if (response) {
-            if (response.rows.length === 0) {
-              res.jsend.success({
-                code: 409,
-                message: 'Could not get the user details created',
-              });
-            } else {
-              const result = response.rows[0];
-              const token = jwt.sign({
-                userId: result.id,
-                username: result.username,
-                email: result.email,
-              }, secret, { expiresIn: '1 day' });
-              res.status(201).jsend.success({
-                message: 'User created succesfully',
-                token,
-              });
-            }
+          } else {
+            const result = response.rows[0];
+            const token = jwt.sign({
+              userId: result.id,
+              username: result.username,
+              email: result.email,
+            }, secret, { expiresIn: '1 day' });
+            res.status(201).jsend.success({
+              message: 'User created succesfully',
+              token,
+            });
           }
         },
       );
@@ -64,7 +56,7 @@ class UserController {
       }
       if (response) {
         if (response.rows.length === 0) {
-          res.status(400).jsend.success({
+          res.status(400).jsend.fail({
             code: 400,
             message: 'Username or password does not exist',
           });
