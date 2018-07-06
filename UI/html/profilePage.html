@@ -4,18 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css?family=Arimo" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Shrikhand" rel="stylesheet">
   <link rel="stylesheet" type="text/css" media="screen" href="../css/profilePage.css" />
   <title>Profile Page</title>
 </head>
 <body>
-  <header>
-    <nav>
-      <button id="logo"><a href="./generalPage.html">Ride-With-Me</a></button>
-      <button><a href="./generalPage.html">Home</a></button>
-      <button><a href="./about.html">About</a></button>
-      <button id="logout-button"><a href="./signin.html">Logout</a></button>
+  <div>
+    <nav class="topnav">
+      <a id="logo" href="./generalPage.html">Ride-With-Me</a>
+      <a href="./generalPage.html">Home</a>
+      <a class="active" href="#">Profile</a>
+      <a href="./about.html">About</a>
+      <a id="logout"href="./signin.html">Logout</a>
     </nav>
-  </header>
+    <header>    
+    </header>
+  </div>
   <main>
     <section class="container" id="grid-item-1">
       <div>
@@ -38,7 +43,7 @@
             <option value="time">Time</option>
             <option value="date">Date</option>
           </select>
-          <input type="text" />
+          <input type="text" placeholder="type keyword"/>
           <button>Search</button>
         </form>
       </div>
@@ -52,11 +57,9 @@
       </div>
     </section>
   </main>
-  <footer>
-    <div>
-      Designed by Ademola
-    </div>
-  </footer>
+  <div class="footer">
+    <p>Designed by Ademola</p>
+  </div>
   <script src="../js/profilePage.js"></script>
 </body>
 </html>
