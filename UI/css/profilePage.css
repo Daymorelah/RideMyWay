@@ -148,8 +148,9 @@ select{
 
 #grid-item-2 button a{
   text-decoration: none;
+  border: none;
   margin: 0;
-  padding: 0;
+  padding: 18px;
   color: #ffffff;
 }
 
@@ -169,6 +170,7 @@ select{
   text-decoration: none;
   font-size: 17px;
   font-family: Arimo;
+  height: inherit;
 }
 
 #logo{
