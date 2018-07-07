@@ -143,9 +143,8 @@ select{
   background-color: #8a2be2;
   font-family: inherit;
   font-size: 18px;
-  margin: 4px;
-  border-radius: 8px;
-  padding: 4px;
+  border-radius: 6px;
+  height: 40px;
 }
 
 #grid-item-2 button a{

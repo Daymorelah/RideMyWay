@@ -142,14 +142,16 @@ select{
   background-color: #8a2be2;
   font-family: inherit;
   font-size: 18px;
-  margin: 4px;
-  border-radius: 8px;
+  height: 40px;
+  border-radius: 8px; 
+  -webkit-box-shadow: 1px 1px 49px 0px rgba(51,51,51,0.75);
+  -moz-box-shadow: 1px 1px 49px 0px rgba(51,51,51,0.75);
+  box-shadow: 1px 1px 49px 0px rgba(51,51,51,0.75);
 }
 
 #grid-item-2 button a{
   text-decoration: none;
   border: none;
-  margin: 0;
   padding: 18px;
   color: #ffffff;
 }
