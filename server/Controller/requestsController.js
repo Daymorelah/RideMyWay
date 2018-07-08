@@ -5,7 +5,7 @@ class RequestsController {
   static getAllRideRequests(req, res) {
     const { rideId } = req.params;
     db(
-      `SELECT name FROM requests WHERE rideoffer_id=${rideId}`,
+      `SELECT name FROM requests WHERE rideofferid=${rideId}`,
       (error, response) => {
         if (error) {
           res.status(500).jsend.error({
@@ -47,7 +47,7 @@ class RequestsController {
             if (response.rows.length) {
               const passengerName = response.rows[0].name;
               if (passengerName) {
-                db(`SELECT passengers FROM ride_offers WHERE id=${rideId}`, (errors, Response) => {
+                db(`SELECT passengers FROM rideOffers WHERE id=${rideId}`, (errors, Response) => {
                   if (errors) {
                     res.status(500).jsend.error({
                       code: 500,
@@ -62,7 +62,7 @@ class RequestsController {
                       newPassengersArray = Response.rows[0].passengers.concat(passengerName);
                     }
                     db(
-                      `UPDATE ride_offers SET passengers = '{${newPassengersArray}}' 
+                      `UPDATE rideOffers SET passengers = '{${newPassengersArray}}' 
                       WHERE id=${rideId}`,
                       (err) => {
                         if (err) {
@@ -113,19 +113,47 @@ class RequestsController {
         );
       }
       if (isAccepted === 'false') {
-        db(`DELETE FROM requests WHERE id=${requestId}`, (error, response) => {
-          if (error) {
-            res.status(500).jsend.error({
-              code: 500,
-              message: 'An error occurred when trying to delete the request from its table',
-            });
-          }
-          if (response) {
-            res.jsend.success({
-              message: 'Passenger rejectetd succesfully',
-            });
-          }
-        });
+        db(
+          `SELECT numberofseats FROM rideoffers WHERE id=${rideId}`,
+          (error, response) => {
+            let seats;
+            if (error) {
+              res.status(500).jsend.error({
+                code: 500,
+                message: 'An error occured completing your request',
+              });
+            }
+            if (response.rows.length) {
+              seats = response.rows[0].numberofseats + 1;
+              db(`UPDATE rideoffers SET numberofseats=${seats} WHERE id=${rideId}`, (err) => {
+                if (err) {
+                  res.status(500).jsend.error({
+                    error: 500,
+                    message: 'An error occured processing your request. Please try again.',
+                  });
+                } else {
+                  db(`DELETE FROM requests WHERE id=${requestId}`, (anyError) => {
+                    if (anyError) {
+                      res.status(500).jsend.error({
+                        code: 500,
+                        message: 'An error occurred when trying to delete the request from its table',
+                      });
+                    } else {
+                      res.jsend.success({
+                        message: 'Passenger rejectetd succesfully',
+                      });
+                    }
+                  });
+                }
+              });
+            } else {
+              res.status(409).jsend.fail({
+                code: 409,
+                message: 'Ride querried does not exist.',
+              });
+            }
+          },
+        );
       }
     } else {
       res.status(400).jsend.fail({
