@@ -20,9 +20,9 @@ class UserController {
                   ` '${email}') RETURNING *`,
         (error, response) => {
           if (error) {
-            res.jsend.fail({
+            res.status(409).jsend.fail({
               code: 409,
-              message: 'User details allready exist on our database. Request was not successful',
+              message: 'User details allready exist on our database. Signup was not successful',
             });
           } else {
             const result = response.rows[0];
@@ -32,7 +32,9 @@ class UserController {
               email: result.email,
             }, secret, { expiresIn: '1 day' });
             res.status(201).jsend.success({
-              message: 'User created succesfully',
+              message: `User ${result.username} created succesfully`,
+              username: result.username,
+              email: result.email,
               token,
             });
           }
@@ -58,7 +60,7 @@ class UserController {
         if (response.rows.length === 0) {
           res.status(400).jsend.fail({
             code: 400,
-            message: 'Username or password does not exist',
+            message: 'Username or password is incorrect',
           });
         } else {
           const result = response.rows[0];
@@ -72,12 +74,14 @@ class UserController {
                 }, secret, { expiresIn: '1 day' });
                 res.jsend.success({
                   message: `User ${result.username} logged in seccessfully`,
+                  username: result.username,
+                  email: result.email,
                   token,
                 });
               } else {
                 res.status(400).jsend.fail({
                   code: 400,
-                  message: 'Username or password is invalid',
+                  message: 'Username or password is incorrect',
                 });
               }
             })

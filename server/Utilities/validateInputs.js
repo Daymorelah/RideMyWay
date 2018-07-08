@@ -1,8 +1,15 @@
-/* eslint-disable consistent-return */
+/* eslint-disable consistent-return, no-param-reassign */
 import validate from 'validator';
+
+function trimValues(objectWithValuesToTrim) {
+  Object.keys(objectWithValuesToTrim).forEach((key) => {
+    objectWithValuesToTrim[key] = objectWithValuesToTrim[key].trim();
+  });
+}
 
 class Validate {
   static validateSignup(req, res, next) {
+    trimValues(req.body);
     const { username, password, email } = req.body;
     if (username && password && email) {
       if (!(validate.isEmpty(username) && validate.isEmpty(password) && validate.isEmpty(email))) {
@@ -35,6 +42,7 @@ class Validate {
     }
   }
   static validateLogin(req, res, next) {
+    trimValues(req.body);
     const { username, password } = req.body;
     if (username && password) {
       if (!(validate.isEmpty(username) && validate.isEmpty(password))) {
@@ -60,13 +68,14 @@ class Validate {
     }
   }
   static ValidateCreateRideOffer(req, res, next) {
+    trimValues(req.body);
     const {
       source, destination, time, driver, numberOfSeats,
     } = req.body;
     if (source && destination && time && driver && numberOfSeats) {
       if (validate.isAscii(source) && validate.isLength(source, { min: 0, max: 20 })) {
         if (validate.isAscii(destination) && validate.isLength(destination, { min: 0, max: 20 })) {
-          if (validate.isAscii(time) && validate.isLength(time, { min: 0, max: 13 })) {
+          if (validate.isAscii(time) && validate.isLength(time, { min: 5, max: 13 })) {
             if (validate.isAlpha(driver) && validate.isLength(driver, { min: 0, max: 15 })) {
               if (validate.isInt(numberOfSeats) &&
                 validate.isLength(numberOfSeats, { min: 0, max: 2 })) {
@@ -109,6 +118,7 @@ class Validate {
     }
   }
   static ValidateGetDetailsOfARide(req, res, next) {
+    trimValues(req.params);
     const { rideId } = req.params;
     if (rideId) {
       if (validate.isNumeric(rideId) && validate.isInt(rideId)) {
@@ -127,6 +137,8 @@ class Validate {
     }
   }
   static ValidateRequestToJoinARide(req, res, next) {
+    trimValues(req.body);
+    trimValues(req.params);
     const { rideId } = req.params;
     const { passengerName } = req.body;
     if (rideId && passengerName) {
@@ -154,6 +166,7 @@ class Validate {
     }
   }
   static ValidateGetAllRideRequests(req, res, next) {
+    trimValues(req.params);
     const { rideId } = req.params;
     if (rideId) {
       if (validate.isNumeric(rideId) && validate.isInt(rideId)) {
@@ -172,6 +185,8 @@ class Validate {
     }
   }
   static ValidateAcceptOrRejectARide(req, res, next) {
+    trimValues(req.params);
+    trimValues(req.body);
     const { rideId, requestId } = req.params;
     const { isAccepted } = req.body;
     if (rideId && requestId && isAccepted) {

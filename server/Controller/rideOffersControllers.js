@@ -3,9 +3,9 @@ import db from '../Models/db/connectToDb';
 
 class RidesController {
   static getAllRideOffers(req, res) {
-    db('SELECT * FROM ride_offers LIMIT 6', (error, response) => {
+    db('SELECT * FROM rideOffers LIMIT 6', (error, response) => {
       if (error) {
-        res.jsend.error({
+        res.status(500).jsend.error({
           code: 500,
           message: 'Could not retrieve ride offers',
         });
@@ -14,11 +14,11 @@ class RidesController {
         if (!response.rows.length) {
           res.jsend.success({
             message: 'No rides has been created yet.',
-            ride_offers: null,
+            rideOffers: null,
           });
         } else {
           res.jsend.success({
-            ride_offers: response.rows,
+            rideOffers: response.rows,
           });
         }
       }
@@ -30,14 +30,14 @@ class RidesController {
     } = req.body;
     const { userId } = req.decoded;
     const seats = parseInt(numberOfSeats, 10);
-    db('INSERT INTO ride_offers (number_of_seats, destination, ' +
-            'source, driver, time, users_id)VALUES ' +
+    db('INSERT INTO rideOffers (numberOfSeats, destination, ' +
+            'source, driver, time, usersId)VALUES ' +
             `('${seats}', '${destination}',` +
             ` '${source}', '${driver}', ` +
             `'${time}', '${userId}' ` +
               ') RETURNING * ', (error, response) => {
       if (error) {
-        res.send(500).jsend.error({
+        res.status(500).jsend.error({
           message: 'Your details were not saved into the database. Please try again.',
           code: 500,
         });
@@ -52,9 +52,9 @@ class RidesController {
   }
   static getDetailsOfARide(req, res) {
     const { rideId } = req.params;
-    db(`SELECT * FROM ride_offers WHERE id=${rideId}`, (error, response) => {
+    db(`SELECT * FROM rideOffers WHERE id=${rideId}`, (error, response) => {
       if (error) {
-        res.jsend.error({
+        res.status(500).jsend.error({
           code: 500,
           message: 'Could not get details of the ride',
         });
@@ -78,18 +78,30 @@ class RidesController {
     const { rideId } = req.params;
     const { userId } = req.decoded;
     const { passengerName } = req.body;
-    db(`SELECT id FROM ride_offers WHERE id=${rideId}`, (err, resp) => {
+    db(`SELECT id,usersId,numberOfSeats FROM rideOffers WHERE id=${rideId}`, (err, resp) => {
+      let seats;
       if (err) {
-        res.jsend.error({
+        res.status(500).jsend.error({
           code: 500,
-          message: 'Could not get the ride you requested to join.',
+          message: 'Could not get the ride you are requesting to join.',
         });
       }
       if (resp.rows.length) {
-        if (resp.rows[0].id === parseInt(rideId, 10)) {
-          db(`INSERT INTO requests (name, users_id,
-              rideoffer_id) VALUES ('${passengerName}',
-              '${userId}', '${rideId}' )`, (error, response) => {
+        if (resp.rows[0].numberofseats === 0) {
+          res.status(409).jsend.fail({
+            code: 409,
+            message: 'This ride is all booked. No more seats available',
+          });
+        } else if (resp.rows[0].usersid === userId) {
+          res.status(409).jsend.fail({
+            code: 409,
+            message: 'You cant join a ride you created.',
+          });
+        } else {
+          seats = resp.rows[0].numberofseats - 1;
+          db(`INSERT INTO requests (name, usersId,
+                rideofferId) VALUES ('${passengerName}',
+                '${userId}', '${rideId}' )`, (error, response) => {
             if (error) {
               res.status(409).jsend.fail({
                 code: 409,
@@ -97,20 +109,24 @@ class RidesController {
               });
             }
             if (response) {
-              res.status(201).jsend.success({
-                message: 'Your request to join the ride has been completed',
+              db(`UPDATE rideOffers SET numberofseats=${seats} WHERE id=${rideId}`, (anyError) => {
+                if (anyError) {
+                  res.status(500).jsend.error({
+                    code: 500,
+                    message: 'An error occured completing your request. Please try again.',
+                  });
+                } else {
+                  res.status(201).jsend.success({
+                    message: 'Your request to join the ride has been completed',
+                  });
+                }
               });
             }
-          });
-        } else {
-          res.status(404).jsend.fail({
-            message: 'The ride-offer you requested to join was not found',
-            code: 404,
           });
         }
       } else {
         res.status(404).jsend.fail({
-          message: 'The ride you requested does not exist',
+          message: 'The ride you requested for does not exist',
           code: 404,
         });
       }
