@@ -9,6 +9,7 @@ const { expect } = chai;
 
 describe('Ride-My-Way App Tests', () => {
   let myToken;
+  let myToken2;
   before((done) => {
     const userDetails = {
       username: 'gibbs',
@@ -45,10 +46,11 @@ describe('Ride-My-Way App Tests', () => {
         chai.request(app).post('/api/v1/auth/signup')
           .send(userDetails)
           .end((err, res) => {
+            myToken2 = res.body.data.token;
             expect(res.status).to.deep.equal(201);
             expect(res.body.data).to.have.property('token');
             expect(res.body.status).to.deep.equal('success');
-            expect(res.body.data.message).to.deep.equal('User created succesfully');
+            expect(res.body.data.message).to.deep.equal('User Thomas created succesfully');
             done();
           });
       });
@@ -95,7 +97,7 @@ describe('Ride-My-Way App Tests', () => {
             expect(res.status).to.deep.equal(400);
             expect(res.body.status).to.deep.equal('fail');
             expect(res.body.data).to.not.have.property('token');
-            expect(res.body.data.message).to.deep.equal('Username or password is invalid');
+            expect(res.body.data.message).to.deep.equal('Username or password is incorrect');
             done();
           });
       });
@@ -211,8 +213,8 @@ describe('Ride-My-Way App Tests', () => {
           .end((err, res) => {
             expect(res.status).to.deep.equal(200);
             expect(res.body.status).to.deep.equal('success');
-            expect(res.body.data).to.have.property('ride_offers');
-            expect(res.body.data.ride_offers.length).to.deep.equal(1);
+            expect(res.body.data).to.have.property('rideOffers');
+            expect(res.body.data.rideOffers.length).to.deep.equal(1);
             done();
           });
       });
@@ -243,9 +245,20 @@ describe('Ride-My-Way App Tests', () => {
       });
     });
     describe.only('Test for requesting to join a ride', () => {
-      it('should return a message when a user has been succesfully added to a ride', (done) => {
+      it('should prevent the creator of  ride from requesting to join a ride he/she created', (done) => {
         chai.request(app).post('/api/v1/rides/1/requests')
           .set('x-access-token', myToken)
+          .send({ passengerName: 'Afolayan' })
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(409);
+            expect(res.body.status).to.deep.equal('fail');
+            expect(res.body.data).to.have.property('message');
+            done();
+          });
+      });
+      it('should return a success message when a user successfully requests to join a ride', (done) => {
+        chai.request(app).post('/api/v1/rides/1/requests')
+          .set('x-access-token', myToken2)
           .send({ passengerName: 'Afolayan' })
           .end((err, res) => {
             expect(res.status).to.deep.equal(201);
