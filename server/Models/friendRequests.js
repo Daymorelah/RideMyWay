@@ -1,13 +1,12 @@
 
 import connecToDb from './db/connectToDb';
 
-const createFriendRequestsTable = () => {
+const createFriendRequestsTable = () => new Promise((resolve, reject) => {
   connecToDb('DROP TABLE IF EXISTS friendRequests CASCADE', (err, res) => {
     if (err) {
-      console.log('An error occurred trying to drop table friendRequests. ', err);
+      reject(Error('An error occurred trying to drop table friendRequests. ', err));
     }
     if (res) {
-      console.log('Table friendRequests has been dropped succesfully');
       connecToDb(`CREATE TABLE friendRequests(
                   id SERIAL PRIMARY KEY,
                   userthataskedid SMALLINT NOT NULL,
@@ -18,15 +17,15 @@ const createFriendRequestsTable = () => {
                   UNIQUE(userthataskedid, userthatdecidesid)
                   )`, (error, response) => {
         if (error) {
-          console.log('An error occurred trying to create table friendRequests.', error);
+          reject(Error('An error occurred trying to create table friendRequests.', error));
         }
         if (response) {
-          console.log('Table friendRequests has been Created succesfully');
+          resolve('Table friendRequests has been Created succesfully');
         }
       });
     }
   });
-};
+});
 
 export default createFriendRequestsTable;
 

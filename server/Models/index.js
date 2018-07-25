@@ -5,8 +5,20 @@ import createRequestsTable from './requests';
 import createFriendsTable from './friends';
 import createFriendRequestTable from './friendRequests';
 
-createUsersTable();
-setTimeout(createRideoffersTable, 1000);
-setTimeout(createRequestsTable, 1500);
-setTimeout(createFriendsTable, 1800);
-setTimeout(createFriendRequestTable, 2000);
+createUsersTable().then((resultFOrUsersTable) => {
+  console.log(resultFOrUsersTable);
+  createRideoffersTable().then((resultForRideOffersTable) => {
+    console.log(resultForRideOffersTable);
+    createRequestsTable().then((resultForRequestTable) => {
+      console.log(resultForRequestTable);
+      createFriendsTable().then((resultForFriendsTable) => {
+        console.log(resultForFriendsTable);
+        createFriendRequestTable().then((resultForFriendRequestTable) => {
+          console.log(resultForFriendRequestTable);
+          process.exit();
+        }).catch(error => console.log(error));
+      }).catch(error => console.log(error));
+    }).catch(error => console.log(error));
+  }).catch(error => console.log(error));
+}).catch(error => console.log(error));
+
