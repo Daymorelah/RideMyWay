@@ -8,7 +8,7 @@ const createRideOffersTable = () => {
       console.log('An error occurred trying to drop table rideOffers. ', err);
     }
     if (res) {
-      console.log('Table ride_offers has been dropped succesfully');
+      console.log('Table rideOffers has been dropped succesfully');
       connecToDb(`CREATE TABLE rideOffers(
                   id SERIAL PRIMARY KEY,
                   numberOfSeats SMALLINT NOT NULL,
