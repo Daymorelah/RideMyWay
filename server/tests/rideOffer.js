@@ -8,23 +8,66 @@ chai.use(chaiHttp);
 const { expect } = chai;
 
 describe('Integration test for the ride-offer controller', () => {
-  let myToken;
+  let user1Token;
+  let user2Token;
   before((done) => {
-    const userDetails = {
-      username: 'gibbs',
+    const user1Details = {
+      username: 'gibbsa',
       password: 'gibbsFreeEnergy',
-      email: 'gabo@wemail.com',
+      email: 'gibbsa@wemail.com',
     };
-    chai.request(app).post('/api/v1/auth/signup')
-      .send(userDetails)
-      .end((err, res) => {
-        if (err) {
-          return done(err);
-        }
-        const { token } = res.body.data;
-        myToken = token;
-        return done();
-      });
+    const user2Details = {
+      username: 'gibbsb',
+      password: 'gibbsFreeEnergy',
+      email: 'gibbsb@wemail.com',
+    };
+    new Promise((resolve, reject) => {
+      chai.request(app).post('/api/v1/auth/signup')
+        .send(user1Details)
+        .end((err, res) => {
+          if (err) {
+            done(err);
+            reject(Error('Could not singup user 1'));
+          }
+          const { token } = res.body.data;
+          user1Token = token;
+          if (user1Token) resolve();
+        });
+    }).then(() => new Promise((resolve, reject) => {
+      chai.request(app).post('/api/v1/auth/signup')
+        .send(user2Details)
+        .end((err, res) => {
+          if (err) {
+            done(err);
+            reject(Error('Could not singup user 2'));
+          }
+          const { token } = res.body.data;
+          user2Token = token;
+          if (user2Token) resolve();
+        });
+    })).then(() => new Promise((resolve, reject) => {
+      chai.request(app).post('/api/v1/users/4/friends/requests')
+        .set('x-access-token', user2Token)
+        .send({ name: 'shobambi' })
+        .end((err) => {
+          if (err) {
+            done(err);
+            reject(Error('An error occurred while sending a friend request'));
+          }
+          resolve();
+        });
+    })).then(() => {
+      chai.request(app).post('/api/v1/users/5/friends/')
+        .set('x-access-token', user1Token)
+        .send({ isFriendRequestAccepted: 'true' })
+        .end((err) => {
+          if (err) {
+            done(err);
+          }
+          done();
+        });
+    })
+      .catch((error) => { Error('Error in rideOffers\'before all hook', error); });
   });
   describe.only('Tests for creating a ride offer', () => {
     it('should return a message when a ride offer has been succesfully created', (done) => {
@@ -38,7 +81,7 @@ describe('Integration test for the ride-offer controller', () => {
       };
       chai.request(app).post('/api/v1/users/rides')
         .send(rideOfferDetails)
-        .set('x-access-token', myToken)
+        .set('x-access-token', user1Token)
         .end((err, res) => {
           expect(res.status).to.deep.equal(201);
           expect(res.body.status).to.deep.equal('success');
@@ -58,7 +101,7 @@ describe('Integration test for the ride-offer controller', () => {
       };
       chai.request(app).post('/api/v1/users/rides')
         .send(rideOfferDetails)
-        .set('x-access-token', myToken)
+        .set('x-access-token', user1Token)
         .end((err, res) => {
           expect(res.status).to.deep.equal(400);
           expect(res.body.status).to.deep.equal('fail');
@@ -71,7 +114,7 @@ describe('Integration test for the ride-offer controller', () => {
   describe.only('Test for viewing all available ride offers', () => {
     it('should return an array of ride offer objects', (done) => {
       chai.request(app).get('/api/v1/rides')
-        .set('x-access-token', myToken)
+        .set('x-access-token', user1Token)
         .end((err, res) => {
           expect(res.status).to.deep.equal(200);
           expect(res.body.status).to.deep.equal('success');
@@ -84,7 +127,7 @@ describe('Integration test for the ride-offer controller', () => {
   describe.only('Test for returning a single ride offer', () => {
     it('should return the ride offer requested', (done) => {
       chai.request(app).get('/api/v1/rides/1')
-        .set('x-access-token', myToken)
+        .set('x-access-token', user2Token)
         .end((err, res) => {
           expect(res.status).to.deep.equal(200);
           expect(res.body.status).to.deep.equal('success');
@@ -93,9 +136,9 @@ describe('Integration test for the ride-offer controller', () => {
           done();
         });
     });
-    it('should return an error message when a requested ride offer is not created', (done) => {
-      chai.request(app).get('/api/v1/rides/2000')
-        .set('x-access-token', myToken)
+    it('should return an error message when the requested ride offer does not exist', (done) => {
+      chai.request(app).get('/api/v1/rides/13')
+        .set('x-access-token', user2Token)
         .end((err, res) => {
           expect(res.status).to.deep.equal(404);
           expect(res.body.status).to.deep.equal('fail');

@@ -28,5 +28,5 @@ const createRideOffersTable = () => new Promise((resolve, reject) => {
     }
   });
 });
-// createRideOffersTable();
 export default createRideOffersTable;
+
