@@ -60,17 +60,10 @@ class RidesController {
         });
       }
       if (response) {
-        if (response.rows.length === 0) {
-          res.status(404).jsend.fail({
-            message: 'Ride offer requested does not exist',
-            ride: null,
-          });
-        } else {
-          const ride = response.rows[0];
-          res.jsend.success({
-            ride,
-          });
-        }
+        const ride = response.rows[0];
+        res.status(200).jsend.success({
+          ride,
+        });
       }
     });
   }
@@ -91,11 +84,6 @@ class RidesController {
           res.status(409).jsend.fail({
             code: 409,
             message: 'This ride is all booked. No more seats available',
-          });
-        } else if (resp.rows[0].usersid === userId) {
-          res.status(409).jsend.fail({
-            code: 409,
-            message: 'You cant join a ride you created.',
           });
         } else {
           seats = resp.rows[0].numberofseats - 1;

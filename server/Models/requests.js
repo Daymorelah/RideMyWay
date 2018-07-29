@@ -1,13 +1,12 @@
 
 import connecToDb from './db/connectToDb';
 
-const createRequestsTable = () => {
+const createRequestsTable = () => new Promise((resolve, reject) => {
   connecToDb('DROP TABLE IF EXISTS requests CASCADE', (err, res) => {
     if (err) {
-      console.log('An error occurred trying to drop table requests. ', err);
+      reject(Error('An error occurred trying to drop table requests. ', err));
     }
     if (res) {
-      console.log('Table requests has been dropped succesfully');
       connecToDb(`CREATE TABLE requests(
                   id SERIAL PRIMARY KEY,
                   name VARCHAR(255) NOT NULL,
@@ -18,14 +17,14 @@ const createRequestsTable = () => {
                   UNIQUE(usersId, rideofferId)
                   )`, (error, response) => {
         if (error) {
-          console.log('An error occurred trying to create table requests.', error);
+          reject(Error('An error occurred trying to create table requests.', error));
         }
         if (response) {
-          console.log('Table requests has been Created succesfully');
+          resolve('Table requests has been Created succesfully');
         }
       });
     }
   });
-};
+});
 
 export default createRequestsTable;

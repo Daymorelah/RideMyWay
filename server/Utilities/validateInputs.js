@@ -219,6 +219,54 @@ class Validate {
       });
     }
   }
+  static ValidateRequestToBeFriends(req, res, next) {
+    trimValues(req.params);
+    trimValues(req.body);
+    const { usersId } = req.params;
+    const { name } = req.body;
+    if (usersId && name) {
+      if (validate.isNumeric(usersId) && validate.isInt(usersId)) {
+        if (validate.isAlpha(name) &&
+        validate.isLength(name, { min: 2, max: 20 })) {
+          next();
+        } else {
+          res.status(400).jsend.fail({
+            code: 400,
+            message: 'Your name should contain letters only',
+          });
+        }
+      } else {
+        res.status(400).jsend.fail({
+          code: 400,
+          message: 'User requested must be an integer',
+        });
+      }
+    } else {
+      res.status(400).jsend.fail({
+        code: 400,
+        message: 'Required fields are missing',
+      });
+    }
+  }
+  static ValidateAddFriend(req, res, next) {
+    trimValues(req.params);
+    const { usersId } = req.params;
+    if (usersId) {
+      if (validate.isNumeric(usersId) && validate.isInt(usersId)) {
+        next();
+      } else {
+        res.status(400).jsend.fail({
+          code: 400,
+          message: 'User requested must be an integer',
+        });
+      }
+    } else {
+      res.status(400).jsend.fail({
+        code: 400,
+        message: 'Required field is missing.',
+      });
+    }
+  }
 }
 
 export default Validate;

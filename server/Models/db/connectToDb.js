@@ -14,6 +14,8 @@ if (process.env.NODE_ENV === 'test') {
   pool = new Pool(config.test);
 }
 
-const connectToDb = (text, params, callback) => pool.query(text, params, callback);
+const connectToDb = (text, params, callback) => {
+  pool.query(text, params, callback);
+};
 
 export default connectToDb;
