@@ -37,6 +37,7 @@ class RidesController {
             `'${time}', '${userId}' ` +
               ') RETURNING * ', (error, response) => {
       if (error) {
+        console.log('error is ==> ', error);
         res.status(500).jsend.error({
           message: 'Your details were not saved into the database. Please try again.',
           code: 500,

@@ -20,7 +20,7 @@ routes(app);
 
 // Catch all invalid routes
 app.all('*', (req, res) => {
-  res.jsend.error({
+  res.status(404).jsend.error({
     code: 404,
     message: 'Page not found',
   });
