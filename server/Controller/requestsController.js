@@ -13,19 +13,21 @@ class RequestsController {
             message: 'An error occurred while processing your request',
           });
         }
-        if (response.rows.length) {
-          const passengers = [];
-          response.rows.forEach(passenger => passengers.push(passenger));
-          res.jsend.success({
-            message: 'Request completed sucessfully',
-            passengers,
-          });
-        } else {
-          res.status(404).jsend.fail({
-            code: 404,
-            message: 'The ride-offer you selected does not exist',
-            passengers: null,
-          });
+        if (response) {
+          if (response.rows.length) {
+            const passengers = [];
+            response.rows.forEach(passenger => passengers.push(passenger));
+            res.jsend.success({
+              message: 'Request completed sucessfully',
+              passengers,
+            });
+          } else {
+            res.status(404).jsend.fail({
+              code: 404,
+              message: 'The ride-offer you selected does not exist',
+              passengers: null,
+            });
+          }
         }
       },
     );
