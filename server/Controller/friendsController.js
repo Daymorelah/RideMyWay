@@ -7,7 +7,6 @@ class FriendsController {
     const { rideId } = req.params;
     db(`SELECT usersid FROM rideOffers WHERE id = ${rideId}`, (error, response) => {
       if (error) {
-        console.log('error is ==> ', error);
         res.status(500).jsend.error({
           code: 500,
           message: 'An error occurred trying to get the owner of the ride you want to join.',
