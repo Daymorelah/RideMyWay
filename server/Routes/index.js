@@ -1,6 +1,11 @@
 
 import { Authenticate, Validate } from '../Utilities';
-import { UserController, RidesContoller, RequestsController, FriendsController } from '../Controller';
+import {
+  UserController,
+  RidesContoller,
+  RequestsController,
+  FriendsController,
+} from '../Controller';
 
 const routes = (app) => {
   app.get('/api/v1/', (req, res) => {
