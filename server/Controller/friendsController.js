@@ -10,6 +10,7 @@ class FriendsController {
         res.status(500).jsend.error({
           code: 500,
           message: 'An error occurred trying to get the owner of the ride you want to join.',
+          errorSentIs: error,
         });
       }
       if (response) {
