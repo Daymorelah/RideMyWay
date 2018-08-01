@@ -63,6 +63,7 @@ class FriendsController {
         `INSERT INTO friends (usersid, friendswithid) VALUES(${usersId}, ${userId})`,
         (error, response) => {
           if (error) {
+            console.log('error is ==> ', error);
             res.status(409).jsend.fail({
               code: 409,
               message: 'You are already friends with this user.',
@@ -117,7 +118,6 @@ class FriendsController {
     db(`INSERT INTO friendRequests (userthataskedid, userthatdecidesid, name)
     VALUES (${userId}, ${usersId}, '${name}')`, (error) => {
       if (error) {
-        console.log('error is ==> ', error);
         res.status(409).jsend.fail({
           code: 409,
           message: 'You have requested to be friends with this user already.',

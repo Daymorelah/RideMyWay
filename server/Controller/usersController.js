@@ -33,6 +33,7 @@ class UserController {
             }, secret, { expiresIn: '1 day' });
             res.status(201).jsend.success({
               message: `User ${result.username} created succesfully`,
+              id: result.id,
               username: result.username,
               email: result.email,
               token,
@@ -74,6 +75,7 @@ class UserController {
                 }, secret, { expiresIn: '1 day' });
                 res.jsend.success({
                   message: `User ${result.username} logged in seccessfully`,
+                  id: result.id,
                   username: result.username,
                   email: result.email,
                   token,
