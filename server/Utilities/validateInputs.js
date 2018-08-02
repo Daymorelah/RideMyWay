@@ -192,7 +192,7 @@ class Validate {
     if (rideId && requestId && isAccepted) {
       if (validate.isNumeric(rideId) && validate.isInt(rideId)) {
         if (validate.isNumeric(requestId) && validate.isInt(requestId)) {
-          if (validate.isBoolean(isAccepted)) {
+          if (validate.isAlpha(isAccepted) && validate.isBoolean(isAccepted)) {
             next();
           } else {
             res.status(400).jsend.fail({
@@ -250,10 +250,20 @@ class Validate {
   }
   static ValidateAddFriend(req, res, next) {
     trimValues(req.params);
+    trimValues(req.body);
     const { usersId } = req.params;
+    const { isFriendRequestAccepted } = req.body;
     if (usersId) {
       if (validate.isNumeric(usersId) && validate.isInt(usersId)) {
-        next();
+        if (validate.isAlpha(isFriendRequestAccepted) &&
+          validate.isBoolean(isFriendRequestAccepted)) {
+          next();
+        } else {
+          res.status(400).jsend.fail({
+            code: 400,
+            message: 'User requested must be an integer',
+          });
+        }
       } else {
         res.status(400).jsend.fail({
           code: 400,

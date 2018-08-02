@@ -24,7 +24,7 @@ class RequestsController {
           } else {
             res.status(404).jsend.fail({
               code: 404,
-              message: 'The ride-offer you selected does not exist',
+              message: 'No passenger has requested to join this ride yet. check back later',
               passengers: null,
             });
           }
