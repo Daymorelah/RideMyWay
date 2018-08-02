@@ -29,7 +29,8 @@ The frontend was implemented using:
 #### Backend:
 The Backend was implemented using: 
  * [Node](https://nodejs.org/en/) Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine
- * [Express](https://expressjs.com/) Express is a minimal and flexible Node.js web application framework 
+ * [Express](https://expressjs.com/) Express is a minimal and flexible Node.js web application framework
+ * [PostgreSQL](https://www.postgresql.org/) The world's most advanced, powerful, open source object-relational database system
  
  ## API Documentation
  The RESTful API for the back-end is documented using [Swagger](https://swagger.io/) and hosted on [SwaggerHub](https://app.swaggerhub.com/signup). Feel free to use this documentation to understand how to consume the API.
