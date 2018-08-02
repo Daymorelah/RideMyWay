@@ -4,15 +4,20 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/7b39a3c4a60595176942/test_coverage)](https://codeclimate.com/github/Daymorelah/RideMyWay/test_coverage)
 
 # RideMyWay
-Ride-my-way App is a carpooling application that provides drivers with the ability to create ride offers and passengers can join available ride offers.
+Ride-my-way App is a carpooling application that provides users with the ability to create ride offers and can also join available ride offers of their friends.
 
 Features:
 - User can signup and signin to the application
-- Drivers can create ride offers
-- Passengers can view all available ride offers
-- Passengers can see the details of a ride and request to join the ride
-- Drivers can view the requests to the ride offers they created
-- Drivers can either accept or reject a ride request
+- Users can create ride offers
+- Users can view all available ride-offers
+- Users can view the details of a ride-offer created by their friends
+- Users can send requests to join a ride-offer belonging to only a friend on the app
+- Users can view the requests to the ride-offers they created
+- Users can either accept or reject a ride request
+- Users can send friend requests to other users so that they can become friends
+- A user can either accept or reject a friend request
+- A user can either accept or reject a request to a ride created by the user
+- The number of available seats for a ride-offer determines the number of requests a ride-offer can get at every point in time.
 
 ## TECHNOLOGIES
 #### Client Side:
@@ -26,7 +31,10 @@ The Backend was implemented using:
  * [Node](https://nodejs.org/en/) Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine
  * [Express](https://expressjs.com/) Express is a minimal and flexible Node.js web application framework 
  
- ### INSTALLATION
+ ## API Documentation
+ The RESTful API for the back-end is documented using [Swagger](https://swagger.io/) and hosted on [SwaggerHub](https://app.swaggerhub.com/signup). Feel free to use this documentation to understand how to consume the API.
+ 
+ ## INSTALLATION
  * install [Node js](https://nodejs.org/en/)
  * Clone the repository `git clone https://github.com/Daymorelah/RideMyWay.git` 
  * Navigate to the location in your terminal
@@ -38,16 +46,25 @@ The Backend was implemented using:
 To run tests for the server side
 * Navigate to the project location in your terminal
 * Run `npm run test` to run tests on the app
-* Run `npm run test-coverage` to run test coverage with istanbul on the app
+* Run `npm run test-coverage` to run test coverage with [Istanbul](https://istanbul.js.org/) on the app
 
-The UI templates for this App can be viewed on git hub pages via the URLs (below) :
-* [Login page](https://daymorelah.github.io/RideMyWay/UI/html/signin.html)
+The UI (_static_) templates for this App can be viewed on [GitHub Pages](https://pages.github.com/) via the URL below :
 * [signup page:](https://daymorelah.github.io/RideMyWay/UI/html/signup.html)
-* [User profile page](https://daymorelah.github.io/RideMyWay/UI/html/profilePage.html)
-* [Home Page](https://daymorelah.github.io/RideMyWay/UI/html/profilePage.html)
 
+## Contributing
+* Fork this repository
+* Clone to your local environment: https://github.com/Daymorelah/RideMyWay.git
+* Create your feature branch: git checkout -b ft-my-new-feature-2178134
+* Commit your changes: git commit -am 'Add some feature'
+* Write test for the new features
+* Push to the branch: git push origin ft-my-new-feature-2178134
+* Submit a pull request against the development branch
 
-## Authors
+## Limitations
+* Users don't get real-time notification when their request to a ride is being rejected or accepted
+* Users don't get real-time notification when their friend request is being rejected or accepted
+
+## Author
 * Ademola Hussain
 
 ## Licence 
