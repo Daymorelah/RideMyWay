@@ -33,7 +33,8 @@ The Backend was implemented using:
  * [PostgreSQL](https://www.postgresql.org/) The world's most advanced, powerful, open source object-relational database system
  
  ## API Documentation
- The RESTful API for the back-end is documented using [Swagger](https://swagger.io/) and hosted on [SwaggerHub](https://app.swaggerhub.com/signup). Feel free to use this documentation to understand how to consume the API.
+ The RESTful API for the back-end is documented using [Swagger](https://swagger.io/) and hosted on [SwaggerHub](https://app.swaggerhub.com/signup). Feel free to use this [documentation](https://app.swaggerhub.com/apis/Daymorelah/rideMyWay/1.0.0)
+ to understand how to consume the API.
  
  ## INSTALLATION
  * install [Node js](https://nodejs.org/en/)
