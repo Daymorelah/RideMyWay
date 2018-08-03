@@ -1,48 +1,45 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Signup Page</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css?family=Arimo" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Shrikhand" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/main.css" />
-  </head>
-  <body>
-    <div id="container">
-      <div id="top-container">
-        <div id="navbar">
-          <a href=#>Ride-My-Way</a>
-        </div>
-        <header>
-          <h1>Welcome to the Ride-My-Way App</h1>
-          <h3>Getting a ride just got easier.</h3>
-        </header>
-      </div>
-      <div id="main-container">
-        <main>
-          <section>
-            <div id="login-form-container">
-              <h2>Please Signup</h2>
-              <form action="./profilePage.html">
-                <input type="text" id="username" placeholder="Username" maxlength="40" />
-                <input type="password" id="password" placeholder="Password" maxlength="40" />
-                <input type="email" id="email" placeholder="Email" maxlength="40" />
-                <div id="checkbox-container"> 
-                  <input type="checkbox" name="gender" id="remember-me" >
-                  <label for="remember-me">Remeber me ?</label> 
-                </div>
-                <input type="submit" value="Signup" />
-              </form>
-              <h4>Already a member? <a href="./signin.html">Login</a></h4>
-            </div>
-          </section>
-        </main>
-      </div>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Signup Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="../css/signup.css" />
+</head>
+
+<body>
+  <header>
+    <div id="brand">
+      <a href='./landingPage.html'>Ride Mw</a>
     </div>
-    <div class="footer">
-      <p>Designed by Ademola</p>  
-    </div>    
-  </body>
+  </header>
+  <main>
+    <section>
+      <div id="greetings">
+        <h1>Welcome to the Ride-My-Way App</h1>
+        <h3>Getting a ride just got easier.</h3>
+      </div>
+    </section>
+    <section>
+      <div id="login-form-container">
+        <h2>Please Signup</h2>
+        <form action="./profilePage.html">
+          <input type="text" id="username" placeholder="Username" maxlength="40" />
+          <input type="password" id="password" placeholder="Password" maxlength="40" />
+          <input type="email" id="email" placeholder="Email" maxlength="40" />
+          <input type="submit" value="Signup" />
+        </form>
+        <h4>Already a member?
+          <a href="./signin.html">Login</a>
+        </h4>
+      </div>
+    </section>
+  </main>
+  <footer id="footer">
+    <p>Designed by Ademola &copy;2018</p>
+  </footer>
+</body>
+
 </html>

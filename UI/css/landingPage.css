@@ -19,11 +19,13 @@ html, body, #container {
   color: var(--dark);
   background: var(--light);
 }
+
 img {
   width: 100%;
   display: block;
   height: 100%;
 }
+
 #text-content {
   background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../images/landing-page.jpeg');
   background-size: cover;
@@ -42,16 +44,20 @@ img {
   text-align: center;
   margin-top: 1em;
 }
+
 #title h1, #title p {
   margin: 0;
 }
+
 #title h1 {
   text-transform: uppercase;
   font-size: 1.2rem;
 }
+
 #title-detail p {
   font-size: 0.8rem;
 }
+
 #get-started {
   text-transform: capitalize;
   text-decoration: none;
@@ -61,10 +67,12 @@ img {
   padding: 1em;
   border-radius: 8px;
 }
+
 #image-section {
   height: 70vh;
   width: 100%;
 }
+
 @media screen and (min-width: 430px) {
   #text-content,#image-section {
     padding: 0 2em;
