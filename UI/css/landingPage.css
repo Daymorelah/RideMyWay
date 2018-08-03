@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css?family=Merienda');
+
+:root {
+  --light: #eeeeff;
+  --primary: #C2185B;
+  --dark: #616161;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #container {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Merienda', cursive;
+  color: var(--dark);
+  background: var(--light);
+}
+img {
+  width: 100%;
+  display: block;
+  height: 100%;
+}
+#text-content {
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../images/landing-page.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #ffffff;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#title, #title-detail, #get-started-container {
+  padding: 0 0.8em;
+  text-align: center;
+  margin-top: 1em;
+}
+#title h1, #title p {
+  margin: 0;
+}
+#title h1 {
+  text-transform: uppercase;
+  font-size: 1.2rem;
+}
+#title-detail p {
+  font-size: 0.8rem;
+}
+#get-started {
+  text-transform: capitalize;
+  text-decoration: none;
+  background: var(--primary);
+  color: var(--light);
+  display: inline-block;
+  padding: 1em;
+  border-radius: 8px;
+}
+#image-section {
+  height: 70vh;
+  width: 100%;
+}
+@media screen and (min-width: 430px) {
+  #text-content,#image-section {
+    padding: 0 2em;
+  }
+}
+
+@media screen and (min-width: 680px) {
+  #container {
+    display: flex;
+  }
+  #text-content {
+    width: 45vw;
+    padding: 0;
+    background: unset;
+    color: var(--dark);
+  }
+  #image-section {
+    width: 55vw;
+    height: 100vh;
+    padding: 0;
+    display: block
+  }
+}
