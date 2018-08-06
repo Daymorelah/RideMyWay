@@ -1,12 +1,18 @@
 window.onload = () => {
+  let isVisible = 0;
+  let navMenu = document.getElementById('nav-menu');
+  let topNav = document.getElementById('nav-top-nav');
   
-  let gridItemTwo = document.getElementById("ask-user");
-  let searchBy = document.getElementById("search-by");
-  let paginate = document.getElementById("paginate");
-
-  document.getElementById("rides-taken").addEventListener('click', showRidesTaken);
-  document.getElementById("rides-given").addEventListener('click', showRidesGiven);
-
+  navMenu.addEventListener('click', () => {
+    if (isVisible) {
+      topNav.setAttribute('class', '');
+      isVisible = 0;
+     } else {  
+      topNav.setAttribute('class', 'open')
+      isVisible = 1;
+    }
+  });
+  
   function showRidesGiven() {
     searchBy.style.display = "block";
     paginate.style.display = "block";
