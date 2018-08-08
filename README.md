@@ -51,7 +51,7 @@ To run tests for the server side
 * Run `npm run test-coverage` to run test coverage with [Istanbul](https://istanbul.js.org/) on the app
 
 The UI (_static_) templates for this App can be viewed on [GitHub Pages](https://pages.github.com/) via the URL below :
-* [signup page:](https://daymorelah.github.io/RideMyWay/UI/html/signup.html)
+* [Ride Mw:](https://daymorelah.github.io/RideMyWay/UI/html/landingPage.html)
 
 ## Contributing
 * Fork this repository
