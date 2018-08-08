@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css?family=Merienda');
+
+:root {
+  --light: #eeeeff;
+  --primary: #c2185b;
+  --dark: #616161;
+  --white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #container {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Merienda', cursive;
+  color: var(--dark);
+  background: var(--light);
+}
+#brand {
+  background: var(--primary);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+#brand a {
+  text-decoration: none;
+  color: var(--white);
+  font-family: 'ABeeZee', sans-serif;
+  display: inline-block;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border: 1px solid var(--white);
+  font-size: 1.3rem;
+  border-radius: 4px;
+}
+#nav-menu {
+  color: white;
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+nav {
+  width: 200px;
+  height: 100%;
+  position: absolute;
+  transform: translate(-300px, 0);
+  transition: transform 0.3s ease; 
+}
+nav.open {
+  transform: translate(0, 0);
+}
+#nav-top-nav a,
+#div-top-nav a {
+  display: block;
+  text-decoration: none;
+  background: rgba(194, 24, 91, 0.7);
+  color: var(--white);
+  font-size: 1.3rem;
+  padding: 0.8rem 0 0 0.8rem;
+  height: 3em;
+}
+#div-top-nav a.active,
+#user-action li a.active {
+  color: var(--primary);
+  background: var(--white);
+}
+#div-top-nav a:hover,
+#user-action li a:hover {
+  background: var(--light);
+  color: var(--primary);
+}
+#div-top-nav a {
+  display: none;
+}
+#footer {
+  background: var(--primary);
+  color: var(--white);
+  text-align: center;
+  font-size: 1.3em;
+  padding: 0.3em;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+#search-container, #ride-offer-container {
+  margin: 1em;
+}
+#filter, #search {
+  width: 100%;
+  display: flex;
+}
+h3, p {
+  margin: 0;
+  padding: 0;
+}
+input, button, select {
+  min-height: 3em;
+  padding: 0.5em;
+  outline: none;
+  border: none;
+  font-size: 1em;
+  font-family: 'Merienda', cursive;
+  text-transform: capitalize;
+  margin-top: 1em;
+}
+input {
+  width: 80%;
+}
+button {
+  width: 20%;
+  background: var(--primary);
+  color: var(--white);
+  cursor: pointer;
+}
+label {
+  font-size: 1.5em;
+  text-transform: capitalize;
+  width:20%;
+  color: var(--primary);
+  align-self: center;
+  margin-top: 1em;
+}
+select {
+  width: 80%;
+  flex: 1;
+}
+#ride-offer-container {
+  overflow-y: scroll;
+  height: 65vh;
+}
+.ride-offer {
+  background: var(--white);
+  -webkit-box-shadow: 0px 0px 31px -3px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 31px -3px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 31px -3px rgba(0,0,0,0.75);
+  padding: 1em;
+  border-radius: 8px;
+  margin-bottom: 1em;
+}
+.price-n-detail {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.8em;
+}
+.details {
+  background: var(--primary);
+  color: var(--white);
+  width: 50%;
+  outline: none;
+  border: none;
+  padding: 0.5em;
+  border-radius: 8px;
+  text-align: center;
+}
+.price {
+  align-self: center;
+}
+.ride-offer h3, .ride-offer p {
+  margin-bottom: 0.2em;
+}
+@media screen and (min-width: 430px) {
+  #ride-offer-container, #search-container {
+    width: 80%;
+    margin: 1em auto;
+  }
+}
+@media screen and (min-width: 530px) {
+  #ride-offer-container, #search-container {
+    width: 100%;
+    margin: 1em auto;
+  }
+  #search-container {
+    display: flex;
+    justify-content: space-around;
+  }
+  #filter {
+    width: 44%;
+    padding: 0.5em;
+  }
+  #search {
+    width: 50%;
+    padding: 0.5em;
+  }
+  input,select {
+    width: 70%;
+  }
+  button, label {
+    width: 30%;
+  }
+  #ride-offer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
+  .ride-offer {
+    width: 40%
+  }
+}
+@media screen and (min-width: 680px) { 
+  #nav-menu, nav {
+    display: none;
+  }
+  #div-top-nav a {
+    display: inline-block;
+    height: unset;
+    margin: 0;
+    padding: 1rem;
+    border: none;
+    font: 1em;
+  }
+  #brand {
+    padding: 0 1em;
+  }
+}
+@media screen and (min-width: 680px) {
+  .ride-offer {
+    width: 30%;
+    height: 200px;
+  }
+  #ride-offer-container {
+    padding: 2em;
+  }
+}
+@media screen and (min-width: 1130px) {
+  .ride-offer {
+    width: 22%;
+    margin: 0.8em;
+  }
+  #ride-offer-container {
+    justify-content: flex-start;
+    align-content: center;
+    width: 80%;
+    margin: auto;
+  }
+  #filter-section {
+    width: 80%;
+    margin: auto;
+  }
+}

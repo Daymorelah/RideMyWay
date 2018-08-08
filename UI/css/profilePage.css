@@ -203,6 +203,9 @@ nav.open {
   text-align: center;
   font-size: 1.3em;
   padding: 0.3em;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
 @media screen and (min-width: 450px) {
@@ -220,9 +223,9 @@ nav.open {
     width: 80%;
     margin: auto;
   }
-  #div-top-nav a{
+  /* #div-top-nav a{
     display: none;
-  }
+  } */
 }
 @media screen and (min-width: 540px) {
   #user-action li {
@@ -230,9 +233,9 @@ nav.open {
   }
 }
 @media screen and (min-width: 562px) {
-  #div-top-nav a {
+  /* #div-top-nav a {
     display: none;
-  }
+  } */
   .rides {
     justify-content: center;
     width: 80%;
@@ -261,12 +264,12 @@ nav.open {
     display: inline-block;
     height: unset;
     margin: 0;
-    padding: 1.3rem;
+    padding: 1rem;
     border: none;
-    font: 1.4em;
+    font: 1em;
   }
   #brand {
-    padding: 0 3em;
+    padding: 0 1em;
   }
   #user-details {
     width: 90%;
