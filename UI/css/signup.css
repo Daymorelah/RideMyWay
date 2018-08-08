@@ -15,7 +15,6 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow-x: hidden;
 }
 
 body{
@@ -38,9 +37,21 @@ body{
   font-size: 1rem;
   border-radius: 4px;
 }
+main {
+  display: flex;
+  flex-direction: column;
+  height: 70vh;
+  align-items: center;
+}
+#greetings-container  {
+  margin: 1em 0;
+  height: 20vh;
+}
+#signup-form-container {
+  height: 40vh;
+}
 #greetings {
-  margin: 1.5em 0;
-  max-width: 100%;
+  width: 100%;
   text-align: center;
 }
 #greetings h1 {
@@ -49,7 +60,7 @@ body{
   font-weight: bold;
 }
 #greetings h3 {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
 }
 #signup-form-container h2, 
 #signup-form-container h4, #footer {
@@ -86,34 +97,30 @@ h4 a {
   font-size: 1.2em;
 }
 
-@media screen and (min-width: 500px) {
-  main {
-    max-width: 80%;
-    margin: auto;
-  }
-  #brand a {
-    margin-left: 10%;
-  }
-}
-
-@media screen and (min-width: 700px) {
-  input,
-  input[type='submit'] {
-    display: block;
-    width: 70%;
-    margin: auto;
-  }
-}
-
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 420px) {
   #signup-form-container {
-    margin-top: 4em;
+    padding: 1em;
   }
-  input,
-  input[type='submit'] {
-    display: block;
-    width: 50%;
+}
+@media screen and (min-width: 520px) {
+  #signup-form-container {
+    width: 90%;
     margin: auto;
   }
 }
-/* @media screen and (min-width: ) */
+@media screen and (min-width: 600px) {
+  #signup-form-container {
+    width: 80%;
+    margin: auto;
+  }
+  #greetings {
+    width: 90%;
+    margin: auto;
+  }
+}
+@media screen and (min-width: 740px) {
+  #signup-form-container {
+    width: 60%;
+    margin: auto;
+  }
+}

@@ -6,16 +6,13 @@
   --dark: #616161;
   --white: #ffffff;
 }
-
 *{
   box-sizing: border-box;
 }
-
 html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow-x: hidden;
 }
 
 body{
@@ -26,6 +23,19 @@ body{
 #brand {
   background: var(--primary);
   width: 100%;
+}
+main {
+  display: flex;
+  flex-direction: column;
+  height: 70vh;
+  align-items: center;
+}
+#greetings-container  {
+  margin: 1em 0;
+  height: 20vh;
+}
+#signup-form-container {
+  height: 40vh;
 }
 #brand a {
   text-decoration: none;
@@ -85,41 +95,30 @@ h4 a {
   color: var(--primary);
   font-size: 1.2em;
 }
-
-
-@media screen and (min-width: 500px) {
-  main {
-    max-width: 80%;
-    margin: auto;
-  }
-  #brand a {
-    margin-left: 10%;
-  }
-}
-
-@media screen and (min-width: 700px) {
-  main {
-    margin: 3em auto;
-  }
-  input,
-  input[type='submit'] {
-    display: block;
-    width: 70%;
-    margin: auto;
-  }
-}
-
-@media screen and (min-width: 1000px) {
-  main {
-    margin: 3em auto;
-  }
+@media screen and (min-width: 420px) {
   #login-form-container {
-    margin-top: 4em;
+    padding: 1em;
   }
-  input,
-  input[type='submit'] {
-    display: block;
-    width: 50%;
+}
+@media screen and (min-width: 520px) {
+  #login-form-container {
+    width: 90%;
+    margin: auto;
+  }
+}
+@media screen and (min-width: 600px) {
+  #login-form-container {
+    width: 80%;
+    margin: auto;
+  }
+  #greetings {
+    width: 90%;
+    margin: auto;
+  }
+}
+@media screen and (min-width: 740px) {
+  #login-form-container {
+    width: 60%;
     margin: auto;
   }
 }
