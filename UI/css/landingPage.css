@@ -3,7 +3,8 @@
 :root {
   --light: #eeeeff;
   --primary: #C2185B;
-  --dark: #616161;
+  --dark: #333333;
+  --white: #ffffff;
 }
 
 * {
@@ -17,7 +18,6 @@ html, body, #container {
   padding: 0;
   font-family: 'Merienda', cursive;
   color: var(--dark);
-  background: var(--light);
 }
 
 img {
@@ -40,24 +40,28 @@ img {
 }
 
 #title, #title-detail, #get-started-container {
-  padding: 0 0.8em;
   text-align: center;
-  margin-top: 1em;
 }
-
+#title {
+  margin: 1.5em 0;
+}
 #title h1, #title p {
   margin: 0;
 }
-
 #title h1 {
   text-transform: uppercase;
-  font-size: 1.2rem;
+  font-size: 3rem;
 }
-
+#title p {
+  text-transform: capitalize;
+  font-size: 1.5rem;
+}
+#title-detail {
+  margin: 1em;
+}
 #title-detail p {
-  font-size: 0.8rem;
+  font-size: 1.3rem;
 }
-
 #get-started {
   text-transform: capitalize;
   text-decoration: none;
@@ -66,33 +70,59 @@ img {
   display: inline-block;
   padding: 1em;
   border-radius: 8px;
+  font-size: 1.5em;
 }
-
 #image-section {
-  height: 70vh;
   width: 100%;
+  height: 100vh;
+  padding: 0;
+  display: block
+}
+#image-container {
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../images/landing-page.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #ffffff;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+#learn-more {
+  text-align: center;
+  padding: 0 1em;
+}
+#learn-more p {
+  font-size: 2em;
+}
+#learn-more a {
+  background: var(--primary);
+  color: var(--white);
+  text-decoration: none;
+  padding: 1em;
+  display: inline-block;
+  border-radius: 8px;
+  font-size: 1.5em;
+  text-transform: capitalize;
 }
 
-@media screen and (min-width: 430px) {
-  #text-content,#image-section {
-    padding: 0 2em;
-  }
-}
-
-@media screen and (min-width: 680px) {
+@media screen and (min-width: 980px) {
   #container {
     display: flex;
   }
   #text-content {
     width: 45vw;
     padding: 0;
-    background: unset;
+    background: var(--light);
     color: var(--dark);
+  }
+  #title-detail, #title p {
+    font-weight: bold;
+    line-height: 2.5em;
   }
   #image-section {
     width: 55vw;
-    height: 100vh;
-    padding: 0;
-    display: block
   }
 }

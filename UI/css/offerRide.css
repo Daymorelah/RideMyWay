@@ -93,10 +93,7 @@ nav.open {
   background: var(--primary);
   color: var(--white);
   text-align: center;
-  font-size: 1.3em;
   padding: 0.3em;
-  position: fixed;
-  bottom: 0;
   width: 100%;
 }
 input{
@@ -115,12 +112,12 @@ button {
   width: 100%;
   background: var(--primary);
   color: var(--white);
-  min-height: 3em;
+  height: 3em;
   border: none;
   font-size: 1.4em;
-  padding: 1em 0;
   margin: 0.5em 0;
   font-family: 'Merienda', cursive;
+  cursor: pointer;
 }
 @media screen and (min-width: 600px) {
   #form-container {

@@ -60,7 +60,6 @@ body{
   color: var(--white);
   text-align: center;
   font-size: 1.3em;
-  padding: 0.3em;
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -117,3 +116,4 @@ h4 a {
     margin: auto;
   }
 }
+/* @media screen and (min-width: ) */
