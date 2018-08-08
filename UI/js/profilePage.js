@@ -1,9 +1,19 @@
 /* eslint-disable no-undef */
 window.onload = () => {
-  const gridItemTwo = document.getElementById('ask-user');
-  const searchBy = document.getElementById('search-by');
-  const paginate = document.getElementById('paginate');
-
+  let isVisible = 0;
+  let navMenu = document.getElementById('nav-menu');
+  let topNav = document.getElementById('nav-top-nav');
+  
+  navMenu.addEventListener('click', () => {
+    if (isVisible) {
+      topNav.setAttribute('class', '');
+      isVisible = 0;
+     } else {  
+      topNav.setAttribute('class', 'open')
+      isVisible = 1;
+    }
+  });
+  
   function showRidesGiven() {
     searchBy.style.display = 'block';
     paginate.style.display = 'block';

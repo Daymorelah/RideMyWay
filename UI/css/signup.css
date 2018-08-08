@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed|ABeeZee');
+
+:root {
+  --light: #eeeeee;
+  --primary: #C2185B;
+  --dark: #616161;
+  --white: #ffffff;
+}
+
+*{
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body{
+  font-family: 'Roboto Condensed', cursive;
+  background-color: var(--light);
+  color: var(--dark);
+}
+#brand {
+  background: var(--primary);
+  width: 100%;
+}
+#brand a {
+  text-decoration: none;
+  color: var(--white);
+  font-family: 'ABeeZee', sans-serif;
+  display: inline-block;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border: 1px solid var(--white);
+  font-size: 1rem;
+  border-radius: 4px;
+}
+main {
+  display: flex;
+  flex-direction: column;
+  height: 70vh;
+  align-items: center;
+}
+#greetings-container  {
+  margin: 1em 0;
+  height: 20vh;
+}
+#signup-form-container {
+  height: 40vh;
+}
+#greetings {
+  width: 100%;
+  text-align: center;
+}
+#greetings h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+#greetings h3 {
+  font-size: 1.5rem;
+}
+#signup-form-container h2, 
+#signup-form-container h4, #footer {
+  text-align: center;
+}
+#footer {
+  background: var(--primary);
+  color: var(--white);
+  text-align: center;
+  font-size: 1.3em;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+input {
+  width: 100%;
+  height: 3rem;
+  border: none;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #aeaeae;
+  padding: 0.8em;
+  font-family: 'Roboto Condensed', cursive;
+  font-size: 1.2rem;
+}
+input[type='submit'] {
+  background: var(--primary);
+  color: var(--white);
+  margin: 0.5em 0;
+  font-size: 1.3em;
+}
+h4 a {
+  text-decoration: none;
+  color: var(--primary);
+  font-size: 1.2em;
+}
+
+@media screen and (min-width: 420px) {
+  #signup-form-container {
+    padding: 1em;
+  }
+}
+@media screen and (min-width: 520px) {
+  #signup-form-container {
+    width: 90%;
+    margin: auto;
+  }
+}
+@media screen and (min-width: 600px) {
+  #signup-form-container {
+    width: 80%;
+    margin: auto;
+  }
+  #greetings {
+    width: 90%;
+    margin: auto;
+  }
+}
+@media screen and (min-width: 740px) {
+  #signup-form-container {
+    width: 60%;
+    margin: auto;
+  }
+}
