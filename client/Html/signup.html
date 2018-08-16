@@ -4,9 +4,9 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Ride Mw | Login Page</title>
+  <title>Ride Mw | Signup Page</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" media="screen" href="../Css/signin.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="../css/signup.css" />
 </head>
 
 <body>
@@ -23,16 +23,19 @@
       </div>
     </section>
     <section id="form-container">
-      <div id="login-form-container">
-        <h2>Please Login</h2>
+      <div id="signup-form-container">
+        <h2>Please Signup</h2>
         <form action="./profilePage.html">
           <input type="text" id="username" placeholder="Username" maxlength="40" />
           <input type="password" id="password" placeholder="Password" maxlength="40" />
-          <input type="submit" value="Login" />
+          <input type="email" id="email" placeholder="Email" maxlength="40" />
+          <input type="submit" value="Signup" />
         </form>
-        <h4>Not yet a member?
-          <a href="./signup.html">Signup</a>
-        </h4>
+        <div id="goto-login-page">
+          <h4>Already a member?
+            <a href="./signin.html">Login</a>
+          </h4>
+        </div>
       </div>
     </section>
   </main>
