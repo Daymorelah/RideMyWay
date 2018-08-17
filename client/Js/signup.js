@@ -18,7 +18,7 @@ signupForm.addEventListener('submit', (event) => {
   };
   event.preventDefault();
   fetch(
-    'http://localhost:2033/api/v1/auth/signup',
+    '/api/v1/auth/signup',
     {
       method: 'POST',
       body: JSON.stringify(userDetails),
