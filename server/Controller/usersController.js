@@ -22,7 +22,7 @@ class UserController {
           if (error) {
             res.status(409).jsend.fail({
               code: 409,
-              message: 'User details allready exist on our database. Signup was not successful',
+              message: 'User details allready exist. Signup was not successful',
             });
           } else {
             const result = response.rows[0];

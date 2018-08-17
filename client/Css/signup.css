@@ -75,11 +75,32 @@ main {
   background: var(--primary);
   color: var(--white);
   text-align: center;
-  font-size: 1.3em;
-  position: fixed;
-  bottom: 0;
+  font-size: 1em;
   width: 100%;
   padding: 0.4em 0;
+}
+#signup-error-container {
+  border: 1px solid #ff0000;
+  padding: 1em;
+  color: #ff0000;
+  text-align: center;
+  width: 100%;
+}
+#signup-success-container {
+  border: 1px solid #008000;
+  padding: 1em;
+  color: #008000;
+  text-align: center;
+  width: 100%; 
+}
+#signup-error-container p,
+#signup-success-container p {
+  margin: 0;
+  font-size: 1.4em;
+}
+#signup-success-container,
+#signup-error-container {
+  display: none;
 }
 input {
   width: 100%;
@@ -106,6 +127,12 @@ h4 a {
 @media screen and (min-width: 420px) {
   #signup-form-container {
     padding: 1em;
+  }
+}
+@media screen and (min-height: 755px) {
+  #footer {
+    position: fixed;
+    bottom: 0;
   }
 }
 @media screen and (min-width: 520px) {

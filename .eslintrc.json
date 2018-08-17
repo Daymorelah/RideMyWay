@@ -3,6 +3,8 @@
   "globals": {
     "window": true,
     "document": true,
-    "localStorage": true
+    "localStorage": true,
+    "fetch": true,
+    "Request": true
   }
 }
