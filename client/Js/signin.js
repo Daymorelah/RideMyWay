@@ -1,24 +1,22 @@
 
-const signupForm = document.querySelector('form');
+const loginForm = document.querySelector('form');
 const footer = document.querySelector('#footer');
 const formContainer = document.querySelector('#form-container');
-const errorContent = document.querySelector('#signup-error-container p');
-const errorContainer = document.querySelector('#signup-error-container');
-const successContent = document.querySelector('#signup-success-container p');
-const successContainer = document.querySelector('#signup-success-container');
+const errorContent = document.querySelector('#login-error-container p');
+const errorContainer = document.querySelector('#login-error-container');
+const successContent = document.querySelector('#login-success-container p');
+const successContainer = document.querySelector('#login-success-container');
 
-signupForm.addEventListener('submit', (event) => {
+loginForm.addEventListener('submit', (event) => {
   const username = document.querySelector('#username').value;
   const password = document.querySelector('#password').value;
-  const email = document.querySelector('#email').value;
   const userDetails = {
     username,
     password,
-    email,
   };
   event.preventDefault();
   fetch(
-    '/api/v1/auth/signup',
+    '/api/v1/auth/login',
     {
       method: 'POST',
       body: JSON.stringify(userDetails),
@@ -41,6 +39,5 @@ signupForm.addEventListener('submit', (event) => {
         document.location = '/client/Html/homePage.html';
       }, 2500);
     }
-  }).catch(error => new Error(error));
+  });
 });
-
