@@ -120,6 +120,9 @@ class RidesController {
       }
     });
   }
+  static getRidesCreatedByUSer() {
+
+  }
 }
 
 export default RidesController;

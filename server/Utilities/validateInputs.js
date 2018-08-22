@@ -277,6 +277,9 @@ class Validate {
       });
     }
   }
+  static ValidateGetRidesCreatedByUser(req, res, next) {
+    next();
+  }
 }
 
 export default Validate;
