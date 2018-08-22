@@ -36,7 +36,7 @@ loginForm.addEventListener('submit', (event) => {
       formContainer.style.display = 'none';
       successContainer.style.display = 'block';
       setTimeout(() => {
-        document.location = '/client/Html/homePage.html';
+        window.location = '/client/Html/homePage.html';
       }, 2500);
     }
   });
