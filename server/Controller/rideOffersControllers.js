@@ -126,7 +126,7 @@ class RidesController {
       if (error) {
         res.status(500).jsend.error({
           code: 500,
-          message: 'Could not retrieve ride offers',
+          message: 'Internal server error',
         });
       }
       if (response) {

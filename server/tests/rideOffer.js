@@ -169,34 +169,14 @@ describe('Integration test for the ride-offer controller', () => {
         });
     });
   });
-  describe('Test for deleting a user from a ride ', () => {
-    it('should remove a passenger from a ride offer', (done) => {
-      chai.request(app).delete('/api/v1/1/requests')
-        .send({ passenger: 'Kemi' })
+  describe.only('Test for getting all rides created by a user', () => {
+    it('should return all rides created by a user', (done) => {
+      chai.request(app).get('/api/v1/rides/users/offers')
+        .set({ 'x-access-token': user1Token })
         .end((err, res) => {
           expect(res.status).to.deep.equal(200);
-          expect(res.body).to.be.an('object');
-          expect(res.body).to.have.property('message');
-          done();
-        });
-    });
-    it('should send an error message if the user to be deleted is not valid', (done) => {
-      chai.request(app).delete('/api/v1/1/requests')
-        .send({ passenger: 'Kemisola' })
-        .end((err, res) => {
-          expect(res.status).to.deep.equal(404);
-          expect(res.body).to.be.an('object');
-          expect(res.body).to.have.property('message');
-          done();
-        });
-    });
-    it('should send an error message if the ride offer requested is invalid', (done) => {
-      chai.request(app).delete('/api/v1/44/requests')
-        .send({ passenger: 'Kemisola' })
-        .end((err, res) => {
-          expect(res.status).to.deep.equal(404);
-          expect(res.body).to.be.an('object');
-          expect(res.body).to.have.property('message');
+          expect(res.body.status).to.deep.equal('success');
+          expect(res.body.data).to.have.property('rideOffers');
           done();
         });
     });
