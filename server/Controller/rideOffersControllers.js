@@ -143,6 +143,29 @@ class RidesController {
       }
     });
   }
+  static getRidesTakenByUser(req, res) {
+    const { username } = req.decoded;
+    db(`SELECT * FROM rideOffers WHERE '${username}' = ANY (passengers) LIMIT 6`, (error, response) => {
+      if (error) {
+        res.status(500).jsend.error({
+          code: 500,
+          message: 'Internal server error',
+        });
+      }
+      if (response) {
+        if (!response.rows.length) {
+          res.jsend.success({
+            message: 'You have not joined any rides yet.',
+            rideOffers: null,
+          });
+        } else {
+          res.jsend.success({
+            rideOffers: response.rows,
+          });
+        }
+      }
+    });
+  }
 }
 
 export default RidesController;
