@@ -143,6 +143,8 @@ class RidesController {
       }
     });
   }
+  static getRidesTakenByUser() {
+  }
 }
 
 export default RidesController;
