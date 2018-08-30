@@ -120,6 +120,29 @@ class RidesController {
       }
     });
   }
+  static getRidesCreatedByUSer(req, res) {
+    const { userId } = req.decoded;
+    db(`SELECT * FROM rideOffers WHERE usersId=${userId} LIMIT 6`, (error, response) => {
+      if (error) {
+        res.status(500).jsend.error({
+          code: 500,
+          message: 'Internal server error',
+        });
+      }
+      if (response) {
+        if (!response.rows.length) {
+          res.jsend.success({
+            message: 'You have not created any rides yet.',
+            rideOffers: null,
+          });
+        } else {
+          res.jsend.success({
+            rideOffers: response.rows,
+          });
+        }
+      }
+    });
+  }
 }
 
 export default RidesController;

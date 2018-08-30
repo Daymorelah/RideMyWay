@@ -19,7 +19,7 @@ class Validate {
           } else {
             return res.status(400).jsend.fail({
               code: 400,
-              message: 'Username and or password should contain only letters and numbers',
+              message: 'Username and password should contain only letters and numbers',
             });
           }
         } else {

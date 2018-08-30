@@ -15,6 +15,12 @@ const routes = (app) => {
   app.get('/api/v1/rides', Authenticate.checkToken, RidesContoller.getAllRideOffers);
 
   app.get(
+    '/api/v1/rides/users/offers',
+    Authenticate.checkToken,
+    RidesContoller.getRidesCreatedByUSer,
+  );
+
+  app.get(
     '/api/v1/rides/:rideId',
     Authenticate.checkToken,
     Validate.ValidateGetDetailsOfARide,
