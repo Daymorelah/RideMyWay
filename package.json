@@ -12,8 +12,7 @@
     "coveralls": "npm run test-coverage && cat ./coverage/lcov.info | coveralls",
     "ui-test": "jest",
     "models": "babel-node server/Models",
-    "models-for-testing": "set NODE_ENV=test&& babel-node server/Models",
-    "test-me":"set NODE_ENV=test&& mocha --exit --require babel-register --require babel-polyfill server/tests/unitTest.js"
+    "models-for-testing": "set NODE_ENV=test&& babel-node server/Models"
   },
   "jest":{
     "transform": {

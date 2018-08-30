@@ -180,5 +180,16 @@ describe('Integration test for the ride-offer controller', () => {
           done();
         });
     });
+    it('should return no ride if user has not created any yet', (done) => {
+      chai.request(app).get('/api/v1/rides/users/offers')
+        .set({ 'x-access-token': user2Token })
+        .end((err, res) => {
+          expect(res.status).to.deep.equal(200);
+          expect(res.body.status).to.deep.equal('success');
+          expect(res.body.data).to.have.property('rideOffers');
+          expect(res.body.data.rideOffers).to.equal(null);
+          done();
+        });
+    });
   });
 });
