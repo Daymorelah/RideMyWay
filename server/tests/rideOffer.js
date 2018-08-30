@@ -192,4 +192,27 @@ describe('Integration test for the ride-offer controller', () => {
         });
     });
   });
+  describe.only('Test for getting all rides joined by a user', () => {
+    it('should return all rides a user joined', (done) => {
+      chai.request(app).get('/api/v1/rides/users')
+        .set({ 'x-access-token': user2Token })
+        .end((err, res) => {
+          expect(res.status).to.deep.equal(200);
+          expect(res.body.status).to.deep.equal('success');
+          expect(res.body.data).to.have.property('rideOffers');
+          done();
+        });
+    });
+    it('should return no ride if user has not joined any yet', (done) => {
+      chai.request(app).get('/api/v1/rides/users')
+        .set({ 'x-access-token': user1Token })
+        .end((err, res) => {
+          expect(res.status).to.deep.equal(200);
+          expect(res.body.status).to.deep.equal('success');
+          expect(res.body.data).to.have.property('rideOffers');
+          expect(res.body.data.rideOffers).to.equal(null);
+          done();
+        });
+    });
+  });
 });
