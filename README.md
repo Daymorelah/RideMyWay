@@ -35,6 +35,8 @@ The Backend was implemented using:
  ## API Documentation
  The RESTful API for the back-end is documented using [Swagger](https://swagger.io/) and hosted on [SwaggerHub](https://app.swaggerhub.com/signup). Feel free to use this [documentation](https://app.swaggerhub.com/apis/Daymorelah/rideMyWay/1.0.0)
  to understand how to consume the API.
+ ### PS: 
+ The API documentation is also avaialble on [Postman](https://www.getpostman.com/) using postmans' [API documentation feature](https://www.getpostman.com/docs/v6/postman/api_documentation/intro_to_api_documentation). Click [here](https://documenter.getpostman.com/view/2371947/RWaC3CWz) to view the project's API docuentation on postman.
  
  ## INSTALLATION
  * install [Node js](https://nodejs.org/en/)
