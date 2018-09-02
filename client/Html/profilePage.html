@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+    crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" media="screen" href="../css/profilePage.css" />
+  <title>Ride Mw | Profile Page</title>
+</head>
+
+<body>
+  <header>
+    <div id="brand">
+      <div>
+        <a href="./homePage.html">Ride Mw</a>
+      </div>
+      <div id="div-top-nav">
+        <a href="./homePage.html">Home</a>
+        <a class="active" href="./profilePage.html">Profile</a>
+        <a href="./offerRide.html">Create Ride</a>
+        <a href="./about.html">About</a>
+        <a id="logout" href="./signin.html">Logout</a>
+      </div>
+      <div>
+        <i class="fas fa-bars fa-2x" id="nav-menu"></i>
+      </div>
+    </div>
+    <nav id="nav-top-nav">
+      <a href="./homePage.html">Home</a>
+      <a class="active" href="./profilePage.html">Profile</a>
+      <a href="./offerRide.html">Create Ride</a>
+      <a href="./about.html">About</a>
+      <a id="logout" href="./signin.html">Logout</a>
+    </nav>
+  </header>
+  <main>
+    <section id="user-details">
+      <div id="user-image">
+        <img src="../images/download2.png" id="profile-image" />
+        <h3>Hello!, john doe</h3>
+      </div>
+      <div id="user-action-container">
+        <ul id="user-action">
+          <li>Number of rides given
+            <span>16</span>
+          </li>
+          <li>Number of rides taken
+            <span>20</span>
+          </li>
+          <li>
+            <a href="#list-rides-taken">View list of rides taken</a>
+          </li>
+          <li>
+            <a href="#list-rides-given">View list of rides given</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section id="list-rides-taken">
+      <h2>List of rides taken</h2>
+      <input type="text" placeholder="search" />
+      <ul>
+        <li class="rides">
+          <div class="driver-image">
+            <img src="../images/download2.png" alt="driver's-pic">
+          </div>
+          <div class="ride-details">
+            <p>
+              <span class="column">Source:</span>
+              <span>Ikoyi</span>
+            </p>
+            <p>
+              <span class="column">Destination:</span>
+              <span>Yaba</span>
+            </p>
+            <p>
+              <span class="column">Driver:</span>
+              <span>Kingsley</span>
+            </p>
+            <p>
+              <span class="column">Time:</span>
+              <span>3:45 P.M</span>
+            </p>
+          </div>
+        </li>
+        <li class="rides">
+          <div class="driver-image">
+            <img src="../images/download2.png" alt="driver's-pic">
+          </div>
+          <div class="ride-details">
+            <p>
+              <span class="column">Source:</span>
+              <span>Ikoyi</span>
+            </p>
+            <p>
+              <span class="column">Destination:</span>
+              <span>Yaba</span>
+            </p>
+            <p>
+              <span class="column">Driver:</span>
+              <span>Kingsley</span>
+            </p>
+            <p>
+              <span class="column">Time:</span>
+              <span>3:45 P.M</span>
+            </p>
+          </div>
+        </li>
+        <li class="rides">
+          <div class="driver-image">
+            <img src="../images/download2.png" alt="driver's-pic">
+          </div>
+          <div class="ride-details">
+            <p>
+              <span class="column">Source:</span>
+              <span>Ikoyi</span>
+            </p>
+            <p>
+              <span class="column">Destination:</span>
+              <span>Yaba</span>
+            </p>
+            <p>
+              <span class="column">Driver:</span>
+              <span>Kingsley</span>
+            </p>
+            <p>
+              <span class="column">Time:</span>
+              <span>3:45 P.M</span>
+            </p>
+          </div>
+        </li>
+        <li class="rides">
+          <div class="driver-image">
+            <img src="../images/download2.png" alt="driver's-pic">
+          </div>
+          <div class="ride-details">
+            <p>
+              <span class="column">Source:</span>
+              <span>Ikoyi</span>
+            </p>
+            <p>
+              <span class="column">Destination:</span>
+              <span>Yaba</span>
+            </p>
+            <p>
+              <span class="column">Driver:</span>
+              <span>Kingsley</span>
+            </p>
+            <p>
+              <span class="column">Time:</span>
+              <span>3:45 P.M</span>
+            </p>
+          </div>
+        </li>
+      </ul>
+      <div id="paginate">
+        <span class="page">
+          <a href="#">1</a>
+        </span>
+        <span class="page">
+          <a href="#">2</a>
+        </span>
+        <span class="page">
+          <a href="#">3</a>
+        </span>
+        <span class="page">
+          <a href="#">
+            <i class="fas fa-ellipsis-h"></i>
+          </a>
+        </span>
+        <span class="page">
+          <a href="#brand">
+            <i class="fas fa-chevron-up"></i>
+          </a>
+        </span>
+      </div>
+    </section>
+    <section id="list-rides-given">
+      <h2>List of rides given</h2>
+      <input type="text" placeholder="search" />
+      <ul>
+        <li class="rides">
+          <div class="driver-image">
+            <img src="../images/download2.png" alt="driver's-pic">
+          </div>
+          <div class="ride-details">
+            <p>
+              <span class="column">Source:</span>
+              <span>Ikoyi</span>
+            </p>
+            <p>
+              <span class="column">Destination:</span>
+              <span>Yaba</span>
+            </p>
+            <p>
+              <span class="column">Driver:</span>
+              <span>Kingsley</span>
+            </p>
+            <p>
+              <span class="column">Time:</span>
+              <span>3:45 P.M</span>
+            </p>
+          </div>
+        </li>
+        <li class="rides">
+          <div class="driver-image">
+            <img src="../images/download2.png" alt="driver's-pic">
+          </div>
+          <div class="ride-details">
+            <p>
+              <span class="column">Source:</span>
+              <span>Ikoyi</span>
+            </p>
+            <p>
+              <span class="column">Destination:</span>
+              <span>Yaba</span>
+            </p>
+            <p>
+              <span class="column">Driver:</span>
+              <span>Kingsley</span>
+            </p>
+            <p>
+              <span class="column">Time:</span>
+              <span>3:45 P.M</span>
+            </p>
+          </div>
+        </li>
+        <li class="rides">
+          <div class="driver-image">
+            <img src="../images/download2.png" alt="driver's-pic">
+          </div>
+          <div class="ride-details">
+            <p>
+              <span class="column">Source:</span>
+              <span>Ikoyi</span>
+            </p>
+            <p>
+              <span class="column">Destination:</span>
+              <span>Yaba</span>
+            </p>
+            <p>
+              <span class="column">Driver:</span>
+              <span>Kingsley</span>
+            </p>
+            <p>
+              <span class="column">Time:</span>
+              <span>3:45 P.M</span>
+            </p>
+          </div>
+        </li>
+        <li class="rides">
+          <div class="driver-image">
+            <img src="../images/download2.png" alt="driver's-pic">
+          </div>
+          <div class="ride-details">
+            <p>
+              <span class="column">Source:</span>
+              <span>Ikoyi</span>
+            </p>
+            <p>
+              <span class="column">Destination:</span>
+              <span>Yaba</span>
+            </p>
+            <p>
+              <span class="column">Driver:</span>
+              <span>Kingsley</span>
+            </p>
+            <p>
+              <span class="column">Time:</span>
+              <span>3:45 P.M</span>
+            </p>
+          </div>
+        </li>
+      </ul>
+      <div id="paginate">
+        <span class="page">
+          <a href="#">1</a>
+        </span>
+        <span class="page">
+          <a href="#">2</a>
+        </span>
+        <span class="page">
+          <a href="#">3</a>
+        </span>
+        <span class="page">
+          <a href="#">
+            <i class="fas fa-ellipsis-h"></i>
+          </a>
+        </span>
+        <span class="page">
+          <a href="#brand">
+            <i class="fas fa-chevron-up"></i>
+          </a>
+        </span>
+      </div>
+    </section>
+  </main>
+  <div id="footer">
+    <p>Designed by Ademola &copy; 2018</p>
+  </div>
+  <script src="../js/profilePage.js"></script>
+</body>
+
+</html>

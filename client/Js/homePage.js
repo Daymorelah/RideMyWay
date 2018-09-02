@@ -95,7 +95,7 @@ const loadContent = () => {
   });
 };
 
-window.onload = loadContent;
+window.onload = loadContent();
 
 window.onclick = (event) => {
   if (event.target === rideDetailModal) {
