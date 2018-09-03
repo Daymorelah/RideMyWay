@@ -16,7 +16,7 @@ loginForm.addEventListener('submit', (event) => {
   };
   event.preventDefault();
   fetch(
-    '/api/v1/auth/login',
+    'http://localhost:2033/api/v1/auth/login',
     {
       method: 'POST',
       body: JSON.stringify(userDetails),

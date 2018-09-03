@@ -61,7 +61,7 @@ nav.open {
 #div-top-nav a {
   display: block;
   text-decoration: none;
-  background: var(--primary); /*rgba(194, 24, 91, 0.7);*/
+  background: var(--primary);
   color: var(--white);
   font-size: 1.3rem;
   padding: 0.8rem 0 0 0.8rem;
@@ -83,7 +83,6 @@ nav.open {
 #user-action, #user-image {
  margin: auto;
  width:100%;
-
 }
 #user-action li {
   width: 100%;
@@ -123,9 +122,12 @@ nav.open {
   text-transform: capitalize;
   color: var(--primary);
 }
+#list-rides-taken{
+min-height: 100vh;}
+#list-rides-given{
+min-height: 100vh;}
 #list-rides-taken,
 #list-rides-given {
-  min-height: 100vh;
   padding-top: 1em;
   color: var(--primary);
 }
@@ -203,6 +205,14 @@ nav.open {
   text-align: center;
   padding: 0.3em;
   width: 100%;
+}
+.no-rides-yet {
+  border: 1px solid #008000;
+  padding: 1em;
+  color: #008000;
+  text-align: center;
+  width: 60%;
+  margin: 2em auto;
 }
 
 @media screen and (min-width: 450px) {
