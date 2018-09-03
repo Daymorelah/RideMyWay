@@ -138,6 +138,7 @@ class RidesController {
         } else {
           res.jsend.success({
             rideOffers: response.rows,
+            numberOfRides: response.rows.length,
           });
         }
       }
@@ -161,6 +162,7 @@ class RidesController {
         } else {
           res.jsend.success({
             rideOffers: response.rows,
+            numberOfRides: response.rows.length,
           });
         }
       }
