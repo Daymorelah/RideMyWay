@@ -59,7 +59,7 @@ const generateRideDetails = (ride) => {
 };
 
 const loadRidesGiven = () => {
-  fetch('http://localhost:2033/api/v1/rides/users/offers', {
+  fetch('/api/v1/rides/users/offers', {
     method: 'GET',
     headers: {
       'x-access-token': `${localStorage.getItem('token')}`,
@@ -88,7 +88,7 @@ const loadRidesGiven = () => {
 };
 
 const loadRidesTaken = () => {
-  fetch('http://localhost:2033/api/v1/rides/users', {
+  fetch('/api/v1/rides/users', {
     method: 'GET',
     headers: {
       'x-access-token': `${localStorage.getItem('token')}`,
@@ -121,3 +121,4 @@ window.onload = () => loadRidesGiven(); loadRidesTaken();
 // Write API docs for your API routes. (last tworoutes in rideOfferController)
 // Work on loginout a user, then creating rideoffers, and upload picture.
 // then update userDetails, update ride offer, sending and accepting friend requests.
+// authorize eah fron-end page.

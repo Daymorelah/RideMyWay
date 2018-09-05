@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Ride My way | Home page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+    crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" media="screen" href="../Css/createRide.css" />
+</head>
+
+<body>
+  <header>
+    <div id="brand">
+      <div>
+        <a href="./homePage.html">Ride Mw</a>
+      </div>
+      <div id="div-top-nav">
+        <a href="./homePage.html">Home</a>
+        <a href="./profilePage.html">Profile</a>
+        <a class="active" href="./createRide.html">Create Ride</a>
+        <a href="./about.html">About</a>
+        <a id="logout" href="./signin.html">Logout</a>
+      </div>
+      <div>
+        <i class="fas fa-bars fa-2x" id="nav-menu"></i>
+      </div>
+    </div>
+    <nav id="nav-top-nav">
+      <a href="./homePage.html">Home</a>
+      <a href="./profilePage.html">Profile</a>
+      <a class="active" href="./createRide.html">Create Ride</a>
+      <a href="./about.html">About</a>
+      <a id="logout" href="./signin.html">Logout</a>
+    </nav>
+  </header>
+  <main>
+    <section id="section-form-container">
+      <div id="form-container">
+        <h2>create your ride request below</h2>
+        <div id="form">
+          <form action="#">
+            <input type="text" placeholder="Your name" name="driver"/>
+            <input type="text" placeholder="Destination" name="destination">
+            <input type="text" placeholder="Riding from" name="source">
+            <input type="datetime" placeholder="Time of Departure" name="time">
+            <input type="number" placeholder="Number of seats" name="numberOfSeats">
+            <input type="text" placeholder="Price" name="price">
+            <button type="button" id="create-ride">Create Ride</button>
+            <button type="button" id="cancel-ride">Cancel Ride</button>
+          </form>
+        </div>
+        <div id="rideCreated-success-container">
+          <p>Ride-offer created successfully!</p>
+        </div>
+        <div id="rideCreated-error-container">
+          <p>Ride-offer could not be created!</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer id="footer">
+    <p>Designed by Ademola &copy; 2018</p>
+  </footer>
+  <script src="../js/createRide.js"></script>
+  <script src="../Js/logout.js"></script>
+</body>
+
+</html>

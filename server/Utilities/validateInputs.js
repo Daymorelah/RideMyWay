@@ -76,7 +76,7 @@ class Validate {
       if (validate.isAscii(source) && validate.isLength(source, { min: 0, max: 20 })) {
         if (validate.isAscii(destination) && validate.isLength(destination, { min: 0, max: 20 })) {
           if (validate.isAscii(time) && validate.isLength(time, { min: 5, max: 13 })) {
-            if (validate.isAlpha(driver) && validate.isLength(driver, { min: 0, max: 15 })) {
+            if (validate.isAscii(driver) && validate.isLength(driver, { min: 0, max: 15 })) {
               if (validate.isInt(numberOfSeats) &&
                 validate.isLength(numberOfSeats, { min: 0, max: 2 })) {
                 next();
