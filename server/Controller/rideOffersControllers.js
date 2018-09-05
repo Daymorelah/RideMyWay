@@ -121,7 +121,7 @@ class RidesController {
     });
   }
   static getRidesCreatedByUSer(req, res) {
-    const { userId } = req.decoded;
+    const { userId, username } = req.decoded;
     db(`SELECT * FROM rideOffers WHERE usersId=${userId} LIMIT 6`, (error, response) => {
       if (error) {
         res.status(500).jsend.error({
@@ -134,10 +134,13 @@ class RidesController {
           res.jsend.success({
             message: 'You have not created any rides yet.',
             rideOffers: null,
+            username,
           });
         } else {
           res.jsend.success({
             rideOffers: response.rows,
+            numberOfRides: response.rows.length,
+            username,
           });
         }
       }
@@ -161,6 +164,7 @@ class RidesController {
         } else {
           res.jsend.success({
             rideOffers: response.rows,
+            numberOfRides: response.rows.length,
           });
         }
       }
