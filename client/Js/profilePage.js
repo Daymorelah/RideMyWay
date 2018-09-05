@@ -121,3 +121,4 @@ window.onload = () => loadRidesGiven(); loadRidesTaken();
 // Write API docs for your API routes. (last tworoutes in rideOfferController)
 // Work on loginout a user, then creating rideoffers, and upload picture.
 // then update userDetails, update ride offer, sending and accepting friend requests.
+// authorize eah fron-end page.
