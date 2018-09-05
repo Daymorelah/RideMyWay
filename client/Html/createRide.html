@@ -43,15 +43,21 @@
         <h2>create your ride request below</h2>
         <div id="form">
           <form action="#">
-            <input type="text" placeholder="Your name" />
-            <input type="text" placeholder="Destination">
-            <input type="text" placeholder="Riding from">
-            <input type="datetime" placeholder="Time of Departure">
-            <input type="number" placeholder="Number of seats">
-            <input type="text" placeholder="Price">
-            <button type="button">Create Ride</button>
-            <button type="button">Cancel Ride</button>
+            <input type="text" placeholder="Your name" name="driver"/>
+            <input type="text" placeholder="Destination" name="destination">
+            <input type="text" placeholder="Riding from" name="source">
+            <input type="datetime" placeholder="Time of Departure" name="time">
+            <input type="number" placeholder="Number of seats" name="numberOfSeats">
+            <input type="text" placeholder="Price" name="price">
+            <button type="button" id="create-ride">Create Ride</button>
+            <button type="button" id="cancel-ride">Cancel Ride</button>
           </form>
+        </div>
+        <div id="rideCreated-success-container">
+          <p>Ride-offer created successfully!</p>
+        </div>
+        <div id="rideCreated-error-container">
+          <p>Ride-offer could not be created!</p>
         </div>
       </div>
     </section>

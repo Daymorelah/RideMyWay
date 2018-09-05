@@ -59,7 +59,7 @@ const generateRideDetails = (ride) => {
 };
 
 const loadRidesGiven = () => {
-  fetch('http://localhost:2033/api/v1/rides/users/offers', {
+  fetch('/api/v1/rides/users/offers', {
     method: 'GET',
     headers: {
       'x-access-token': `${localStorage.getItem('token')}`,
@@ -88,7 +88,7 @@ const loadRidesGiven = () => {
 };
 
 const loadRidesTaken = () => {
-  fetch('http://localhost:2033/api/v1/rides/users', {
+  fetch('/api/v1/rides/users', {
     method: 'GET',
     headers: {
       'x-access-token': `${localStorage.getItem('token')}`,

@@ -57,7 +57,7 @@ nav.open {
 #div-top-nav a {
   display: block;
   text-decoration: none;
-  background: rgba(194, 24, 91, 0.7);
+  background: #e23c52;
   color: var(--white);
   font-size: 1.3rem;
   padding: 0.8rem 0 0 0.8rem;
@@ -89,6 +89,26 @@ nav.open {
 #form {
   padding: 1.5em;
 }
+#rideCreated-error-container {
+  border: 1px solid #ff0000;
+  padding: 1em;
+  color: #ff0000;
+  text-align: center;
+  width: 100%;
+  display: none;
+}
+#rideCreated-success-container {
+  border: 1px solid #008000;
+  padding: 1em;
+  color: #008000;
+  text-align: center;
+  width: 100%;
+  display: none;
+}
+#rideCreated-success-container p,
+#rideCreated-error-container p {
+  font-size: 1.5em;
+}
 #footer {
   background: var(--primary);
   color: var(--white);
@@ -98,7 +118,7 @@ nav.open {
 }
 input{
   width: 100%;
-  min-height: 3rem;
+  min-height: 2rem;
   padding: 1em;
   border: none;
   outline: none;
@@ -112,9 +132,9 @@ button {
   width: 100%;
   background: var(--primary);
   color: var(--white);
-  height: 3em;
+  height: 2em;
   border: none;
-  font-size: 1.4em;
+  font-size: 1.8em;
   margin: 0.5em 0;
   font-family: 'Merienda', cursive;
   cursor: pointer;
