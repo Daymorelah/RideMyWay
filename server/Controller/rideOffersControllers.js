@@ -165,7 +165,6 @@ class RidesController {
           res.jsend.success({
             rideOffers: response.rows,
             numberOfRides: response.rows.length,
-            username,
           });
         }
       }
