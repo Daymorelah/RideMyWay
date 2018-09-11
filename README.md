@@ -72,4 +72,4 @@ The UI (_static_) templates for this App can be viewed on [GitHub Pages](https:/
 * Ademola Hussain
 
 ## Licence 
-[MIT License](https://github.com/Kenec/PostIt/blob/master/LICENSE)
+[MIT License](https://github.com/Daymorelah/RideMyWay/blob/master/LICENSE)
