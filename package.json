@@ -6,13 +6,17 @@
   "scripts": {
     "start": "nodemon --exec babel-node server/app.js",
     "build": "babel server/ -d dist",
-    "host-on-heroku": "npm run build && node dist/app.js",
-    "test": "set NODE_ENV=test&& npm run models-for-testing && mocha --exit --timeout 6000 --require babel-register --require babel-polyfill server/tests/index.js",
-    "test-coverage": "set NODE_ENV=test&& npm run models-for-testing && babel-node ./node_modules/babel-istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- --exit server/tests/index.js",
-    "coveralls": "npm run test-coverage && cat ./coverage/lcov.info | coveralls",
+    "host-on-heroku": "yarn build && node dist/app.js",
+    "test": "set NODE_ENV=test&& yarn models-for-testing && mocha --exit --timeout 6000 --require babel-register --require babel-polyfill server/tests/index.js",
+    "test-coverage": "set NODE_ENV=test&& yarn models-for-testing && babel-node ./node_modules/babel-istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- --exit server/tests/index.js",
+    "coveralls": "yarn test-coverage && cat ./coverage/lcov.info | coveralls",
     "ui-test": "jest",
     "models": "babel-node server/Models",
     "models-for-testing": "set NODE_ENV=test&& babel-node server/Models"
+  },
+  "engines": {
+    "node": "8.11.1",
+    "npm": "5.3.0"
   },
   "jest":{
     "transform": {
@@ -40,6 +44,8 @@
   },
   "homepage": "https://github.com/Daymorelah/RideMyWay#readme",
   "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "babel-istanbul": "^0.12.2",
     "bcrypt": "^2.0.1",
     "body-parser": "^1.18.3",
