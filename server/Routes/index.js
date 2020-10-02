@@ -8,10 +8,6 @@ import {
 } from '../Controller';
 
 const routes = (app) => {
-  app.get('/getCookie/:session', (req, res) => {
-    console.log('in getCookie. session is: ', req.params);
-    res.status(200).send({ message: 'This is the getCookie route' });
-  });
   app.get('/api/v1/', (req, res) => {
     res.status(200).send({ message: 'Welcome to the Ride-my-way App\'s API' });
   });
